@@ -1,0 +1,15 @@
+.QuerySelector {
+
+}
+.QueryEntry {
+    color: lightgray;
+}
+.QueryEntry-nonempty {
+    color: yellowgreen;
+}
+.QueryEntry-selected {
+    color: darkgreen;
+}
+.SavedQueryRow:hover {
+    background-color: #f5f5f5;
+}

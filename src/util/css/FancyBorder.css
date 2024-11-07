@@ -1,0 +1,36 @@
+.FancyBorder fieldset {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.FancyBorder legend {
+    font-size: .8em;
+    color: #666;
+}
+
+.FancyBorder-helperText {
+    font-size: .9em;
+    margin-top: -5px;
+    margin-left: 5px;
+    color: #666;
+}
+
+.FancyBorder fieldset:focus-within {
+    border: 2px solid rgb(67,81,175);
+}
+.FancyBorder fieldset:focus-within > legend, .FancyBorder:focus-within .FancyBorder-helperText  {
+    color: rgb(67,81,175);
+}
+
+.FancyBorder.Error fieldset {
+    border: 1px solid red;
+}
+.FancyBorder.Error fieldset legend {
+    color: red;
+}
+.FancyBorder.Error .FancyBorder-helperText {
+    color: red;
+}
+

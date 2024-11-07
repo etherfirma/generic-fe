@@ -1,0 +1,8 @@
+.ThingLink > span:hover {
+    text-decoration: underline;
+}
+
+.DataFilters {
+    padding: 8px;
+    width: 400px;
+}

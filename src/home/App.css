@@ -1,0 +1,18 @@
+.App {
+}
+
+.DebugButton {
+    color: white;
+    float: right;
+}
+.DebugPane {
+    padding: 8px;
+    width: 500px;
+    border-left: 3px solid cadetblue;
+    height: 100vh;
+}
+.DebugHeader {
+    font-size: 2em;
+    color: cadetblue;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}

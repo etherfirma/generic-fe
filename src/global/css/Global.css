@@ -1,0 +1,14 @@
+.OuterWrapper {
+    min-height: 100vh;
+}
+
+.InnerWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: revert;
+    width: 100%;
+}
+.ContentPane {
+    padding: 8px;
+    flex-grow: 1;
+}

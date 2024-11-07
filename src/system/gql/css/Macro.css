@@ -1,0 +1,19 @@
+.Macros {
+    float: right;
+    padding-top: 14px;
+    padding-left: 5px
+}
+.Macro {
+    border: 1px solid #ccc;
+    padding: 3px 5px;
+    border-radius: 6px;
+    font-size: .9em;
+    margin-bottom: 3px;
+    font-family: sans-serif;
+}
+.Macro:hover {
+    border: 1px solid #ccc;
+    background-color: #e5e5e5;
+    padding: 3px 5px;
+    border-radius: 6px;
+}

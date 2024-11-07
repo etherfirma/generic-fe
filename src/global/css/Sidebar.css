@@ -1,0 +1,27 @@
+.Sidebar {
+    /*background-color: #eee;*/
+    width: 100px;
+    text-align: left;
+    border-right: 1px dotted #999;
+    min-height: 1024px;
+    display: block;
+}
+
+.SidebarButton {
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.SidebarButton:hover {
+    background-color: #e5e5e5;
+}
+
+.SidebarIcon {
+    font-size: 1.7em;
+}
+
+.SidebarLabel {
+    font-size: 1em;
+}

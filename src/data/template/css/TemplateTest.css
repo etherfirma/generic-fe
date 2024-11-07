@@ -1,0 +1,13 @@
+.TemplateTestTable {
+    width: 100%;
+}
+
+.TemplateTestResults {
+    margin: 8px;
+    padding: 8px;
+    border: 4px solid lightblue;
+}
+
+.MergedTemplate {
+    margin-top: 16px;
+}

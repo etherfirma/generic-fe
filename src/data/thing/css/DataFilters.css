@@ -1,0 +1,23 @@
+.DataFilters {
+    min-width: 300px;
+    padding: 16px;
+}
+
+.DataFilterButton {
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    margin-top: 8px;
+    padding: 8px 6px 30px 6px;
+}
+
+.DataFilterButton-true {
+    background-color: #1976d2;
+    color: white;
+}
+
+.SortButton-false {
+    color: gray;
+}
+.SortButton-true {
+    color: red;
+}

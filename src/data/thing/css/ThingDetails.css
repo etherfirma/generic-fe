@@ -1,0 +1,37 @@
+.ThingDetailsPagination {
+    display: flex;
+    margin-bottom: 16px;
+}
+.ThingDetailsPagination > div {
+    display: flex;
+    flex: 1;
+    min-width: 150px;
+}
+.ThingDetailsPagination > div:nth-child(1) {
+    padding-right: 32px;
+}
+.ThingDetailsPagination > div:nth-child(2) {
+    justify-content: center;
+    margin: auto;
+    flex: 2;
+}
+.ThingDetailsPagination > div:nth-child(3) {
+    text-align: right;
+    padding-left: 32px;
+    display: flex;
+}
+.ThingDetails-Header:hover {
+    text-decoration: underline;
+}
+
+.DataFilterButton-true {
+
+}
+.DataFilterButton-false {
+
+}
+.ThingElapsed {
+    color: #5e5e7e;
+    font-size: .9em;
+    font-style: italic;
+}

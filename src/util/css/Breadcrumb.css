@@ -1,0 +1,13 @@
+.Breadcrumb {
+    /*font-style: italic;*/
+    font-size: .9em;
+    color: #5d4141;
+    padding: 8px;
+}
+.Breadcrumb a {
+    color: #5d4141;
+    text-decoration: none;
+}
+.Breadcrumb a:hover {
+    text-decoration: underline;
+}
