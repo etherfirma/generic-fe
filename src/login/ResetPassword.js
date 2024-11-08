@@ -31,8 +31,8 @@ const fields = [
         validator: Validator.stringValidator
     },
     {
-        path: "password",
-        name: "Password",
+        path: "newPassword",
+        name: "New Password",
         required: true,
         validator: Validator.stringValidator
     }

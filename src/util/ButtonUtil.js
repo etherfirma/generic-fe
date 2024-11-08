@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import Button from "@mui/material/Button";
 
 function iconButton (icon, label, props) {
+    const text = props.label || label;
     return (
         <Button variant="outlined" size="small" {...props}>
             <i className={icon}></i>
             &nbsp;
-            {label}
+            {text}
         </Button>
     );
 }
@@ -42,11 +43,17 @@ function ClearAllButton (props) {
 function PrettifyButton (props) {
     return iconButton("fal fa-brackets-curly", "Prettify", props);
 }
+function SendButton (props) {
+    return iconButton ("fal fa-paper-plane", "Send", props);
+}
+function ResetButton (props) {
+    return iconButton("fas fa-power-off", "Reset", props);
+}
 
 export {
-    IconButton,
+    IconButton, SendButton,
     AddButton, EditButton, ReloadButton, DeleteButton, CancelButton, UpdateButton, CopyButton,
-    ClearAllButton, PrettifyButton
+    ClearAllButton, PrettifyButton, ResetButton
 }
 
 // EOF

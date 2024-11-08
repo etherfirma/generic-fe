@@ -18,7 +18,7 @@ const INIT = {
 
 class DataTemplate extends ThingDetail {
     constructor() {
-        super(INIT);
+        super (INIT);
     }
 
     get query() {
@@ -59,7 +59,7 @@ class DataTemplate extends ThingDetail {
                 }}/>
                 &nbsp;
                 <IconButton icon={"far fa-file-alt"} label={"Merge"} onClick={() => {
-                    window.location.hash = `#/data/template/test?templateId=${template.id}`;
+                    window.location.hash = `#/tests/template?templateId=${template.id}`;
                 }}/>
             </div>
         );

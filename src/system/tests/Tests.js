@@ -31,6 +31,7 @@ class Tests extends Component {
                 <Tabs value={tab} onChange={(e, nt) => this.store.tab = nt}>
                     <Tab label={"UX"} />
                     <Tab label={"Data"} />
+                    <Tab label={"Service"} />
                     <Tab label={"System"} />
                 </Tabs>
                 <TabPanel value={tab} index={0}>
@@ -76,15 +77,24 @@ class Tests extends Component {
                         </li>
                     </ul>
                 </TabPanel>
-            <TabPanel value={tab} index={2}>
-                <ul>
-                    <li>
-                        <a href={"#/tests/template"}>
-                            TemplateTest
-                        </a>
-                    </li>
-                </ul>
-            </TabPanel>
+                <TabPanel value={tab} index={2}>
+                    <ul>
+                        <li>
+                            <a href={"#/tests/svc/sendEmail"}>
+                                SendEmail
+                            </a>
+                        </li>
+                    </ul>
+                </TabPanel>
+                <TabPanel value={tab} index={3}>
+                    <ul>
+                        <li>
+                            <a href={"#/tests/template"}>
+                                TemplateTest
+                            </a>
+                        </li>
+                    </ul>
+                </TabPanel>
             </div>
         );
     }

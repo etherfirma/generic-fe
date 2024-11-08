@@ -12,6 +12,8 @@ import { wrap, objGet} from "../util/Utils";
 import LoginBanner from "./LoginBanner";
 import Server from "../util/Server";
 import Validator from "./Validator";
+import Alert from "@mui/material/Alert";
+import CheckIcon from '@mui/icons-material/Check';
 
 /**
  * The validation rules for the form fields.
@@ -81,7 +83,11 @@ class Register extends Component {
         try {
             const res = await Server._gql(this.mutation, variables);
             if (res) {
-                this.store.result = "Account has been created.";
+                this.store.result = (
+                    <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                        Account has been created.
+                    </Alert>
+                )
             } else {
                 this.store.result = res.errors;
             }
@@ -114,6 +120,8 @@ class Register extends Component {
                         })}
                     </ul>
                 );
+            } else {
+                return result;
             }
         } else {
             return null;

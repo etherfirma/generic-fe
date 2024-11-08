@@ -59,6 +59,7 @@ class FindUsers extends ThingDetails {
         return [
             this.sortHeader ("email", "Email"),
             this.sortHeader ("name", "Name"),
+            <i className="fal fa-paper-plane" />,
             <i className="fal fa-key" />,
             this.sortHeader ("locked", <i className="fas fa-lock" />),
             this.sortHeader("_id", "ID")
@@ -69,6 +70,7 @@ class FindUsers extends ThingDetails {
         return [
             userLink (user),
             user.name,
+            <YesNo value={user.emailVerified} />,
             <YesNo value={user.hasUserLocal} />,
             <YesNo value={user.locked} onClick={async (e) => {
                 try {

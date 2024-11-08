@@ -10,7 +10,7 @@ import Breadcrumb from "../../util/Breadcrumb";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Server from "../../util/Server";
-import {DeleteButton, EditButton, ReloadButton} from "../../util/ButtonUtil";
+import {DeleteButton, EditButton, ReloadButton, ResetButton, SendButton} from "../../util/ButtonUtil";
 
 /**
  *
@@ -33,6 +33,12 @@ class DataUser extends ThingDetail {
                 email
                 locked
                 props 
+                emailVerified
+                emailVerification {
+                    expires
+                    isExpired
+                    token 
+                } 
                 userLocal {
                     hashedPassword 
                     reset {
@@ -62,6 +68,8 @@ class DataUser extends ThingDetail {
                 }}/>
                 &nbsp;
                 <ReloadButton onClick={() => this.doLoad ()} />
+                &nbsp;
+                <SendButton label="Verify Email" onClick={() => this.sendVerifyEmail (user)} />
             </div>
         );
     }
@@ -72,26 +80,27 @@ class DataUser extends ThingDetail {
      * @param user
      */
 
-    // async sendVerifyEmail (user) {
-    //     try {
-    //         const mutation = `
-    //             mutation ($email: String!) {
-    //                 res: sendVerifyEmail (email: $email)
-    //             }
-    //         `;
-    //         const variables = {
-    //             email: user.email
-    //         };
-    //         const res = await Server._gql (mutation, variables);
-    //         const {snackbarStore} = this.props;
-    //         snackbarStore.show("Verification email sent.");
-    //     }
-    //     catch (e) {
-    //         const { infoDialogStore } = this.props;
-    //         infoDialogStore.showError (e);
-    //     }
-    //     return
-    // }
+    async sendVerifyEmail (user) {
+        try {
+            const mutation = `
+                mutation ($userId: String!) {
+                    res: sendVerifyEmail (userId: $userId)
+                }
+            `;
+            const variables = {
+                userId: user.id
+            };
+            const res = await Server._gql (mutation, variables);
+            const {snackbarStore} = this.props;
+            snackbarStore.show ("Verification email sent.");
+            this.doLoad ();
+        }
+        catch (e) {
+            const { infoDialogStore } = this.props;
+            infoDialogStore.showError (e);
+        }
+        return
+    }
 
     /**
      *
@@ -114,11 +123,22 @@ class DataUser extends ThingDetail {
             user: userLink (user),
             name: user.name,
             locked: <YesNo value={user.locked} labelled={true} />,
-            created: user.props.created,
-            lastModified: user.props.lastModified,
+            emailVerified: <YesNo value={user.emailVerified} labelled={true} />,
         };
 
-        formatDate (o, [ "created", "lastModified" ]);
+        if (user.emailVerification) {
+            const prefix = "emailVerification"
+            o[`${prefix}.expires`] = user.emailVerification.expires;
+            o[`${prefix}.isExpired`] = <YesNo value={user.emailVerification.isExpired} labelled={true} />;
+            o[`${prefix}.token`] = user.emailVerification.token;
+        } else {
+            o.emailVerification = "-";
+        }
+
+        o.created = user.props.created;
+        o.lastModified = user.props.lastModified;
+
+        formatDate (o, [ "created", "lastModified", "emailVerification.expires" ]);
         return (
             <div>
                 <PropertyTable value={o} size={"small"} />
@@ -150,23 +170,22 @@ class DataUser extends ThingDetail {
         if (userLocal) {
             const props = {
                 hashedPassword: userLocal.hashedPassword,
-                created: userLocal.props.created,
-                lastModified: userLocal.props.lastModified,
-                reset: <i>none</i>,
+                reset: JSON.stringify (userLocal.reset),
             };
             if (userLocal.reset) {
                 props.reset = userLocal.reset.token;
                 props.expires = userLocal.reset.expires;
                 props.isExpired = <YesNo value={userLocal.reset.isExpired} labelled={true} />;
             }
+            props.created = userLocal.props.created;
+            props.lastModified = userLocal.props.lastModified;
+
             formatDate (props, [ "created", "lastModified", "expires" ]);
             return (
                 <div>
                     <PropertyTable value={props} />
                     <br/>
-                    <Button variant={"outlined"} size={"small"} onClick={() => this.resetPassword (user)}>
-                        Reset Password
-                    </Button>
+                    <SendButton label={"Forgot Password"} onClick={() => this.resetPassword (user)} />
                 </div>
             );
         } else {
@@ -195,11 +214,14 @@ class DataUser extends ThingDetail {
                 res: forgotPassword (email: $email)          
             }
         `;
-        const variables = { email: user.email };
+        const variables = {
+            email: user.email
+        };
         try {
             const res = await Server._gql(mutation, variables);
             const { snackbarStore } = this.props;
             snackbarStore.show ("Forgot password email sent.");
+            this.doLoad ();
         }
         catch (e) {
             const { infoDialogStore } = this.props;

@@ -87,10 +87,9 @@ class Login extends Component {
 
     doLogin () {
         const { AuthManager } = this.props;
-        AuthManager.skip ();
-        return;
+        // AuthManager.skip ();
+        // return;
 
-        // const { AuthManager } = this.props;
         const { email, password } = this.store;
         AuthManager.login (email, password);
         window.location.hash = window.location.hash;

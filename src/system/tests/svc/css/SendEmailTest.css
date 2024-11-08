@@ -1,0 +1,6 @@
+.SendEmailTestTable {
+    width: 100%;
+}
+.SendEmailTestTable tbody tr:nth-child(1) td {
+    width: 50%;
+}

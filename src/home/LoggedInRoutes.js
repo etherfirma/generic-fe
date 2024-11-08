@@ -27,6 +27,7 @@ import FindUserLocals from "../data/userLocal/FindUserLocals";
 import ShowUserLocal from "../data/userLocal/ShowUserLocal";
 import TemplatePickerTest from "../system/tests/data/TemplatePickerTest";
 import TemplateTest from "../system/tests/data/TemplateTest";
+import SendEmailTest from "../system/tests/svc/SendEmailTest";
 
 /**
  *
@@ -71,6 +72,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests/userPicker", element: <UserPickerTest /> },
     { path: "/tests/templatePicker", element: <TemplatePickerTest /> },
     { path: "/tests/template", element: <TemplateTest /> },
+    { path: "/tests/svc/sendEmail", element: <SendEmailTest /> },
 ]);
 
 export default LOGGED_IN;

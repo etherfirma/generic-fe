@@ -123,7 +123,9 @@ const GraphQLQuery = inject (...stores)(observer (
                 return <CircularProgress/>;
             } else if (res) {
                 const {tab2, elapsed} = this.store;
-                res = toJS(res);
+                const { selected, reqs, contexts } = this.store;
+                res = toJS (res);
+                const fullText = reqs[selected] + "\n" + contexts[selected] + "\n" + JSON.stringify(res.data, null, 2);
                 return (
                     <div>
                         <h2>Results</h2>
@@ -139,17 +141,17 @@ const GraphQLQuery = inject (...stores)(observer (
                             <Tab label="Trace"/>
                         </Tabs>
                         <TabPanel value={tab2} index={0}>
-                            <CopyToClipboard text={JSON.stringify(res.data, null, 2)}>
+                            <CopyToClipboard text={fullText} >
                                 <div>
                                     <span>
                                         <i className="fal fa-copy"></i>
                                         &nbsp;
                                         <i>response in {withCommas(elapsed)}ms</i>
                                     </span>
-                                    {this.renderErrors(res.errors)}
-                                    {this.renderData(res.data)}
                                 </div>
                             </CopyToClipboard>
+                            {this.renderErrors(res.errors)}
+                            {this.renderData(res.data)}
                         </TabPanel>
                         <TabPanel value={tab2} index={1}>
                             <pre>
