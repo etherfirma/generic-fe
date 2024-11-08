@@ -7,29 +7,28 @@ import ThingDetails from "../thing/ThingDetails";
 import {action} from "mobx";
 import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import GeoUtil from "./GeoUtil";
+import EmployerUtil from "./EmployerUtil";
 import Breadcrumb from "../../util/Breadcrumb";
 import {AddButton, ReloadButton} from "../../util/ButtonUtil";
-import {geoLink} from "../thing/ThingUtil";
+import {employerLink} from "../thing/ThingUtil";
 
 /**
  *
  */
 
-class FindGeos extends ThingDetails {
+class FindEmployers extends ThingDetails {
     constructor () {
         super ({
-            heading: "Geos",
+            heading: "Employers",
             hasFilters: true,
             key: "", // filter
             name: "", //filter
-            type: "", //filter
             id: "" // filter
         });
     }
 
     get query () {
-        return GeoUtil.findGeosGql;
+        return EmployerUtil.findEmployersGql;
     }
 
     extendVariables (variables) {
@@ -38,15 +37,12 @@ class FindGeos extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { name, key, type, id } = this.store;
+        const { name, key, id } = this.store;
         if (name) {
             filters.name = name;
         }
         if (key) {
             filters.key = key;
-        }
-        if (type) {
-            filters.type = type;
         }
         if (id) {
             filters.id = id;
@@ -59,17 +55,15 @@ class FindGeos extends ThingDetails {
         return [
             this.sortHeader ("key", "Key"),
             this.sortHeader ("name", "Name"),
-            this.sortHeader ("type", "Type"),
             this.sortHeader("_id", "ID")
         ];
     }
 
-    xform (geo) {
+    xform (employer) {
         return [
-            geoLink (geo),
-            geo.name,
-            geo.type,
-            <ID value={geo.id} />
+            employerLink (employer),
+            employer.name,
+            <ID value={employer.id} />
         ];
     }
 
@@ -81,33 +75,34 @@ class FindGeos extends ThingDetails {
                     xform={this.xform.bind (this)}
                     rows={fres.results}
                     skip={fres.skip}
-                    onClick={geo => window.location.href = `#/data/geo/${geo.id}`}
+                    onClick={employer => window.location.href = `#/data/employer/${employer.id}`}
                 />
 
                 <br/>
                 {this.showElapsed ()}
                 <br/>
 
+                <AddButton onClick={() => window.location.href = "#/data/employer/add"} />
+                &nbsp;
                 <ReloadButton disabled={this.store.loading} onClick={() => this.doLoad ()} />
             </div>
         );
     }
 
     hasFilters () {
-        const { name, id, email, label } = this.store;
-        return Boolean (name || id || email || label);
+        const { name, id, key } = this.store;
+        return Boolean (name || id || key);
     }
 
     clearFilters = action (() => {
         this.store.name = "";
-        this.store.email = "";
+        this.store.key = "";
         this.store.id = "";
-        this.store.label = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { key, name, type, id, showDrawer } = this.store;
+        const { key, name, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -140,15 +135,6 @@ class FindGeos extends ThingDetails {
                     />
                     <TextField
                         {...formProps}
-                        value={type}
-                        label={"Type"}
-                        onChange={(e) => {
-                            this.store.type = e.target.value;
-                            this.doLoad();
-                        }}
-                    />
-                    <TextField
-                        {...formProps}
                         value={id}
                         label={"ID"}
                         onChange={(e) => {
@@ -171,7 +157,7 @@ class FindGeos extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "Geos" }
+            { label: "Employers" }
         ];
         return (
             <div>
@@ -182,6 +168,6 @@ class FindGeos extends ThingDetails {
     }
 }
 
-export default wrap (FindGeos);
+export default wrap (FindEmployers);
 
 // EOF

@@ -33,6 +33,10 @@ import Cardinality from "../system/Cardinality";
 import BooleanPickerTest from "../system/tests/ux/BooleanPickerTest";
 import FindGeos from "../data/geo/FindGeos";
 import ShowGeo from "../data/geo/ShowGeo";
+import ShowEmployer from "../data/employer/ShowEmployer";
+import FindEmployers from "../data/employer/FindEmployers";
+import AddEmployer from "../data/employer/AddEmployer";
+import EditEmployer from "../data/employer/EditEmployer";
 
 /**
  *
@@ -71,6 +75,11 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/userLocal/:id", element: <ShowUserLocal /> },
     { path: "/data/geos", element: <FindGeos /> },
     { path: "/data/geo/:id", element: <ShowGeo /> },
+
+    { path: "/data/employers", element: <FindEmployers /> },
+    { path: "/data/employer/add", element: <AddEmployer /> },
+    { path: "/data/employer/:id", element: <ShowEmployer /> },
+    { path: "/data/employer/:id/edit", element: <EditEmployer /> },
 
     { path: "/system/cardinality", element: <Cardinality /> },
 
