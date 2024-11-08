@@ -3,6 +3,7 @@ import {PreJson, wrap} from "../../../util/Utils";
 import _ from "lodash";
 import {observable} from "mobx";
 import BooleanPicker from "../../../util/BooleanPicker";
+import Breadcrumb from "../../../util/Breadcrumb";
 
 /**
  *
@@ -14,10 +15,18 @@ class BooleanPickerTest extends Component {
         boolean2: null
     });
 
+    static crumbs = [
+        { label: null, href: "#/" },
+        { label: "System", href: "#/system" },
+        { label: "Tests", href: "#/tests" },
+        { label: "BooleanPicker" },
+    ];
+
     render () {
         const { boolean1, boolean2 } = this.store;
         return (
             <div>
+                <Breadcrumb crumbs={BooleanPickerTest.crumbs} />
                 <h1>Boolean Test</h1>
 
                 <BooleanPicker

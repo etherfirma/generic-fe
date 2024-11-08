@@ -8,7 +8,7 @@ class PropertyTableTest extends Component {
         { label: null, href: "#/" },
         { label: "System", href: "#/system" },
         { label: "Tests", href: "#/tests" },
-        { label: "PropertyTable Test" },
+        { label: "PropertyTable" },
     ];
 
     render() {

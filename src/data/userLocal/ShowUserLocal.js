@@ -3,12 +3,8 @@ import {encodeUrl, formatDate, objGet, TabPanel, wrap, PreJson} from "../../util
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
-import Button from "@mui/material/Button";
-import UserLocalUtil from "./UserLocalUtil";
 import YesNo from "../../util/YesNo";
 import Breadcrumb from "../../util/Breadcrumb";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Server from "../../util/Server";
 import {DeleteButton, EditButton, ReloadButton} from "../../util/ButtonUtil";
 
@@ -34,7 +30,8 @@ class ShowUserLocal extends ThingDetail {
                             isExpired
                             token 
                         } 
-                        props
+                        created
+                        lastModified
                     } 
                 }`;
     }
@@ -104,8 +101,8 @@ class ShowUserLocal extends ThingDetail {
             o.resetToken = <YesNo value={false} />
         }
 
-        o.created = userLocal.props.created;
-        o.lastModified = userLocal.props.lastModified;
+        o.created = userLocal.created;
+        o.lastModified = userLocal.lastModified;
         formatDate (o, [ "created", "lastModified", "expires" ]);
         return (
             <div>

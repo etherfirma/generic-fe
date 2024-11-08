@@ -11,6 +11,7 @@ class DataBrowser extends Component {
     dataTypes = [
         { name: "user", hash: "#/data/users" },
         { name: "userLocal", hash: "#/data/userLocals" },
+        { name: "geo", hash: "#/data/geos" },
         { name: "sender", hash: "#/data/senders" },
         { name: "template", hash: "#/data/templates" },
     ];
@@ -25,7 +26,7 @@ class DataBrowser extends Component {
                     {_.map (this.dataTypes, (dataType, i) => {
                         return (
                             <li key={i}>
-                                <a onClick={() => window.location.hash = dataType.hash}>
+                                <a className="ThingLink" onClick={() => window.location.hash = dataType.hash}>
                                     {dataType.name}
                                 </a>
                             </li>

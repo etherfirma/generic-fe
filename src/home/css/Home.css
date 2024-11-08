@@ -1,0 +1,10 @@
+.HomeTable {
+    width: 100%;
+}
+.HomeTable tr:nth-child(2) td {
+    width: 50%;
+    vertical-align: top;
+}
+.HomeTable tr:nth-child(1) td {
+    text-align: center;
+}

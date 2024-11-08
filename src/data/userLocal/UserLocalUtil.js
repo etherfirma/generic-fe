@@ -9,7 +9,13 @@ class UserLocalUtil {
                 results { 
                     id
                     hashedPassword
-                    props
+                    reset {
+                        expires
+                        token
+                        isExpired
+                    }
+                    created
+                    lastModified               
                 }
             }
         }`;

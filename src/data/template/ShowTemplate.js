@@ -22,7 +22,6 @@ class DataTemplate extends ThingDetail {
             query ($id: String!) {
                 res: templateById (id: $id) {
                     id
-                    props
                     engine
                     description
                     path
@@ -33,7 +32,8 @@ class DataTemplate extends ThingDetail {
                         email
                     }
                     template
-                    props 
+                    created
+                    lastModified
                 } 
             }`;
     }
@@ -86,8 +86,8 @@ class DataTemplate extends ThingDetail {
             ),
             sampleContext: <PreJson json={JSON.parse(template.sampleContext)}/>,
             user: userLink(template.user),
-            created: template.props.created,
-            lastModified: template.props.lastModified,
+            created: template.created,
+            lastModified: template.lastModified,
         };
 
         formatDate(o, ["created", "lastModified"]);

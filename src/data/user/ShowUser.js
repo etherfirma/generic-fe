@@ -29,10 +29,11 @@ class DataUser extends ThingDetail {
         query ($id: String!) {
             res: userById (id: $id) {
                 id
+                created
+                lastModified
                 name
                 email
                 locked
-                props 
                 emailVerified
                 emailVerification {
                     expires
@@ -46,7 +47,8 @@ class DataUser extends ThingDetail {
                         isExpired
                         token 
                     } 
-                    props
+                    created
+                    lastModified
                 } 
             } 
         }`;
@@ -135,8 +137,8 @@ class DataUser extends ThingDetail {
             o.emailVerification = "-";
         }
 
-        o.created = user.props.created;
-        o.lastModified = user.props.lastModified;
+        o.created = user.created;
+        o.lastModified = user.lastModified;
 
         formatDate (o, [ "created", "lastModified", "emailVerification.expires" ]);
         return (
@@ -177,8 +179,8 @@ class DataUser extends ThingDetail {
                 props.expires = userLocal.reset.expires;
                 props.isExpired = <YesNo value={userLocal.reset.isExpired} labelled={true} />;
             }
-            props.created = userLocal.props.created;
-            props.lastModified = userLocal.props.lastModified;
+            props.created = userLocal.created;
+            props.lastModified = userLocal.lastModified;
 
             formatDate (props, [ "created", "lastModified", "expires" ]);
             return (

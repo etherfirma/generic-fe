@@ -2,31 +2,34 @@ import React from 'react';
 import {wrap} from "../../util/Utils";
 import ID from "../../util/ID";
 import DataTable from "../DataTable";
+import Button from "@mui/material/Button";
 import ThingDetails from "../thing/ThingDetails";
 import {action} from "mobx";
 import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import UserLocalUtil from "./UserLocalUtil";
+import GeoUtil from "./GeoUtil";
 import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, ClearAllButton, ReloadButton} from "../../util/ButtonUtil";
-import YesNo from "../../util/YesNo";
+import {AddButton, ReloadButton} from "../../util/ButtonUtil";
+import {geoLink} from "../thing/ThingUtil";
 
 /**
  *
  */
 
-class FindUserLocals extends ThingDetails {
+class FindGeos extends ThingDetails {
     constructor () {
         super ({
-            heading: "UserLocals",
+            heading: "Geos",
             hasFilters: true,
-            hashedPassword: "", // filter
+            key: "", // filter
+            name: "", //filter
+            type: "", //filter
             id: "" // filter
         });
     }
 
     get query () {
-        return UserLocalUtil.findUserLocalsGql;
+        return GeoUtil.findGeosGql;
     }
 
     extendVariables (variables) {
@@ -35,9 +38,15 @@ class FindUserLocals extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { hashedPassword, id } = this.store;
-        if (hashedPassword) {
-            filters.hashedPassword = hashedPassword;
+        const { name, key, type, id } = this.store;
+        if (name) {
+            filters.name = name;
+        }
+        if (key) {
+            filters.key = key;
+        }
+        if (type) {
+            filters.type = type;
         }
         if (id) {
             filters.id = id;
@@ -48,19 +57,19 @@ class FindUserLocals extends ThingDetails {
 
     get headers () {
         return [
-            this.sortHeader ("hashedPassword", "HashedPassword"),
-            // this.sortHeader ("name", "Name"),
-            <i className="fal fa-key" />,
-            // this.sortHeader ("locked", <i className="fas fa-lock" />),
+            this.sortHeader ("key", "Key"),
+            this.sortHeader ("name", "Name"),
+            this.sortHeader ("type", "Type"),
             this.sortHeader("_id", "ID")
         ];
     }
 
-    xform (userLocal) {
+    xform (geo) {
         return [
-            userLocal.hashedPassword,
-            <YesNo value={userLocal.reset} />,
-            <ID value={userLocal.id} />
+            geoLink (geo),
+            geo.name,
+            geo.type,
+            <ID value={geo.id} />
         ];
     }
 
@@ -72,10 +81,14 @@ class FindUserLocals extends ThingDetails {
                     xform={this.xform.bind (this)}
                     rows={fres.results}
                     skip={fres.skip}
-                    onClick={(user) => window.location.href = `#/data/userLocal/${user.id}`}
+                    onClick={geo => window.location.href = `#/data/geo/${geo.id}`}
                 />
+
                 <br/>
-                <AddButton onClick={() => window.location.href = "#/data/userLocal/add"} />
+                {this.showElapsed ()}
+                <br/>
+
+                <AddButton onClick={() => window.location.href = "#/data/geo/add"} />
                 &nbsp;
                 <ReloadButton disabled={this.store.loading} onClick={() => this.doLoad ()} />
             </div>
@@ -83,19 +96,20 @@ class FindUserLocals extends ThingDetails {
     }
 
     hasFilters () {
-        const { hashedPassword, id } = this.store;
-        return Boolean (hashedPassword || id);
+        const { name, id, email, label } = this.store;
+        return Boolean (name || id || email || label);
     }
 
     clearFilters = action (() => {
         this.store.name = "";
         this.store.email = "";
         this.store.id = "";
+        this.store.label = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { hashedPassword, id, showDrawer } = this.store;
+        const { key, name, type, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -110,10 +124,28 @@ class FindUserLocals extends ThingDetails {
 
                     <TextField
                         {...formProps}
-                        value={hashedPassword}
-                        label={"hashedPassword"}
+                        value={key}
+                        label={"Key"}
                         onChange={(e) => {
-                            this.store.hashedPassword = e.target.value;
+                            this.store.key = e.target.value;
+                            this.doLoad();
+                        }}
+                    />
+                    <TextField
+                        {...formProps}
+                        value={name}
+                        label={"Name"}
+                        onChange={(e) => {
+                            this.store.name = e.target.value;
+                            this.doLoad();
+                        }}
+                    />
+                    <TextField
+                        {...formProps}
+                        value={type}
+                        label={"Type"}
+                        onChange={(e) => {
+                            this.store.type = e.target.value;
                             this.doLoad();
                         }}
                     />
@@ -128,7 +160,11 @@ class FindUserLocals extends ThingDetails {
                     />
                     <br/>
                     <br/>
-                    <ClearAllButton onClick={() => this.clearFilters ()} />
+                    <Button size="small" variant="outlined" onClick={() => this.clearFilters ()}>
+                        <i className="fas fa-trash" />
+                        &nbsp;
+                        Clear All
+                    </Button>
                 </div>
             </Drawer>
         )
@@ -137,7 +173,7 @@ class FindUserLocals extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "UserLocals" }
+            { label: "Geos" }
         ];
         return (
             <div>
@@ -148,6 +184,6 @@ class FindUserLocals extends ThingDetails {
     }
 }
 
-export default wrap (FindUserLocals);
+export default wrap (FindGeos);
 
 // EOF

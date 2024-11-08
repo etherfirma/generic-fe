@@ -9,7 +9,8 @@ class LoginBanner extends Component {
 
         return (
             <div className={"LoginBanner"}>
-                <img height={50} src={logo} />
+                {/*<img height={50} src={logo} />*/}
+                <img height={50} src={"https://abide.com/wp-content/uploads/2023/03/Abide_Logo_Horizontal_FullColor_WEB.svg"} />
             </div>
         );
     }

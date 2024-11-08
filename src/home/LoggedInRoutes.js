@@ -31,6 +31,8 @@ import SendEmailTest from "../system/tests/svc/SendEmailTest";
 import TemplateLinkTest from "../system/tests/data/TemplateLinkTest";
 import Cardinality from "../system/Cardinality";
 import BooleanPickerTest from "../system/tests/ux/BooleanPickerTest";
+import FindGeos from "../data/geo/FindGeos";
+import ShowGeo from "../data/geo/ShowGeo";
 
 /**
  *
@@ -67,6 +69,8 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/user/:id/edit", element: <EditUser /> },
     { path: "/data/userLocals", element: <FindUserLocals /> },
     { path: "/data/userLocal/:id", element: <ShowUserLocal /> },
+    { path: "/data/geos", element: <FindGeos /> },
+    { path: "/data/geo/:id", element: <ShowGeo /> },
 
     { path: "/system/cardinality", element: <Cardinality /> },
 

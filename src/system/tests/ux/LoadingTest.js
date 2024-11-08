@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import Loading from "../../../util/Loading";
-import {Breadcrumbs} from "@mui/material";
+import Breadcrumb from "../../../util/Breadcrumb";
 
 class LoadingTest extends Component {
     static crumbs = [
         { label: null, href: "#/" },
         { label: "System", href: "#/system" },
         { label: "Tests", href: "#/tests" },
-        { label: "Loading Test Test" },
+        { label: "Loading" },
     ];
 
     render() {
         return (
             <div>
-                <Breadcrumbs crumbs={LoadingTest.crumbs} />
+                <Breadcrumb crumbs={LoadingTest.crumbs} />
                 <h1>LoadingTest</h1>
 
                 <Loading show={true} />

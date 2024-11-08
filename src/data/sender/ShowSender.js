@@ -25,7 +25,8 @@ class DataSender extends ThingDetail {
                 name
                 email
                 label
-                props 
+                created
+                lastModified 
             } 
         }`;
     }
@@ -90,8 +91,8 @@ class DataSender extends ThingDetail {
             label: sender.label,
             email: senderLink (sender),
             name: sender.name || '-',
-            created: sender.props.created,
-            lastModified: sender.props.lastModified,
+            created: sender.created,
+            lastModified: sender.lastModified,
         };
 
         formatDate (o, [ "created", "lastModified" ]);

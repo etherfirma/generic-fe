@@ -12,9 +12,11 @@ const thingLink = (type, field = "name", func = null) => (thing) => {
 const senderLink = thingLink ("sender", "email");
 const userLink = thingLink ("user", "name", (thing) => `${thing.name} (${thing.email})`);
 const templateLink = thingLink ("template", "path");
+const geoLink = thingLink ("geo", "key")
 
 export {
     senderLink,
+    geoLink,
     userLink,
     templateLink
 };
