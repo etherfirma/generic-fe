@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Loading from "../../util/Loading";
+import Loading from "../../../util/Loading";
 import {Breadcrumbs} from "@mui/material";
 
 class LoadingTest extends Component {

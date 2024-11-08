@@ -3,14 +3,14 @@ import {encodeUrl, formatDate, objGet, TabPanel, wrap, PreJson} from "../../util
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
-import Button from "@mui/material/Button";
-import UserUtil, {userLink} from "./UserUtil";
+import UserUtil from "./UserUtil";
 import YesNo from "../../util/YesNo";
 import Breadcrumb from "../../util/Breadcrumb";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Server from "../../util/Server";
 import {DeleteButton, EditButton, ReloadButton, ResetButton, SendButton} from "../../util/ButtonUtil";
+import {userLink} from "../thing/ThingUtil";
 
 /**
  *

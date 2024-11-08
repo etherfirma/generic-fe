@@ -7,13 +7,11 @@ import ThingDetails from "../thing/ThingDetails";
 import {action} from "mobx";
 import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import UserUtil, { userLink } from "./UserUtil";
+import UserUtil from "./UserUtil";
 import YesNo from "../../util/YesNo";
-import Server from "../../util/Server";
 import Breadcrumb from "../../util/Breadcrumb";
-import Tab from "@mui/material/Tab";
 import {AddButton, ReloadButton} from "../../util/ButtonUtil";
-import * as PropTypes from "prop-types";
+import {userLink} from "../thing/ThingUtil";
 
 /**
  *

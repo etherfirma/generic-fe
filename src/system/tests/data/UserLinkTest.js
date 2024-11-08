@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import ErrorBanner from "../../../util/ErrorBanner";
 import {PreJson, wrap} from "../../../util/Utils";
 import {observable} from "mobx";
-import UserUtil, {userLink} from "../../../data/user/UserUtil";
+import UserUtil from "../../../data/user/UserUtil";
 import Server from "../../../util/Server";
 import Button from "@mui/material/Button";
 import _ from "lodash";
+import {userLink} from "../../../data/thing/ThingUtil";
 
 /**
  *

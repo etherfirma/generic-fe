@@ -3,14 +3,10 @@ import {encodeUrl, formatDate, objGet, PreJson, wrap} from "../../util/Utils";
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
-import Button from "@mui/material/Button";
-import {templateLink} from "./TemplateUtil";
-import YesNo from "../../util/YesNo";
 import Breadcrumb from "../../util/Breadcrumb";
-import FancyBorder from "../../util/FancyBorder";
 import Server from "../../util/Server";
-import {userLink} from "../user/UserUtil";
 import {DeleteButton, EditButton, IconButton} from "../../util/ButtonUtil";
+import {userLink} from "../thing/ThingUtil";
 
 const INIT = {
     type: "Template",

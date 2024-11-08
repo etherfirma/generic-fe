@@ -9,8 +9,8 @@ import AddSender from "../data/sender/AddSender";
 import ShowSender from "../data/sender/ShowSender";
 import EditSender from "../data/sender/EditSender";
 import Tests from "../system/tests/Tests";
-import LoadingTest from "../system/tests/LoadingTest";
-import PropertyTableTest from "../system/tests/PropertyTableTest";
+import LoadingTest from "../system/tests/ux/LoadingTest";
+import PropertyTableTest from "../system/tests/ux/PropertyTableTest";
 import SenderPickerTest from "../system/tests/data/SenderPickerTest";
 import SenderLinkTest from "../system/tests/data/SenderLinkTest";
 import FindTemplates from "../data/template/FindTemplates";
@@ -28,6 +28,9 @@ import ShowUserLocal from "../data/userLocal/ShowUserLocal";
 import TemplatePickerTest from "../system/tests/data/TemplatePickerTest";
 import TemplateTest from "../system/tests/data/TemplateTest";
 import SendEmailTest from "../system/tests/svc/SendEmailTest";
+import TemplateLinkTest from "../system/tests/data/TemplateLinkTest";
+import Cardinality from "../system/Cardinality";
+import BooleanPickerTest from "../system/tests/ux/BooleanPickerTest";
 
 /**
  *
@@ -65,14 +68,20 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/userLocals", element: <FindUserLocals /> },
     { path: "/data/userLocal/:id", element: <ShowUserLocal /> },
 
+    { path: "/system/cardinality", element: <Cardinality /> },
+
     { path: "/tests/loading", element: <LoadingTest /> },
     { path: "/tests/propertyTable", element: <PropertyTableTest /> },
     { path: "/tests/senderPicker", element: <SenderPickerTest /> },
     { path: "/tests/senderLink", element: <SenderLinkTest /> },
     { path: "/tests/userPicker", element: <UserPickerTest /> },
+    { path: "/tests/userLink", element: <UserLinkTest /> },
     { path: "/tests/templatePicker", element: <TemplatePickerTest /> },
-    { path: "/tests/template", element: <TemplateTest /> },
+    { path: "/tests/templateLink", element: <TemplateLinkTest /> },
     { path: "/tests/svc/sendEmail", element: <SendEmailTest /> },
+    { path: "/tests/template", element: <TemplateTest /> },
+
+    { path: "/tests/ux/booleanPicker", element: <BooleanPickerTest /> },
 ]);
 
 export default LOGGED_IN;

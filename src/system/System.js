@@ -24,6 +24,11 @@ class System extends Component {
                             Tests
                         </a>
                     </li>
+                    <li>
+                        <a href={"#/system/cardinality"}>
+                            Cardinality
+                        </a>
+                    </li>
                 </ul>
             </div>
         );

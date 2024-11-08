@@ -3,12 +3,10 @@ import {encodeUrl, formatDate, objGet, wrap} from "../../util/Utils";
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
-import Button from "@mui/material/Button";
-import {senderLink} from "./SenderUtil";
-import YesNo from "../../util/YesNo";
 import Breadcrumb from "../../util/Breadcrumb";
 import Server from "../../util/Server";
 import {DeleteButton, EditButton} from "../../util/ButtonUtil";
+import {senderLink} from "../thing/ThingUtil";
 
 const INIT = {
     type: "Sender"

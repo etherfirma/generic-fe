@@ -8,8 +8,8 @@ import {action} from "mobx";
 import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Breadcrumb from "../../util/Breadcrumb";
-import {userLink} from "../user/UserUtil";
 import {AddButton, ReloadButton} from "../../util/ButtonUtil";
+import {userLink} from "../thing/ThingUtil";
 
 
 class FindTemplates extends ThingDetails {

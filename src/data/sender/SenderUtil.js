@@ -1,12 +1,3 @@
-import "./css/SenderLink.css";
-
-const senderLink = (sender) => {
-    return (
-        <span className="ThingLink" onClick={() => window.location.hash = `#/data/sender/${sender.id}`}>
-            {sender.email}
-        </span>
-    )
-};
 
 class SenderUtil {
     findSendersGql =  `query ($req: SenderFindRequest!) { 
@@ -25,9 +16,5 @@ class SenderUtil {
 }
 
 export default new SenderUtil ();
-
-export {
-    senderLink
-};
 
 // EOF

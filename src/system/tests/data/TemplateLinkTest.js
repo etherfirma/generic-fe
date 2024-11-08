@@ -2,27 +2,27 @@ import React, { Component } from "react";
 import ErrorBanner from "../../../util/ErrorBanner";
 import {PreJson, wrap} from "../../../util/Utils";
 import {observable} from "mobx";
-import SenderUtil from "../../../data/sender/SenderUtil";
+import TemplateUtil from "../../../data/template/TemplateUtil";
 import Server from "../../../util/Server";
 import Button from "@mui/material/Button";
-import { senderLink } from "../../../data/thing/ThingUtil"
 import _ from "lodash";
+import {templateLink} from "../../../data/thing/ThingUtil";
 
 /**
  *
  */
 
-class SenderLinkTest extends Component {
+class TemplateLinkTest extends Component {
     store = observable ({
         res: null
     });
 
     componentDidMount() {
-        this.loadSenders ()
+        this.loadTemplates ()
     }
 
-    async loadSenders () {
-        const query = SenderUtil.findSendersGql;
+    async loadTemplates () {
+        const query = TemplateUtil.findTemplatesGql;
         const variables = { req: { filters: { } } };
         try {
             this.store.res = await Server.gql(query, variables);;
@@ -34,27 +34,27 @@ class SenderLinkTest extends Component {
     }
 
     render() {
-        const senders = this.store.res?.data?.findSenders?.results;
+        const templates = this.store.res?.data?.findTemplates?.results;
 
         return (
             <div>
-                <h1>SenderLink Test</h1>
+                <h1>TemplateLink Test</h1>
 
                 <ErrorBanner error={this.store.res?.errors} />
 
-                {senders && (
+                {templates && (
                     <ul>
-                        {_.map(senders, (sender, i) => {
+                        {_.map(templates, (template, i) => {
                             return (
                                 <li>
-                                    {senderLink (sender)}
+                                    {templateLink (template)}
                                 </li>
                             );
                         })}
                     </ul>
                 )}
 
-                <Button size={"small"} variant={"outlined"} onClick={() => this.loadSenders()}>
+                <Button size={"small"} variant={"outlined"} onClick={() => this.loadTemplates()}>
                     Reload
                 </Button>
             </div>
@@ -62,6 +62,6 @@ class SenderLinkTest extends Component {
     }
 }
 
-export default wrap(SenderLinkTest);
+export default wrap(TemplateLinkTest);
 
 // EOF

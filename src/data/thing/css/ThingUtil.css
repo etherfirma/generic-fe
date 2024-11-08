@@ -1,5 +1,12 @@
-.ThingLink > span:hover {
+:root {
+    --thing-link-color: steelblue;
+}
+
+.ThingLink:hover {
     text-decoration: underline;
+}
+.ThingLink {
+    color: var(--thing-link-color);
 }
 
 .DataFilters {

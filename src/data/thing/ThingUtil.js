@@ -1,33 +1,22 @@
 import React from 'react';
 import "./css/ThingUtil.css";
 
-const thingLink = (type, icon, field = "name") => (thing) => {
+const thingLink = (type, field = "name", func = null) => (thing) => {
+    const text = func ? func (thing) : thing[field];
     return (
         <span className="ThingLink" onClick={() => window.location.href = `#/data/${type}/${thing.id}`}>
-            <i className={icon} />
-            &nbsp;
-            <span>
-                {thing[field]}
-            </span>
+            {text}
         </span>
     );
-
 }
-
-const taskLink = thingLink ("task", "fal fa-tasks", "title");
-const userLink = thingLink ("user", "fal fa-user");
-const auditLink = thingLink ("audit", "fas fa-calculator");
-const projectLink = thingLink ("project", "fal fa-project-diagram");
-const templateLink = thingLink ("template", "fal fa-file-code");
-// const organizationLink = thingLink ("organization", "fal fa-building");
+const senderLink = thingLink ("sender", "email");
+const userLink = thingLink ("user", "name", (thing) => `${thing.name} (${thing.email})`);
+const templateLink = thingLink ("template", "path");
 
 export {
+    senderLink,
     userLink,
-    projectLink,
-    templateLink,
-    // organizationLink,
-    taskLink,
-    auditLink
+    templateLink
 };
 
 // EOF

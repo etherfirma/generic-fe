@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import PropertyTable from "../../util/PropertyTable";
-import YesNo from "../../util/YesNo";
-import Breadcrumb from "../../util/Breadcrumb";
+import PropertyTable from "../../../util/PropertyTable";
+import YesNo from "../../../util/YesNo";
+import Breadcrumb from "../../../util/Breadcrumb";
 
 class PropertyTableTest extends Component {
     static crumbs = [

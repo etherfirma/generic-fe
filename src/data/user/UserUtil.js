@@ -1,17 +1,6 @@
 import Server from "../../util/Server";
 import _ from "lodash";
 
-const userLink = (user) => {
-    if (! user) {
-        return '-';
-    }
-    return (
-        <span className="ThingLink" onClick={() => window.location.hash = `#/data/user/${user.id}`}>
-            {user.email}
-        </span>
-    )
-};
-
 class UserUtil {
     // async removeAll () {
     //     const query = "mutation { res: removeAllUsers }";
@@ -75,8 +64,5 @@ class UserUtil {
 
 export default new UserUtil ();
 
-export {
-    userLink
-};
 
 // EOF

@@ -46,13 +46,18 @@ class Tests extends Component {
                                 PropertyTable
                             </a>
                         </li>
+                        <li>
+                            <a href={"#/tests/ux/booleanPicker"}>
+                                BooleanPicker
+                            </a>
+                        </li>
                     </ul>
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <ul>
                         <li>
                             <a href={"#/tests/senderPicker"}>
-                                SenderPicker
+                            SenderPicker
                             </a>
                         </li>
                         <li>
@@ -75,13 +80,18 @@ class Tests extends Component {
                                 TemplatePickerTest
                             </a>
                         </li>
+                        <li>
+                            <a href={"#/tests/templateLink"}>
+                                TemplateLink
+                            </a>
+                        </li>
                     </ul>
                 </TabPanel>
                 <TabPanel value={tab} index={2}>
                     <ul>
                         <li>
                             <a href={"#/tests/svc/sendEmail"}>
-                                SendEmail
+                            SendEmail
                             </a>
                         </li>
                     </ul>

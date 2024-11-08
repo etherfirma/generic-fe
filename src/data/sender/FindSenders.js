@@ -7,9 +7,10 @@ import ThingDetails from "../thing/ThingDetails";
 import {action} from "mobx";
 import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import SenderUtil, { senderLink } from "./SenderUtil";
+import SenderUtil from "./SenderUtil";
 import Breadcrumb from "../../util/Breadcrumb";
 import {AddButton, ReloadButton} from "../../util/ButtonUtil";
+import {senderLink} from "../thing/ThingUtil";
 
 /**
  *
