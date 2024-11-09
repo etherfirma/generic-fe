@@ -8,6 +8,7 @@ import {DeleteButton, EditButton} from "../../../util/ButtonUtil";
 import YesNo from "../../../util/YesNo";
 import {employerLink, geoLink} from "../../thing/ThingUtil";
 import Server from "../../../util/Server";
+import Button from "@mui/material/Button";
 
 /**
  *
@@ -87,7 +88,15 @@ class ShowEmployerGeo extends ThingDetail {
             id: <ID snackbar={true} value={employerGeo.id} />,
             employer: employerLink (employerGeo.employer),
             geo: geoLink (employerGeo.geo),
-            isActive: <YesNo value={employerGeo.isActive} labelled={true} />,
+            isActive: (
+                <div>
+                    <YesNo value={employerGeo.isActive} labelled={true} />
+                    &nbsp;
+                    <Button variant={"outlined"} size={"small"} onClick={() => this.toggleActive (employerGeo)}>
+                        Toggle
+                    </Button>
+                </div>
+            ),
         };
 
         return (
@@ -97,6 +106,23 @@ class ShowEmployerGeo extends ThingDetail {
                 {this.actions (employerGeo)}
             </div>
         )
+    }
+
+    async toggleActive (employerGeo) {
+        const query = `mutation ($id: String!, $update: EmployerGeoUpdate!) {
+            res: updateEmployerGeo (id: $id, update: $update) {
+                id 
+            }  
+        }`;
+        const variables = {
+            id: employerGeo.id,
+            update: {
+                isActive: ! employerGeo.isActive
+            }
+        };
+        const req = await Server._gql (query, variables);
+        this.doLoad ();
+        return;
     }
 
     renderHeader () {
