@@ -1,0 +1,12 @@
+.UserProfile-name {
+    font-size: 2em;
+    padding: 4px;
+}
+.UserProfile-email {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    color: #444;
+    padding-left: 16px;
+}
+.UserProfileTable tbody tr:nth-child(1) td:nth-child(2) {
+    padding: 8px;
+}

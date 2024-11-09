@@ -1,37 +1,38 @@
 import React from 'react';
-import {wrap} from "../../util/Utils";
-import ID from "../../util/ID";
-import DataTable from "../DataTable";
+import {wrap} from "../../../util/Utils";
+import ID from "../../../util/ID";
+import DataTable from "../../DataTable";
 import Button from "@mui/material/Button";
-import ThingDetails from "../thing/ThingDetails";
+import ThingDetails from "../../thing/ThingDetails";
 import {action} from "mobx";
 import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import EmployerUtil from "./EmployerUtil";
-import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, ReloadButton} from "../../util/ButtonUtil";
-import {employerLink} from "../thing/ThingUtil";
-import YesNo from "../../util/YesNo";
-import BooleanPicker from "../../util/BooleanPicker";
+import EmployerUtil from "./EmployerGeoUtil";
+import Breadcrumb from "../../../util/Breadcrumb";
+import {AddButton, ReloadButton} from "../../../util/ButtonUtil";
+import {employerLink, geoLink} from "../../thing/ThingUtil";
+import YesNo from "../../../util/YesNo";
+import BooleanPicker from "../../../util/BooleanPicker";
+import EmployerGeoUtil from "./EmployerGeoUtil";
 
 /**
  *
  */
 
-class FindEmployers extends ThingDetails {
+class FindEmployerGeos extends ThingDetails {
     constructor () {
         super ({
-            heading: "Employers",
+            heading: "EmployerGeos",
             hasFilters: true,
-            key: "", // filter
-            name: "", //filter
+            employer: null, // filter
+            geo: null, //filter
             isActive: null, // filter
             id: "" // filter
         });
     }
 
     get query () {
-        return EmployerUtil.findEmployersGql;
+        return EmployerGeoUtil.findEmployerGeosGql;
     }
 
     extendVariables (variables) {
@@ -40,15 +41,15 @@ class FindEmployers extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { name, key, id, isActive } = this.store;
-        if (name) {
-            filters.name = name;
+        const { employer, geo, isActive, id } = this.store;
+        if (employer) {
+            filters.employerId = employer.id;
         }
         if (isActive !== null) {
             filters.isActive = isActive;
         }
-        if (key) {
-            filters.key = key;
+        if (geo) {
+            filters.geoId = geo.id;
         }
         if (id) {
             filters.id = id;
@@ -59,19 +60,19 @@ class FindEmployers extends ThingDetails {
 
     get headers () {
         return [
-            this.sortHeader ("key", "Key"),
-            this.sortHeader ("name", "Name"),
+            this.sortHeader ("employer", "Employer"),
+            this.sortHeader ("geo", "Geo"),
             this.sortHeader ("isActive", "Active?"),
             this.sortHeader("_id", "ID")
         ];
     }
 
-    xform (employer) {
+    xform (employerGeo) {
         return [
-            employerLink (employer),
-            employer.name,
-            <YesNo value={employer.isActive} />,
-            <ID value={employer.id} />
+            employerLink (employerGeo.employer),
+            geoLink (employerGeo.geo),
+            <YesNo value={employerGeo.isActive} />,
+            <ID value={employerGeo.id} />
         ];
     }
 
@@ -83,14 +84,14 @@ class FindEmployers extends ThingDetails {
                     xform={this.xform.bind (this)}
                     rows={fres.results}
                     skip={fres.skip}
-                    onClick={employer => window.location.href = `#/data/employer/${employer.id}`}
+                    onClick={employerGeo => window.location.href = `#/data/employerGeo/${employerGeo.id}`}
                 />
 
                 <br/>
                 {this.showElapsed ()}
                 <br/>
 
-                <AddButton onClick={() => window.location.href = "#/data/employer/add"} />
+                <AddButton onClick={() => window.location.href = "#/data/employerGeo/add"} />
                 &nbsp;
                 <ReloadButton disabled={this.store.loading} onClick={() => this.doLoad ()} />
             </div>
@@ -103,15 +104,15 @@ class FindEmployers extends ThingDetails {
     }
 
     clearFilters = action (() => {
-        this.store.name = "";
-        this.store.key = "";
+        this.store.employer = null;
+        this.store.geo = null;
+        this.store.isActive = null;
         this.store.id = "";
-        this.store.isActive = null; 
         this.doLoad ();
     });
 
     renderFilters () {
-        const { key, name, id, isActive, showDrawer } = this.store;
+        const { employer, geo, isActive, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -124,24 +125,24 @@ class FindEmployers extends ThingDetails {
                 <div className={"DataFilters"}>
                     <h2>Filters</h2>
 
-                    <TextField
-                        {...formProps}
-                        value={key}
-                        label={"Key"}
-                        onChange={(e) => {
-                            this.store.key = e.target.value;
-                            this.doLoad();
-                        }}
-                    />
-                    <TextField
-                        {...formProps}
-                        value={name}
-                        label={"Name"}
-                        onChange={(e) => {
-                            this.store.name = e.target.value;
-                            this.doLoad();
-                        }}
-                    />
+                    {/*<TextField*/}
+                    {/*    {...formProps}*/}
+                    {/*    value={key}*/}
+                    {/*    label={"Key"}*/}
+                    {/*    onChange={(e) => {*/}
+                    {/*        this.store.key = e.target.value;*/}
+                    {/*        this.doLoad();*/}
+                    {/*    }}*/}
+                    {/*/>*/}
+                    {/*<TextField*/}
+                    {/*    {...formProps}*/}
+                    {/*    value={name}*/}
+                    {/*    label={"Name"}*/}
+                    {/*    onChange={(e) => {*/}
+                    {/*        this.store.name = e.target.value;*/}
+                    {/*        this.doLoad();*/}
+                    {/*    }}*/}
+                    {/*/>*/}
                     <BooleanPicker
                         value={isActive}
                         onChange={(boolean) => {
@@ -177,7 +178,7 @@ class FindEmployers extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "Employers" }
+            { label: "EmployerGeos" }
         ];
         return (
             <div>
@@ -188,6 +189,6 @@ class FindEmployers extends ThingDetails {
     }
 }
 
-export default wrap (FindEmployers);
+export default wrap (FindEmployerGeos);
 
 // EOF

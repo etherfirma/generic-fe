@@ -37,6 +37,13 @@ import ShowEmployer from "../data/employer/ShowEmployer";
 import FindEmployers from "../data/employer/FindEmployers";
 import AddEmployer from "../data/employer/AddEmployer";
 import EditEmployer from "../data/employer/EditEmployer";
+import UserProfile from "../user/UserProfile";
+import EditUserProfile from "../user/EditUserProfile";
+import FindEmployerGeos from "../data/employer/geo/FindEmployerGeos";
+import AddEmployerGeo from "../data/employer/geo/AddEmployerGeo";
+import ShowEmployerGeo from "../data/employer/geo/ShowEmployerGeo";
+import GeoPickerTest from "../system/tests/data/GeoPickerTest";
+import EmployerPickerTest from "../system/tests/data/EmployerPickerTest";
 
 /**
  *
@@ -59,6 +66,9 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests", element: <Tests /> },
     { path: "/system/gql", element: <GraphQLQuery /> },
 
+    { path: "/profile/:id", element: <UserProfile /> },
+    { path: "/profile/edit", element: <EditUserProfile /> },
+
     { path: "/data/senders", element: <FindSenders /> },
     { path: "/data/sender/add", element: <AddSender /> },
     { path: "/data/sender/:id", element: <ShowSender /> },
@@ -80,6 +90,9 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/employer/add", element: <AddEmployer /> },
     { path: "/data/employer/:id", element: <ShowEmployer /> },
     { path: "/data/employer/:id/edit", element: <EditEmployer /> },
+    { path: "/data/employerGeos", element: <FindEmployerGeos /> },
+    { path: "/data/employerGeo/add", element: <AddEmployerGeo /> },
+    { path: "/data/employerGeo/:id", element: <ShowEmployerGeo /> },
 
     { path: "/system/cardinality", element: <Cardinality /> },
 
@@ -93,6 +106,8 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests/templateLink", element: <TemplateLinkTest /> },
     { path: "/tests/svc/sendEmail", element: <SendEmailTest /> },
     { path: "/tests/template", element: <TemplateTest /> },
+    { path: "/tests/geoPicker", element: <GeoPickerTest /> },
+    { path: "/tests/employerPicker", element: <EmployerPickerTest /> },
 
     { path: "/tests/ux/booleanPicker", element: <BooleanPickerTest /> },
 ]);

@@ -12,6 +12,7 @@ import Alert from "@mui/material/Alert";
 import ErrorBanner from "../../util/ErrorBanner";
 import Validator from "../../login/Validator";
 import {CancelButton, UpdateButton} from "../../util/ButtonUtil";
+import BooleanPicker from "../../util/BooleanPicker";
 
 /**
  * The validation rules for the form fields.
@@ -67,6 +68,7 @@ class EditEmployer extends Component {
                     id
                     key
                     name
+                    isActive
                 } 
             }
         `;
@@ -144,6 +146,19 @@ class EditEmployer extends Component {
                         </td>
                     </tr>
                     <tr>
+                        <BooleanPicker
+                            value={this.store.employer.isActive}
+                            onChange={(boolean) => {
+                                this.store.employer.isActive = boolean;
+                                this.validate ();
+                            }}
+                            formProps={{
+                                fullWidth: true,
+                                size: "small"
+                            }}
+                        />
+                    </tr>
+                    <tr>
                         <td colSpan={2}>
                             <UpdateButton disabled={loading || ! this.isValid} onClick={() => this.doUpdate ()} />
                             &nbsp;
@@ -162,8 +177,9 @@ class EditEmployer extends Component {
     }
 
     async doUpdate () {
-        const { employer: obj } = this.store;
-        const { id, key, name } = obj;
+        const { employer } = this.store;
+        const { id, key, name, isActive } = employer;
+
         const mutation = `
             mutation ($id: String!, $update: EmployerUpdate!) {
                 res: updateEmployer (id: $id, update: $update) {
@@ -175,7 +191,8 @@ class EditEmployer extends Component {
             id,
             update: {
                 key,
-                name
+                name,
+                isActive
             }
         };
         try {

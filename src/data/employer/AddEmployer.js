@@ -7,6 +7,7 @@ import Breadcrumb from "../../util/Breadcrumb";
 import "./css/AddEmployer.css";
 import Validator from "../../login/Validator";
 import {AddButton} from "../../util/ButtonUtil";
+import BooleanPicker from "../../util/BooleanPicker";
 
 /**
  * The validation rules for the form fields.
@@ -24,7 +25,7 @@ const fields = [
         name: "Name",
         required: true,
         validator: Validator.stringValidator
-    }
+    },
 ];
 
 class AddEmployer extends AddThing {
@@ -34,6 +35,7 @@ class AddEmployer extends AddThing {
             slug: "employer",
             key: "",
             name: "",
+            isActive: false
         });
         this.validate ();
     }
@@ -50,11 +52,12 @@ class AddEmployer extends AddThing {
     }
 
     get variables () {
-        const { name, key } = this.store;
+        const { name, key, isActive } = this.store;
         return {
             employer: {
                 key,
                 name,
+                isActive
             }
         };
     }
@@ -81,7 +84,7 @@ class AddEmployer extends AddThing {
     }
 
     doRender () {
-        const { lkey, name } = this.store;
+        const { key, name, isActive } = this.store;
         const { loading, errors } = this.store;
 
         return (
@@ -97,6 +100,20 @@ class AddEmployer extends AddThing {
                         <td>
                             {this.textField ("name", "Name")}
                         </td>
+                    </tr>
+                    <tr>
+                        <BooleanPicker
+                            value={isActive}
+                            onChange={(boolean) => {
+                                this.store.isActive = boolean;
+                                this.validate ();
+                            }}
+                            required={false}
+                            formProps={{
+                                fullWidth: true,
+                                size: "small"
+                            }}
+                        />
                     </tr>
                     <tr>
                         <td colSpan={2}>

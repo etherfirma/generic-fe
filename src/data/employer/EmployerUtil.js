@@ -9,6 +9,7 @@ class EmployerUtil {
                     id
                     key
                     name
+                    isActive
                 }
             }
         }`;

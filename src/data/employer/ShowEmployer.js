@@ -5,6 +5,7 @@ import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
 import {DeleteButton, EditButton} from "../../util/ButtonUtil";
+import YesNo from "../../util/YesNo";
 
 /**
  *
@@ -23,7 +24,8 @@ class DataEmployer extends ThingDetail {
             res: employerById (id: $id) {
                 id
                 key
-                name
+                name 
+                isActive
                 created
                 lastModified
             } 
@@ -62,6 +64,7 @@ class DataEmployer extends ThingDetail {
             id: <ID snackbar={true} value={employer.id} />,
             key: employer.key,
             name: employer.name,
+            isActive: <YesNo value={employer.isActive} labelled={true} />,
             created: employer.created,
             lastModified: employer.lastModified,
         };
@@ -82,7 +85,7 @@ class DataEmployer extends ThingDetail {
         const crumbs = [
             { label: null, href: "#/" },
             { label: "Employers", href: "#/data/employers" },
-            { label: result?.key || id}
+            { label: result?.name || id}
         ];
         return (
             <div>

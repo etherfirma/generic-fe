@@ -57,7 +57,7 @@ class Tests extends Component {
                     <ul>
                         <li>
                             <a href={"#/tests/senderPicker"}>
-                            SenderPicker
+                                SenderPicker
                             </a>
                         </li>
                         <li>
@@ -83,6 +83,16 @@ class Tests extends Component {
                         <li>
                             <a href={"#/tests/templateLink"}>
                                 TemplateLink
+                            </a>
+                        </li>
+                        <li>
+                            <a href={"#/tests/employerPicker"}>
+                                EmployerPickerTest
+                            </a>
+                        </li>
+                        <li>
+                            <a href={"#/tests/geoPicker"}>
+                                GeoPickerTest
                             </a>
                         </li>
                     </ul>

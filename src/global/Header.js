@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from "@mui/material/Button";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import logo from "./logo.png";
+import AuthManager from "../util/AuthManager";
 
 function stringAvatar(name) {
     return {
@@ -67,7 +68,15 @@ function BasicMenu({ authManager }) {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        handleClose ();
+                        const userId = AuthManager.user.id;
+                        window.location.hash = `#/profile/${userId}`;
+                    }}
+                >
+                    Profile
+                </MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={() => {
                     authManager.logout ();
@@ -86,7 +95,7 @@ class Header extends Component {
         const user = AuthManager.user;
         return (
             <div className={"Header"}>
-                <div>
+                <div onClick={() => window.location.hash = "/"}>
                     {/*<img height={50} src={logo} />*/}
                     <img height={50} src={"https://abide.com/wp-content/uploads/2023/03/Abide_Logo_Horizontal_FullColor_WEB.svg"} />
                 </div>
