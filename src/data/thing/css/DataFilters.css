@@ -2,6 +2,9 @@
     min-width: 300px;
     padding: 16px;
 }
+.DataFilters > div {
+    padding: 8px;
+}
 
 .DataFilterButton {
     border: 1px solid lightgray;

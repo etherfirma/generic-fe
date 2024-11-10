@@ -68,7 +68,7 @@ class EmployerPicker extends Component {
     }
 
     render () {
-        const { value, onChange = () => null, label = "Employer", formProps, hideEmpty } = this.props;
+        const { value, onChange = () => null, label = "Employer", formProps, hideEmpty, disabled } = this.props;
         const { employers } = this.store;
 
         let { error } = this.props;
@@ -86,14 +86,18 @@ class EmployerPicker extends Component {
 
         return (
             <FormControl error={error} variant="outlined" {...formProps}>
-                <InputLabel>{label}</InputLabel>
+                <InputLabel>
+                    {label}
+                </InputLabel>
                 <Select
-                    value={encodeSelectValue (value)}
+                    value={encodeSelectValue (value?.id)}
                     onChange={(e) => {
-                        const employer = decodeSelectValue (e.target.value);
+                        const employerId = decodeSelectValue (e.target.value);
+                        const employer = _.find (employers, (employer) => employer.id == employerId);
                         onChange (employer);
                     }}
                     label={label}
+                    disabled={disabled}
                     required
                 >
                     {! hideEmpty && (
@@ -103,7 +107,7 @@ class EmployerPicker extends Component {
                     )}
                     {_.map (employers, (employer, i) => {
                         return (
-                            <MenuItem key={i} value={employer}>
+                            <MenuItem key={i} value={employer?.id}>
                                 {employer.name} ({employer.key})
                             </MenuItem>
                         );

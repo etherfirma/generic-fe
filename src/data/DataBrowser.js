@@ -16,7 +16,8 @@ class DataBrowser extends Component {
         { name: "sender", hash: "#/data/senders" },
         { name: "template", hash: "#/data/templates" },
         { name: "employers", hash: "#/data/employers" },
-        { name: "employerGeos", hash: "#/data/employerGeos" }
+        { name: "employerGeos", hash: "#/data/employerGeos" },
+        { name: "job", hash: "#/data/jobs" },
     ];
 
     render() {

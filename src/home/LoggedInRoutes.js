@@ -48,6 +48,10 @@ import FindGeoTargets from "../data/geo/target/FindGeoTargets";
 import EditGeoTarget from "../data/geo/target/EditGeoTarget";
 import ShowGeoTarget from "../data/geo/target/ShowGeoTarget";
 import AddGeoTarget from "../data/geo/target/AddGeoTarget";
+import FindJobs from "../data/job/FindJobs";
+import AddJob from "../data/job/AddJob";
+import ShowJob from "../data/job/ShowJob";
+import EditJob from "../data/job/EditJob";
 
 /**
  *
@@ -89,6 +93,12 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/userLocal/:id", element: <ShowUserLocal /> },
     { path: "/data/geos", element: <FindGeos /> },
     { path: "/data/geo/:id", element: <ShowGeo /> },
+
+    { path: "/data/jobs", element: <FindJobs /> },
+    { path: "/data/job/add", element: <AddJob /> },
+    { path: "/data/job/:id", element: <ShowJob /> },
+    { path: "/data/job/:id/edit", element: <EditJob /> },
+
 
     { path: "/data/employers", element: <FindEmployers /> },
     { path: "/data/employer/add", element: <AddEmployer /> },

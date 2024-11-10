@@ -1,0 +1,145 @@
+import React from 'react';
+import {encodeUrl, formatDate, objGet, wrap} from "../../util/Utils";
+import PropertyTable from "../../util/PropertyTable";
+import ID from "../../util/ID";
+import ThingDetail from "../thing/ThingDetail";
+import Breadcrumb from "../../util/Breadcrumb";
+import {AddButton, DeleteButton, EditButton, IconButton} from "../../util/ButtonUtil";
+import YesNo from "../../util/YesNo";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import _ from "lodash";
+import {TableFooter} from "@mui/material";
+import {employerLink, geoLink} from "../thing/ThingUtil";
+import Server from "../../util/Server";
+
+/**
+ *
+ */
+
+class ShowJob extends ThingDetail {
+    constructor () {
+        super ({
+            type: "Job"
+        });
+    }
+
+    get query () {
+        return `
+        query ($id: String!) {
+            res: jobById (id: $id) {
+                id
+                jobKey
+                title
+                description
+                state
+                employer {id key name }
+                geo { id key name }
+                created
+                lastModified
+            } 
+        }`;
+    }
+
+    actions (job) {
+        return (
+            <div>
+                <EditButton onClick={() => {
+                    window.location.hash = `#/data/job/${job.id}/edit`;
+                }} />
+                &nbsp;
+                <DeleteButton onClick={()=> {
+                    this.delete (job);
+                }} />
+            </div>
+        );
+    }
+
+    /**
+     *
+     * @param jobId
+     */
+
+    doRender (job) {
+        if (! job) {
+            return (
+                <span>
+                    Job not found.
+                </span>
+            );
+        }
+
+        const o = {
+            id: <ID snackbar={true} value={job.id} />,
+            employer: employerLink (job.employer),
+            jobKey: job.jobKey,
+            title: job.title,
+            description: job.description,
+            geo: geoLink (job.geo),
+            state: job.state,
+            created: job.created,
+            lastModified: job.lastModified,
+        };
+
+        formatDate (o, [ "created", "lastModified" ]);
+
+        return (
+            <div>
+                <PropertyTable value={o} size={"small"} />
+                <br/>
+                {this.actions (job)}
+            </div>
+        )
+    }
+
+    renderHeader () {
+        const { result, id } = this.store;
+        const crumbs = [
+            { label: null, href: "#/" },
+            { label: "Jobs", href: "#/data/jobs" },
+            { label: result?.name || id}
+        ];
+        return (
+            <div>
+                <Breadcrumb crumbs={crumbs} />
+                {super.renderHeader ()}
+            </div>
+        );
+    }
+
+    delete (job) {
+        const props = {
+            title: "Confirm delete",
+            body: <p>Really delete <b>job</b>?</p>,
+            confirmText: "Delete",
+            confirmFunc: () => {
+                this.doDelete (job);
+            }
+        };
+        const { infoDialogStore } = this.props;
+        infoDialogStore.showDialog (props);
+    }
+
+    async doDelete (follow) {
+        const mutation = `mutation ($id: String!) {
+            res: deleteJob (id: $id) 
+        }`;
+        const variables = { id: follow.id };
+        try {
+            const res = await Server._gql (mutation, variables);
+            this.doLoad();
+        }
+        catch (e) {
+            alert (JSON.stringify (e));
+        }
+    }
+}
+
+export default wrap (ShowJob);
+
+// EOF
