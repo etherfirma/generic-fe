@@ -12,6 +12,7 @@ class DataBrowser extends Component {
         { name: "user", hash: "#/data/users" },
         { name: "userLocal", hash: "#/data/userLocals" },
         { name: "geo", hash: "#/data/geos" },
+        { name: "geoTarget", hash: "#/data/geoTargets" },
         { name: "sender", hash: "#/data/senders" },
         { name: "template", hash: "#/data/templates" },
         { name: "employers", hash: "#/data/employers" },

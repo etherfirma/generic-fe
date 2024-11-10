@@ -68,7 +68,7 @@ class GeoPicker extends Component {
     }
 
     render () {
-        const { value, onChange = () => null, label = "Geo", formProps, hideEmpty } = this.props;
+        const { value, onChange = () => null, label = "Geo", formProps, hideEmpty, disabled } = this.props;
         const { geos } = this.store;
 
         let { error } = this.props;
@@ -90,9 +90,11 @@ class GeoPicker extends Component {
                 <Select
                     value={encodeSelectValue (value)}
                     onChange={(e) => {
-                        const geo = decodeSelectValue (e.target.value);
+                        const geoId = decodeSelectValue (e.target.value);
+                        const geo = _.find (geos, (geo) => geo.id == geoId);
                         onChange (geo);
                     }}
+                    disabled={disabled}
                     label={label}
                     required
                 >
@@ -103,7 +105,7 @@ class GeoPicker extends Component {
                     )}
                     {_.map (geos, (geo, i) => {
                         return (
-                            <MenuItem key={i} value={geo}>
+                            <MenuItem key={i} value={geo.id}>
                                 {geo.name} ({geo.key})
                             </MenuItem>
                         );

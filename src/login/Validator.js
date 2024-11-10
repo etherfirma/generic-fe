@@ -13,6 +13,14 @@ class Validator {
         this.accessor = accessor || ((obj) => obj.store);
     }
 
+    static urlValidator (val) {
+        if (!ValidationUtil.isUrl(val)) {
+            return "Not a URL";
+        } else {
+            return null;
+        }
+    }
+
     static intValidator (val) {
         if (! ValidationUtil.isNumber(val)) {
             return "Not a number.";

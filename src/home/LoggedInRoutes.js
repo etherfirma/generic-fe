@@ -44,6 +44,10 @@ import AddEmployerGeo from "../data/employer/geo/AddEmployerGeo";
 import ShowEmployerGeo from "../data/employer/geo/ShowEmployerGeo";
 import GeoPickerTest from "../system/tests/data/GeoPickerTest";
 import EmployerPickerTest from "../system/tests/data/EmployerPickerTest";
+import FindGeoTargets from "../data/geo/target/FindGeoTargets";
+import EditGeoTarget from "../data/geo/target/EditGeoTarget";
+import ShowGeoTarget from "../data/geo/target/ShowGeoTarget";
+import AddGeoTarget from "../data/geo/target/AddGeoTarget";
 
 /**
  *
@@ -93,6 +97,11 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/employerGeos", element: <FindEmployerGeos /> },
     { path: "/data/employerGeo/add", element: <AddEmployerGeo /> },
     { path: "/data/employerGeo/:id", element: <ShowEmployerGeo /> },
+
+    { path: "/data/geoTargets", element: <FindGeoTargets /> },
+    { path: "/data/geoTarget/add", element: <AddGeoTarget /> },
+    { path: "/data/geoTarget/:id", element: <ShowGeoTarget /> },
+    { path: "/data/geoTarget/:id/:edit", element: <EditGeoTarget /> },
 
     { path: "/system/cardinality", element: <Cardinality /> },
 

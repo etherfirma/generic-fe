@@ -36,7 +36,7 @@ class GeoPickerTest extends Component {
                 <h1>Geo Picker Test</h1>
 
                 <GeoPicker
-                    value={geo}
+                    value={geo?.id}
                     required={false}
                     onChange={geo => this.store.geo = geo}
                     formProps={{
@@ -49,7 +49,7 @@ class GeoPickerTest extends Component {
                 <br/>
 
                 <GeoPicker
-                    value={geo2}
+                    value={geo2?.id}
                     required={true}
                     onChange={geo => this.store.geo2 = geo}
                     formProps={{

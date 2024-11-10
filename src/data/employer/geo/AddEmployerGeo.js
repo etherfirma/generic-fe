@@ -1,5 +1,5 @@
 import React from 'react';
-import {wrap} from "../../../util/Utils";
+import {getParams, wrap} from "../../../util/Utils";
 import AddThing from "../../thing/AddThing";
 import TextField from "@mui/material/TextField";
 import Breadcrumb from "../../../util/Breadcrumb";
@@ -9,6 +9,7 @@ import {AddButton} from "../../../util/ButtonUtil";
 import BooleanPicker from "../../../util/BooleanPicker";
 import EmployerPicker from "../EmployerPicker";
 import GeoPicker from "../../geo/GeoPicker";
+import {matchPath} from "react-router";
 
 /**
  * The validation rules for the form fields.
@@ -34,7 +35,7 @@ class AddEmployerGeo extends AddThing {
         super({
             header: "Add EmployerGeo",
             slug: "employerGeo",
-            employerGeo: null,
+            employer: null,
             geo: null,
             isActive: false
         });
@@ -42,6 +43,22 @@ class AddEmployerGeo extends AddThing {
     }
 
     validator = new Validator (this, fields);
+
+    componentDidMount() {
+        const params = getParams ();
+        if (params.employerId) {
+            this.store.employer = {
+                id: params.employerId
+            };
+        }
+        if (params.geoId) {
+            this.store.geo = {
+                id: params.geoId
+            };
+        }
+        return;
+    }
+
 
     get query () {
         return `

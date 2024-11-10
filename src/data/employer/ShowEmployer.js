@@ -4,14 +4,24 @@ import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
-import {DeleteButton, EditButton} from "../../util/ButtonUtil";
+import {AddButton, DeleteButton, EditButton, IconButton} from "../../util/ButtonUtil";
 import YesNo from "../../util/YesNo";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import _ from "lodash";
+import {TableFooter} from "@mui/material";
+import {geoLink} from "../thing/ThingUtil";
 
 /**
  *
  */
 
-class DataEmployer extends ThingDetail {
+class ShowEmployer extends ThingDetail {
     constructor () {
         super ({
             type: "Employer"
@@ -26,6 +36,11 @@ class DataEmployer extends ThingDetail {
                 key
                 name 
                 isActive
+                employerGeos {
+                    id
+                    geo { id key name }
+                    isActive
+                }
                 created
                 lastModified
             } 
@@ -71,13 +86,68 @@ class DataEmployer extends ThingDetail {
 
         formatDate (o, [ "created", "lastModified" ]);
 
+        const { employerGeos } = employer;
         return (
             <div>
                 <PropertyTable value={o} size={"small"} />
                 <br/>
                 {this.actions (employer)}
+                <br/>
+                <div>
+                    <h2>Geos</h2>
+                    {employerGeos
+                        ? this.renderGeos (employer)
+                        : "No geos"
+                    }
+                </div>
             </div>
         )
+    }
+
+    renderGeos (employer) {
+        const { employerGeos } = employer;
+        return (
+            <div>
+                <TableContainer component={Paper}>
+                    <Table size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Index</TableCell>
+                                <TableCell>Key</TableCell>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Active?</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {_.map (employerGeos, (employerGeo, i) =>
+                                <TableRow key={i} onClick={() => {
+                                    window.location.hash = `/data/employerGeo/${employerGeo.id}`;
+                                }}>
+                                    <TableCell component="th" scope="row">
+                                        {i + 1}.
+                                    </TableCell>
+                                    <TableCell>
+                                        {geoLink (employerGeo.geo)}</TableCell>
+                                    <TableCell>{employerGeo.geo.name}</TableCell>
+                                    <TableCell>
+                                        <YesNo value={employerGeo.isActive} />
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            {employerGeos.length === 0 && (
+                                <TableRow>
+                                    <TableCell colSpan={4} scope="row">
+                                        No Geos
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <br/>
+                <AddButton>sdf</AddButton>
+            </div>
+        );
     }
 
     renderHeader () {
@@ -96,6 +166,6 @@ class DataEmployer extends ThingDetail {
     }
 }
 
-export default wrap (DataEmployer);
+export default wrap (ShowEmployer);
 
 // EOF

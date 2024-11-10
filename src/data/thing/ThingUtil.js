@@ -13,6 +13,7 @@ const senderLink = thingLink ("sender", "email");
 const userLink = thingLink ("user", "name", (thing) => `${thing.name} (${thing.email})`);
 const templateLink = thingLink ("template", "path");
 const geoLink = thingLink ("geo", "key")
+const geoTargetLink = thingLink ("geoTarget", "key")
 const employerLink = thingLink ("employer", "name")
 
 export {
@@ -20,7 +21,8 @@ export {
     employerLink,
     geoLink,
     userLink,
-    templateLink
+    templateLink,
+    geoTargetLink
 };
 
 // EOF
