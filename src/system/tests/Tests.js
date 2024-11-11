@@ -25,14 +25,14 @@ class Tests extends Component {
 
         return (
             <div>
-                <Breadcrumb crumbs={Tests.crumbs} />
+                <Breadcrumb crumbs={Tests.crumbs}/>
                 <h1>Tests</h1>
 
                 <Tabs value={tab} onChange={(e, nt) => this.store.tab = nt}>
-                    <Tab label={"UX"} />
-                    <Tab label={"Data"} />
-                    <Tab label={"Service"} />
-                    <Tab label={"System"} />
+                    <Tab label={"UX"}/>
+                    <Tab label={"Data"}/>
+                    <Tab label={"Service"}/>
+                    <Tab label={"System"}/>
                 </Tabs>
                 <TabPanel value={tab} index={0}>
                     <ul>
@@ -101,7 +101,7 @@ class Tests extends Component {
                     <ul>
                         <li>
                             <a href={"#/tests/svc/sendEmail"}>
-                            SendEmail
+                                SendEmail
                             </a>
                         </li>
                     </ul>
@@ -130,6 +130,14 @@ class Tests extends Component {
                         </li>
                     </ul>
                 </TabPanel>
+
+                <ul>
+                    <li>
+                        <a href={"#/tests/graph/1"}>
+                            Graph1
+                        </a>
+                    </li>
+                </ul>
             </div>
         );
     }

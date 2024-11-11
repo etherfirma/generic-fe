@@ -59,7 +59,7 @@ class Home extends Component {
                                 <DashboardWidget label={"Users"} value={users} loading={users === null}/>
                                 <DashboardWidget label={"Employers"} value={employers} loading={employers === null}/>
                                 <DashboardWidget label={"Jobs"} value={jobs} loading={jobs === null}/>
-                                <DashboardWidget label={"Messages"} value={"-"}/>
+                                <DashboardWidget label={"Messages"} value={0}/>
                                 <DashboardWidget label={"Server Status"} value={<YesNo value={true} />} />
                             </DashboardBar>
                         </td>
