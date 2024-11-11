@@ -14,6 +14,7 @@ import BooleanPicker from "../../util/BooleanPicker";
 import {jobValidationFields} from "./AddJob";
 import EmployerPicker from "../employer/EmployerPicker";
 import GeoPicker from "../geo/GeoPicker";
+import EnumPicker from "../../util/enum/EnumPicker";
 
 /**
  *
@@ -111,6 +112,11 @@ class EditJob extends Component {
     renderForm (job) {
         const { errors, loading } = this.store;
 
+        const formProps = {
+            fullWidth: true,
+            size: "small"
+        };
+
         return (
             <div>
                 <table className={"EditJobTable"} >
@@ -170,7 +176,13 @@ class EditJob extends Component {
                         </td>
                     </tr>
                     <tr>
-                        {this.textField("state", "State")}
+                        <EnumPicker
+                            enumType={"JobState"}
+                            value={job.state}
+                            onChange={value => job.state = value}
+                            required={true}
+                            formProps={formProps}
+                        />
                     </tr>
                     <tr>
                         <td colSpan={2}>

@@ -10,6 +10,7 @@ import {AddButton} from "../../util/ButtonUtil";
 import BooleanPicker from "../../util/BooleanPicker";
 import EmployerPicker from "../employer/EmployerPicker";
 import GeoPicker from "../geo/GeoPicker";
+import EnumPicker from "../../util/enum/EnumPicker";
 
 /**
  * The validation rules for the form fields.
@@ -114,8 +115,13 @@ class AddJob extends AddThing {
     }
 
     doRender () {
-        const { title, description, jobKey, state, employer, geo, isActive } = this.store;
+        const { employer, geo, state } = this.store;
         const { loading, errors } = this.store;
+
+        const formProps = {
+            fullWidth: true,
+            size: "small"
+        };
 
         return (
             <div>
@@ -146,10 +152,7 @@ class AddJob extends AddThing {
                                     this.store.geo = geo;
                                     this.validate();
                                 }}
-                                formProps={{
-                                    fullWidth: true,
-                                    size: "small"
-                                }}
+                                formProps={formProps}
                             />
                         </td>
                     </tr>
@@ -169,7 +172,13 @@ class AddJob extends AddThing {
                         </td>
                     </tr>
                     <tr>
-                        {this.textField("state", "State")}
+                        <EnumPicker
+                            enumType={"JobState"}
+                            value={state}
+                            onChange={value => this.store.state = value}
+                            required={true}
+                            formProps={formProps}
+                        />
                     </tr>
                     <tr>
                         <td colSpan={2}>

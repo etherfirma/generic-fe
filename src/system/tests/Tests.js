@@ -123,6 +123,11 @@ class Tests extends Component {
                                 EnumPickers
                             </a>
                         </li>
+                        <li>
+                            <a href={"#/tests/enumSlugTest"}>
+                                EnumSlugs
+                            </a>
+                        </li>
                     </ul>
                 </TabPanel>
             </div>

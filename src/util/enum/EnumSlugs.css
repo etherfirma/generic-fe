@@ -1,0 +1,54 @@
+.EnumSlug {
+    color: #666;
+}
+
+.Colors-BLACK > span {
+    color: black;
+}
+.Colors-BLUE > span {
+    color: cornflowerblue;
+}
+.Colors-BROWN > span {
+    color: saddlebrown;
+}
+.Colors-GREEN > span {
+    color: darkseagreen;
+}
+.Colors-ORANGE > span {
+    color:  orange;
+}
+.Colors-PURPLE > span {
+    color: mediumpurple;
+}
+.Colors-RED > span {
+    color: red;
+}
+.Colors-WHITE > span {
+    color: lightgray;
+}
+.Colors-YELLOW > span {
+    color: yellow;
+}
+
+.JobState {
+    /*border-radius: 4px;*/
+    /*background-color: #e5e5e5;*/
+    /*display: inline-block;*/
+    /*padding: 1px 4px;*/
+}
+
+.JobState-ACTIVE > span {
+    color: yellow;
+}
+.JobState-FAILED > span {
+    color: red;
+}
+.JobState-PENDING > span {
+    color: darkorange;
+}
+.JobState-PUBLISHED > span {
+    color: green;
+}
+.JobState-REMOVED > span {
+    color: darkgray;
+}

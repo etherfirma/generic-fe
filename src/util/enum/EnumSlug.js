@@ -1,6 +1,9 @@
+import classnames from "classnames";
+import {Typography} from "@mui/material";
+
 const EnumSlug = (type) => ({value}) => {
     return (
-        <div className={classnames (type, `${type}-${value}`)}>
+        <div className={classnames ("EnumSlug", type, `${type}-${value}`)}>
             <span>⏺</span>
             &nbsp;
             {value}
@@ -8,18 +11,14 @@ const EnumSlug = (type) => ({value}) => {
     );
 };
 
-const ClaimStatus = EnumSlug ("ClaimStatus");
-const ResourceStatus = EnumSlug ("ResourceStatus");
-const ResourceLicense = EnumSlug ("ResourceLicense");
-const MediaType = EnumSlug ("MediaType");
-const OrganizationType = EnumSlug ("OrganizationType");
+// const ClaimStatus = EnumSlug ("ClaimStatus");
+// const ResourceStatus = EnumSlug ("ResourceStatus");
+// const ResourceLicense = EnumSlug ("ResourceLicense");
+// const MediaType = EnumSlug ("MediaType");
+// const OrganizationType = EnumSlug ("OrganizationType");
 
 export {
-    ClaimStatus,
-    ResourceStatus,
-    ResourceLicense,
-    MediaType,
-    OrganizationType
+    EnumSlug,
 };
 
 // EOF
