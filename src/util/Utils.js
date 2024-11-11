@@ -328,7 +328,7 @@ const renderMillis = (val) => {
 };
 
 
-const standardInjects = [ "infoDialogStore", "AuthManager", "debugStore", "snackbarStore", "EnumManager" ];
+const standardInjects = [ "infoDialogStore", "AuthManager", "debugStore", "snackbarStore", "EnumManager", "Server" ];
 
 const wrap = (thing, extra) => {
     if (extra) {

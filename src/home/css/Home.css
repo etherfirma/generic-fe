@@ -5,7 +5,7 @@
     width: 50%;
     vertical-align: top;
 }
-.HomeTable tr:nth-child(1) td {
+.HomeTable > tr:nth-child(1) td {
     text-align: center;
 }
 

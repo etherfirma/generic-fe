@@ -21,13 +21,14 @@ class DataBrowser extends Component {
     ];
 
     render() {
+        const sorted = _.sortBy (this.dataTypes, (o) => o.name);
         return (
             <div>
                 <Breadcrumb crumbs={this.crumbs} />
                 <h1>DataBrowser</h1>
 
                 <ul>
-                    {_.map (this.dataTypes, (dataType, i) => {
+                    {_.map (sorted, (dataType, i) => {
                         return (
                             <li key={i}>
                                 <a className="ThingLink" onClick={() => window.location.hash = dataType.hash}>

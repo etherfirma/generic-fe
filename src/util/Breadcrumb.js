@@ -29,23 +29,23 @@ class Breadcrumb extends Component {
         const { href } = crumb;
         if (href) {
             return (
-                <>
-                    <a href={href} key={key}>
+                <span key={key}>
+                    <a href={href}>
                         {label}
                     </a>
                     {! isLast && (
-                        <>
+                        <span>
                             &nbsp;
                             <i className="fas fa-angle-right"></i>
                             &nbsp;
-                        </>
+                        </span>
                     )}
-                </>
+                </span>
             );
         } else {
             return (
-                <>
-                    <span key={key}>
+                <span key={key}>
+                    <span>
                         {label}
                     </span>
                     {! isLast && (
@@ -55,7 +55,7 @@ class Breadcrumb extends Component {
                             &nbsp;
                         </>
                     )}
-                </>
+                </span>
             );
         }
     }

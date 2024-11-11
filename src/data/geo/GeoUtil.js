@@ -13,6 +13,10 @@ class GeoUtil {
                 }
             }
         }`;
+
+    linkUrl (geoId) {
+        return `#/data/geo/${geoId}`;
+    }
 }
 
 export default new GeoUtil ();
