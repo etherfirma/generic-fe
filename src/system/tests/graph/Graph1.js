@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BarChart from "./BarChart";
 import USAMap from "react-usa-map";
+import PieChart from "./PieChart";
 
 /**
  *
@@ -35,6 +36,11 @@ class Graph1 extends Component {
                 <h2>Bar Chart</h2>
                 <div style={{ border: "1px solid gray" }}>
                     <BarChart />
+                </div>
+
+                <h2>Pie Chart</h2>
+                <div>
+                    <PieChart />
                 </div>
 
                 <h2>Map</h2>

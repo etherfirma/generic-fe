@@ -19,6 +19,9 @@ function IconButton ({ icon, label, ...rest }) {
 function AddButton (props) {
     return iconButton ("far fa-plus", "Add", props);
 }
+function ClearButton (props) {
+    return iconButton ("far fa-trash", "ClearatBr", props);
+}
 function EditButton (props) {
     return iconButton ("far fa-edit", "Edit", props);
 }
@@ -51,7 +54,7 @@ function ResetButton (props) {
 }
 
 export {
-    IconButton, SendButton,
+    IconButton, SendButton, ClearButton,
     AddButton, EditButton, ReloadButton, DeleteButton, CancelButton, UpdateButton, CopyButton,
     ClearAllButton, PrettifyButton, ResetButton
 }

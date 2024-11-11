@@ -9,7 +9,7 @@ import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import SenderUtil from "./SenderUtil";
 import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, ReloadButton} from "../../util/ButtonUtil";
+import {AddButton, ClearButton, ReloadButton} from "../../util/ButtonUtil";
 import {senderLink} from "../thing/ThingUtil";
 
 /**
@@ -23,6 +23,7 @@ class FindSenders extends ThingDetails {
             hasFilters: true,
             email: "", // filter
             name: "", //filter
+            label: "", // filter
             id: "" // filter
         });
     }
@@ -159,11 +160,7 @@ class FindSenders extends ThingDetails {
                     />
                     <br/>
                     <br/>
-                    <Button size="small" variant="outlined" onClick={() => this.clearFilters ()}>
-                        <i className="fas fa-trash" />
-                        &nbsp;
-                        Clear All
-                    </Button>
+                    <ClearButton onClick={() => this.clearFilters ()} />
                 </div>
             </Drawer>
         )
