@@ -4,7 +4,8 @@ import fakePng from "./fake.png";
 import {DashboardBar, DashboardWidget} from "./Dashboard";
 import React, {Component} from "react";
 import {observable} from "mobx";
-import { wrap } from "../util/Utils";
+import YesNo from "../util/YesNo";
+import {PreJson, wrap, fixedPoint} from "../util/Utils";
 import Loading from "../util/Loading";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,7 +29,8 @@ class Home extends Component {
         employers: null,
         topJobs: null,
         topGeos: null,
-        topEmployers: null
+        topEmployers: null,
+        jobsByState: null
     });
 
     async componentDidMount() {
@@ -37,14 +39,15 @@ class Home extends Component {
         this.store.users = await Server._gql ("query { res: countUsers }");
         this.store.jobs = await Server._gql ("query { res: countJobs }");
         this.store.employers = await Server._gql ("query { res: countEmployers }");
-        this.store.topJobs = await Server._gql ("query { res: topJobs (count: 5) { title count } }");
-        this.store.topEmployers = await Server._gql ("query { res: topEmployers (count: 5) { employer { id name } count } }");
-        this.store.topGeos = await Server._gql ("query { res: topGeos (count: 5) { geo { id name key } count } }");
+        this.store.topJobs = await Server._gql ("query { res: topJobs (count: 10) { title count } }");
+        this.store.topEmployers = await Server._gql ("query { res: topEmployers (count: 10) { employer { id name } count } }");
+        this.store.topGeos = await Server._gql ("query { res: topGeos (count: 10) { geo { id name key } count } }");
+        this.store.jobsByState = await Server._gql ("query { res: jobsByState { state count } }");
     }
 
     render () {
         const { users, jobs, employers } = this.store;
-        const { topJobs, topEmployers, topGeos } = this.store;
+        const { topJobs, topEmployers, topGeos, jobsByState } = this.store;
 
         return (
             <div>
@@ -52,16 +55,12 @@ class Home extends Component {
                     <tbody>
                     <tr>
                         <td colSpan={2}>
-                            <img src={fakePng} alt={""}/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>
                             <DashboardBar>
-                                <DashboardWidget label={"Users"} numeric={users} loading={users === null}/>
-                                <DashboardWidget label={"Employers"} numeric={employers} loading={employers === null}/>
-                                <DashboardWidget label={"Jobs"} numeric={jobs} loading={jobs === null}/>
-                                <DashboardWidget label={"Messages"} numeric={"-"} loading={true}/>
+                                <DashboardWidget label={"Users"} value={users} loading={users === null}/>
+                                <DashboardWidget label={"Employers"} value={employers} loading={employers === null}/>
+                                <DashboardWidget label={"Jobs"} value={jobs} loading={jobs === null}/>
+                                <DashboardWidget label={"Messages"} value={"-"}/>
+                                <DashboardWidget label={"Server Status"} value={<YesNo value={true} />} />
                             </DashboardBar>
                         </td>
                     </tr>
@@ -74,11 +73,11 @@ class Home extends Component {
                         </td>
                     </tr>
                     <tr>
-                    <td>
-                        <TopGeos topGeos={topGeos}/>
-                    </td>
                         <td>
-
+                            <TopGeos topGeos={topGeos}/>
+                        </td>
+                        <td>
+                            <JobsByState jobsByState={jobsByState} />
                         </td>
                     </tr>
                     </tbody>
@@ -199,6 +198,51 @@ class TopGeos extends Component {
                                             </a>
                                         </TableCell>
                                         <TableCell>{el.count}</TableCell>
+                                    </TableRow>
+                                )})}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        );
+    }
+}
+
+class JobsByState extends Component {
+    render () {
+        const { jobsByState } = this.props;
+        return (
+            <ShadowBox>
+                <div className={"DashboardLabel"}>
+                    Jobs by Status
+                </div>
+                <br/>
+                {this.renderJobsByState (jobsByState)}
+            </ShadowBox>
+        );
+    }
+
+    renderJobsByState (jobsByState) {
+        if (! jobsByState) {
+            return <Loading show={true}/>
+        }
+        let total = 0;
+        _.each (jobsByState, (el) => total += el.count);
+        return (
+            <div>
+                <TableContainer component={Paper}>
+                    <Table size="small" aria-label="a dense table">
+                        <TableBody>
+                            {_.map (jobsByState, (el, i) => {
+                                return (
+                                    <TableRow key={i}>
+                                        <TableCell>
+                                            {el.state}
+                                        </TableCell>
+                                        <TableCell>{el.count}</TableCell>
+                                        <TableCell>
+                                            {fixedPoint (el.count / total * 100.0)}%
+                                        </TableCell>
                                     </TableRow>
                                 )})}
                         </TableBody>

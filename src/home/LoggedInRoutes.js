@@ -52,6 +52,8 @@ import FindJobs from "../data/job/FindJobs";
 import AddJob from "../data/job/AddJob";
 import ShowJob from "../data/job/ShowJob";
 import EditJob from "../data/job/EditJob";
+import EnumTest from "../util/enum/EnumTest";
+import EnumPickerTest from "../util/enum/EnumPickerTest";
 
 /**
  *
@@ -129,6 +131,9 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests/employerPicker", element: <EmployerPickerTest /> },
 
     { path: "/tests/ux/booleanPicker", element: <BooleanPickerTest /> },
+
+    { path: "/tests/enums", element: <EnumTest /> },
+    { path: "/tests/enumPickers", element: <EnumPickerTest /> }
 ]);
 
 export default LOGGED_IN;

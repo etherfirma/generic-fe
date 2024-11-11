@@ -14,7 +14,7 @@ class DashboardBar extends Component {
 
 class DashboardWidget extends Component {
     render() {
-        const { label, numeric, loading } = this.props;
+        const { label, value, loading } = this.props;
         return (
             <div className={"DashboardWidget"}>
                 <div className={"DashboardLabel"}>
@@ -27,7 +27,7 @@ class DashboardWidget extends Component {
                                 <i className="fas fa-sync fa-spin"></i>
                             </div>
                         )
-                        : numeric}
+                        : value}
                 </div>
             </div>
         );

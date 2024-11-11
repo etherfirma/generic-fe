@@ -1,12 +1,12 @@
 import {action, observable} from "mobx";
-import Server from './Server';
-import {objGet} from "./Utils";
+import Server from '../Server';
+import {objGet} from "../Utils";
 import _ from "lodash";
 import React from "react";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 /**
- * A store that downloads all of the enumerated types from the server for
+ * A store that downloads all the enumerated types from the server for
  * local use in pickers, etc.
  */
 

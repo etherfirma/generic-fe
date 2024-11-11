@@ -7,7 +7,7 @@ import Server from "./util/Server";
 import {Provider} from "mobx-react";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import AuthManager from "./util/AuthManager";
-import EnumManager from "./util/EnumManager";
+import EnumManager from "./util/enum/EnumManager";
 import SnackbarPopop, {snackbarStore} from "./util/snackbarStore";
 import DebugPane, {DebugButton, debugStore} from "./util/debugStore";
 import {BugReport} from "@mui/icons-material";

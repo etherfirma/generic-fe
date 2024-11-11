@@ -113,6 +113,16 @@ class Tests extends Component {
                                 TemplateTest
                             </a>
                         </li>
+                        <li>
+                            <a href={"#/tests/enums"}>
+                                Enums
+                            </a>
+                        </li>
+                        <li>
+                            <a href={"#/tests/enumPickers"}>
+                                EnumPickers
+                            </a>
+                        </li>
                     </ul>
                 </TabPanel>
             </div>
