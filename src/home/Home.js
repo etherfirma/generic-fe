@@ -17,6 +17,8 @@ import Paper from '@mui/material/Paper';
 import _ from "lodash";
 import {employerLink, geoLink} from "../data/thing/ThingUtil";
 import GeoUtil from "../data/geo/GeoUtil";
+import SampleMap from "../system/tests/graph/SampleMap";
+import {JobState} from "../util/enum/EnumSlug";
 
 /**
  * The home page.
@@ -30,7 +32,8 @@ class Home extends Component {
         topJobs: null,
         topGeos: null,
         topEmployers: null,
-        jobsByState: null
+        jobsByState: null,
+        jobsByGeo: null
     });
 
     async componentDidMount() {
@@ -39,29 +42,36 @@ class Home extends Component {
         this.store.users = await Server._gql ("query { res: countUsers }");
         this.store.jobs = await Server._gql ("query { res: countJobs }");
         this.store.employers = await Server._gql ("query { res: countEmployers }");
-        this.store.topJobs = await Server._gql ("query { res: topJobs (count: 10) { title count } }");
-        this.store.topEmployers = await Server._gql ("query { res: topEmployers (count: 10) { employer { id name } count } }");
-        this.store.topGeos = await Server._gql ("query { res: topGeos (count: 10) { geo { id name key } count } }");
+        this.store.topJobs = await Server._gql ("query { res: topJobs (count: 6) { title count } }");
+        this.store.topEmployers = await Server._gql ("query { res: topEmployers (count: 6) { employer { id name } count } }");
+        this.store.topGeos = await Server._gql ("query { res: topGeos (count: 6) { geo { id name key } count } }");
         this.store.jobsByState = await Server._gql ("query { res: jobsByState { state count } }");
+        this.store.jobsByGeo = await Server._gql ("query { res: jobsByGeo { geoId count } }");
     }
 
     render () {
         const { users, jobs, employers } = this.store;
-        const { topJobs, topEmployers, topGeos, jobsByState } = this.store;
+        const { topJobs, topEmployers, topGeos, jobsByState, jobsByGeo } = this.store;
 
         return (
             <div>
                 <table className={"HomeTable"}>
                     <tbody>
                     <tr>
-                        <td colSpan={2}>
+                        <td style={{textAlign: "center"}}>
+                            <SampleMap jobsByGeo={jobsByGeo} />
+                        </td>
+                        <td>
                             <DashboardBar>
                                 <DashboardWidget label={"Users"} value={users} loading={users === null}/>
                                 <DashboardWidget label={"Employers"} value={employers} loading={employers === null}/>
+                            </DashboardBar>
+                            <DashboardBar>
                                 <DashboardWidget label={"Jobs"} value={jobs} loading={jobs === null}/>
-                                <DashboardWidget label={"Messages"} value={0}/>
                                 <DashboardWidget label={"Server Status"} value={<YesNo value={true} />} />
                             </DashboardBar>
+                        </td>
+                        <td colSpan={2}>
                         </td>
                     </tr>
                     <tr>
@@ -115,7 +125,7 @@ class TopJobs extends Component {
                                     <TableRow key={i}>
                                         <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
                                         <TableCell>{job.title}</TableCell>
-                                        <TableCell>{job.count}</TableCell>
+                                        <TableCell align={"right"}>{job.count}</TableCell>
                                     </TableRow>
                             )})}
                         </TableBody>
@@ -154,7 +164,7 @@ class TopEmployers extends Component {
                                     <TableRow key={i}>
                                         <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
                                         <TableCell>{employerLink (el.employer)}</TableCell>
-                                        <TableCell>{el.count}</TableCell>
+                                        <TableCell align={"right"}>{el.count}</TableCell>
                                     </TableRow>
                                 )})}
                         </TableBody>
@@ -193,11 +203,11 @@ class TopGeos extends Component {
                                     <TableRow key={i}>
                                         <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
                                         <TableCell>
-                                            <a href={GeoUtil.linkUrl (el.geo.id)}>
+                                            <span className={"ThingLink"} onClick={() => window.location.hash = GeoUtil.linkUrl (el.geo.id)}>
                                                 {`${el.geo.name} (${el.geo.key})`}
-                                            </a>
+                                            </span>
                                         </TableCell>
-                                        <TableCell>{el.count}</TableCell>
+                                        <TableCell align={"right"}>{el.count}</TableCell>
                                     </TableRow>
                                 )})}
                         </TableBody>
@@ -237,7 +247,7 @@ class JobsByState extends Component {
                                 return (
                                     <TableRow key={i}>
                                         <TableCell>
-                                            {el.state}
+                                            <JobState value={el.state} />
                                         </TableCell>
                                         <TableCell>{el.count}</TableCell>
                                         <TableCell>
@@ -248,6 +258,7 @@ class JobsByState extends Component {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <br/>
             </div>
         );
     }

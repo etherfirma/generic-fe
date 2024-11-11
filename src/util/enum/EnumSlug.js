@@ -4,14 +4,15 @@ import {Typography} from "@mui/material";
 const EnumSlug = (type) => ({value}) => {
     return (
         <div className={classnames ("EnumSlug", type, `${type}-${value}`)}>
-            <span>⏺</span>
+            {/*<span>⏺</span>*/}
+            <span>◼</span>
             &nbsp;
             {value}
         </div>
     );
 };
 
-// const ClaimStatus = EnumSlug ("ClaimStatus");
+const JobState = EnumSlug ("JobState");
 // const ResourceStatus = EnumSlug ("ResourceStatus");
 // const ResourceLicense = EnumSlug ("ResourceLicense");
 // const MediaType = EnumSlug ("MediaType");
@@ -19,6 +20,7 @@ const EnumSlug = (type) => ({value}) => {
 
 export {
     EnumSlug,
+    JobState
 };
 
 // EOF

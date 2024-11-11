@@ -1,5 +1,5 @@
 .EnumSlug {
-    color: #666;
+    /*color: #666;*/
 }
 
 .Colors-BLACK > span {
@@ -38,7 +38,7 @@
 }
 
 .JobState-ACTIVE > span {
-    color: yellow;
+    color: cornflowerblue;
 }
 .JobState-FAILED > span {
     color: red;

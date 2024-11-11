@@ -1,5 +1,5 @@
 import React from 'react';
-import {encodeUrl, formatDate, objGet, wrap} from "../../util/Utils";
+import {encodeUrl, formatDate, objGet, PreJson, wrap} from "../../util/Utils";
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
@@ -16,6 +16,7 @@ import Paper from '@mui/material/Paper';
 import _ from "lodash";
 import {TableFooter} from "@mui/material";
 import {geoLink} from "../thing/ThingUtil";
+import {JobState} from "../../util/enum/EnumSlug";
 
 /**
  *
@@ -40,6 +41,12 @@ class ShowEmployer extends ThingDetail {
                     id
                     geo { id key name }
                     isActive
+                }
+                jobs {
+                    id
+                    title
+                    geo { id key name }  
+                    state
                 }
                 created
                 lastModified
@@ -86,17 +93,24 @@ class ShowEmployer extends ThingDetail {
 
         formatDate (o, [ "created", "lastModified" ]);
 
-        const { employerGeos } = employer;
+        const { employerGeos, jobs } = employer;
         return (
             <div>
-                <PropertyTable value={o} size={"small"} />
+                <PropertyTable value={o} size={"small"}/>
                 <br/>
-                {this.actions (employer)}
+                {this.actions(employer)}
                 <br/>
                 <div>
-                    <h2>Geos</h2>
+                    <h2>Active Geos</h2>
                     {employerGeos
                         ? this.renderGeos (employer)
+                        : "No geos"
+                    }
+                </div>
+                <div>
+                    <h2>Jobs</h2>
+                    {jobs
+                        ? this.renderJobs (employer)
                         : "No geos"
                     }
                 </div>
@@ -104,13 +118,13 @@ class ShowEmployer extends ThingDetail {
         )
     }
 
-    renderGeos (employer) {
-        const { employerGeos } = employer;
+    renderGeos(employer) {
+        const {employerGeos} = employer;
         return (
             <div>
                 <TableContainer component={Paper}>
                     <Table size="small">
-                        <TableHead>
+                    <TableHead>
                             <TableRow>
                                 <TableCell>Index</TableCell>
                                 <TableCell>Key</TableCell>
@@ -145,7 +159,56 @@ class ShowEmployer extends ThingDetail {
                     </Table>
                 </TableContainer>
                 <br/>
-                <AddButton>sdf</AddButton>
+                <AddButton onClick={() => window.location.hash = `/data/employerGeo/add?employerId=${employer.id}`} />
+            </div>
+        );
+    }
+
+    renderJobs (employer) {
+        const { jobs } = employer;
+        return (
+            <div>
+                <TableContainer component={Paper}>
+                    <Table size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Index</TableCell>
+                                <TableCell>Title</TableCell>
+                                <TableCell>Geo</TableCell>
+                                <TableCell>Status</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {_.map (jobs, (job, i) =>
+                                <TableRow key={i} onClick={() => {
+                                    window.location.hash = `/data/job/${job.id}`;
+                                }}>
+                                    <TableCell component="th" scope="row">
+                                        {i + 1}.
+                                    </TableCell>
+                                    <TableCell>
+                                        {job.title}
+                                    </TableCell>
+                                    <TableCell>
+                                        {geoLink (job.geo)}
+                                    </TableCell>
+                                    <TableCell>
+                                        <JobState value={job.state} />
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            {jobs.length === 0 && (
+                                <TableRow>
+                                    <TableCell colSpan={4} scope="row">
+                                        No Jobs Listed
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <br/>
+                <AddButton onClick={() => window.location.hash = `/data/job/add?employerId=${employer.id}`} />
             </div>
         );
     }
