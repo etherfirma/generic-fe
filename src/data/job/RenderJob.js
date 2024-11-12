@@ -1,23 +1,15 @@
 import React from 'react';
-import {encodeUrl, formatDate, objGet, wrap, toBullets} from "../../util/Utils";
+import {encodeUrl, formatDate, objGet, wrap, toBullets, If} from "../../util/Utils";
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, DeleteButton, EditButton, IconButton, ShowButton} from "../../util/ButtonUtil";
-import YesNo from "../../util/YesNo";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {AddButton, DeleteButton, EditButton, IconButton} from "../../util/ButtonUtil";
 import _ from "lodash";
-import {TableFooter} from "@mui/material";
 import {employerLink, geoLink} from "../thing/ThingUtil";
 import Server from "../../util/Server";
 import {JobState} from "../../util/enum/EnumSlug";
+import "./css/RenderJob.css";
 
 /**
  *
@@ -62,11 +54,6 @@ class ShowJob extends ThingDetail {
                 <DeleteButton onClick={()=> {
                     this.delete (job);
                 }} />
-                &nbsp;
-                <ShowButton label={"Show Posting"} onClick={() => {
-                    window.location.hash = `#/data/posting/${job.id}`;
-                }}>
-                </ShowButton>
             </div>
         );
     }
@@ -84,6 +71,56 @@ class ShowJob extends ThingDetail {
                 </span>
             );
         }
+
+        return (
+            <div className={"RenderJob"}>
+                <h2>{job.title} @ {job.employer.name}</h2>
+                <p>
+                    Located in {job.location.city}, {job.geo.name}. <br/>
+                    {job.location.additional}
+                </p>
+
+                <h4>Job Description</h4>
+
+                {job.description}
+
+                <If condition={job.compensation}>
+                    <h4>Compensation</h4>
+                    {job.compensation}
+                </If>
+
+                <h4>Requirements</h4>
+                <ul>
+                    {_.map (job.requirements, (requirement, i) => {
+                        return (
+                            <li key={i}>
+                                {requirement}
+                            </li>
+                        );
+                    })}
+                    </ul>
+
+                <h4>To Apply</h4>
+
+                <p>
+                    {job.toApply.instructions}
+                </p>
+
+                <ul>
+                    <li>
+                        <b>URL</b> - {job.toApply.url}
+                    </li>
+                    <li>
+                        <b>Contact</b> - {job.toApply.contact}
+                    </li>
+                </ul>
+
+                <If condition={job.eeoStatement}>
+                    <h4>EEO Statement</h4>
+                    {job.eeoStatement}
+                </If>
+            </div>
+        );
 
         const o = {
             id: <ID snackbar={true} value={job.id} />,
@@ -130,7 +167,6 @@ class ShowJob extends ThingDetail {
         return (
             <div>
                 <Breadcrumb crumbs={crumbs} />
-                {super.renderHeader ()}
             </div>
         );
     }

@@ -52,9 +52,12 @@ function SendButton (props) {
 function ResetButton (props) {
     return iconButton("fas fa-power-off", "Reset", props);
 }
+function ShowButton (props) {
+    return iconButton("far fa-eye", "Show", props);
+}
 
 export {
-    IconButton, SendButton, ClearButton,
+    IconButton, SendButton, ClearButton, ShowButton,
     AddButton, EditButton, ReloadButton, DeleteButton, CancelButton, UpdateButton, CopyButton,
     ClearAllButton, PrettifyButton, ResetButton
 }

@@ -56,6 +56,7 @@ import EnumTest from "../util/enum/EnumTest";
 import EnumPickerTest from "../util/enum/EnumPickerTest";
 import EnumSlugTest from "../util/enum/EnumSlugTest";
 import Graph1 from "../system/tests/graph/Graph1";
+import RenderJob from "../data/job/RenderJob";
 
 /**
  *
@@ -102,7 +103,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/job/add", element: <AddJob /> },
     { path: "/data/job/:id", element: <ShowJob /> },
     { path: "/data/job/:id/edit", element: <EditJob /> },
-
+    { path: "/data/posting/:id", element: <RenderJob /> },
 
     { path: "/data/employers", element: <FindEmployers /> },
     { path: "/data/employer/add", element: <AddEmployer /> },
