@@ -36,6 +36,7 @@ class ShowEmployer extends ThingDetail {
                 id
                 key
                 name 
+                domain
                 isActive
                 employerGeos {
                     id
@@ -86,6 +87,7 @@ class ShowEmployer extends ThingDetail {
             id: <ID snackbar={true} value={employer.id} />,
             key: employer.key,
             name: employer.name,
+            domain: employer.domain,
             isActive: <YesNo value={employer.isActive} labelled={true} />,
             created: employer.created,
             lastModified: employer.lastModified,

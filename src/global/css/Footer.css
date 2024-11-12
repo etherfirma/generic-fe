@@ -6,3 +6,21 @@
     font-size: .9em;
     border-top: 1px dotted #ccc;
 }
+.Footer table {
+    width: 100%;
+}
+.Footer table td {
+    width: 33%;
+}
+.Footer table td:nth-child(3) {
+    text-align: right;
+}
+
+.Environment {
+    border-radius: 4px;
+    padding: 2px 4px;
+    background-color: cadetblue;
+    color: white;
+    font-size: .8em;
+    font-weight: bold;
+}

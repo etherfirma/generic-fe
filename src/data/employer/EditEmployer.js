@@ -31,6 +31,12 @@ const fields = [
         required: false,
         validator: Validator.stringValidator
     },
+    {
+        path: "domain",
+        domain: "Domain",
+        required: true,
+        validator: Validator.domainValidator
+    },
 ];
 
 /**
@@ -68,6 +74,7 @@ class EditEmployer extends Component {
                     id
                     key
                     name
+                    domain
                     isActive
                 } 
             }
@@ -132,17 +139,22 @@ class EditEmployer extends Component {
                     <tbody>
                     <tr>
                         <td>
-                            {this.textField ("id", "ID", { disabled: true })}
+                            {this.textField("id", "ID", {disabled: true})}
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            {this.textField ("key", "Key")}
+                            {this.textField("key", "Key")}
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            {this.textField ("name", "name")}
+                            {this.textField("name", "name")}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.textField("domain", "domain")}
                         </td>
                     </tr>
                     <tr>
@@ -150,7 +162,7 @@ class EditEmployer extends Component {
                             value={this.store.employer.isActive}
                             onChange={(boolean) => {
                                 this.store.employer.isActive = boolean;
-                                this.validate ();
+                                this.validate();
                             }}
                             formProps={{
                                 fullWidth: true,
@@ -160,9 +172,9 @@ class EditEmployer extends Component {
                     </tr>
                     <tr>
                         <td colSpan={2}>
-                            <UpdateButton disabled={loading || ! this.isValid} onClick={() => this.doUpdate ()} />
+                            <UpdateButton disabled={loading || !this.isValid} onClick={() => this.doUpdate()}/>
                             &nbsp;
-                            <CancelButton onClick={() => this.doCancel ()} />
+                            <CancelButton onClick={() => this.doCancel()}/>
                         </td>
                     </tr>
                     </tbody>
@@ -171,14 +183,14 @@ class EditEmployer extends Component {
         );
     }
 
-    doCancel () {
-        const { employer } = this.store;
+    doCancel() {
+        const {employer} = this.store;
         window.location.href = `#/data/employer/${employer.id}`;
     }
 
     async doUpdate () {
         const { employer } = this.store;
-        const { id, key, name, isActive } = employer;
+        const { id, key, name, domain, isActive } = employer;
 
         const mutation = `
             mutation ($id: String!, $update: EmployerUpdate!) {
@@ -192,6 +204,7 @@ class EditEmployer extends Component {
             update: {
                 key,
                 name,
+                domain,
                 isActive
             }
         };

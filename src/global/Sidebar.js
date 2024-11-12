@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./css/Sidebar.css";
 import _ from "lodash";
 import {Badge} from "@mui/material";
+import {PreJson} from "../util/Utils";
 
 class SidebarButton extends Component {
     doClick () {
@@ -15,18 +16,16 @@ class SidebarButton extends Component {
     }
 
     render () {
-        const defaultOnClick = () => {
-            window.location.hash = this.props.href;
-        }
         const {
             icon = "fal fa-question",
             label = "no-label",
+            onClick,
+            href,
+            ...extra
         } = this.props;
         return (
-            <div className={"SidebarButton"} onClick={(e) => this.doClick ()}>
-                <div className={"SidebarIcon"}>
-                    <i className={icon} />
-                </div>
+            <div className={"SidebarButton"} {...extra} onClick={(e) => this.doClick ()}>
+                <i className={icon} />
                 <div className={"SidebarLabel"}>
                     {label}
                 </div>
@@ -45,6 +44,11 @@ const BUTTONS = [
         label: "Data Browser",
         icon: "fal fa-database",
         href: "#/data",
+    },
+    {
+        label: "GraphQL",
+        icon: "fal fa-project-diagram",
+        href: "#/system/gql",
     },
     {
         label: "System",

@@ -44,6 +44,14 @@ class Validator {
             return null;
         }
     }
+    static domainValidator (val) {
+        if (!ValidationUtil.isDomain(val)) {
+            return "Not a domain.";
+        } else {
+            return null;
+        }
+    }
+
     static stringValidator (val, min, max) {
         if (min && val.length < min) {
             return `Value must be at least ${min} characters.`;
@@ -86,7 +94,7 @@ class Validator {
                 } else {
                     errors[field.path] = "Value is required.";
                 }
-            } else {
+            } else if (field.validator) {
                 const error = field.validator (value);
                 if (error) {
                     errors [field.path] = error;

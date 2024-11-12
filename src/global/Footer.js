@@ -7,7 +7,8 @@ import {DebugButton} from "../util/debugStore";
 
 class Footer extends Component {
     store = observable ({
-        version: "loading"
+        version: "...",
+        env: null
     });
 
     componentDidMount() {
@@ -15,22 +16,48 @@ class Footer extends Component {
     }
 
     async getServerVersion () {
-        const query = "{ res: serverVersion { version } }";
+        const query = "{ res: serverVersion { version env } }";
         const res = await Server._gql (query);
         this.store.version = res.version;
+        this.store.env = res.env;
         return;
+    }
+
+    renderEnv (env) {
+        if (env) {
+            return (
+                <span className={"Environment"}>
+                    {env}
+                </span>
+            );
+        } else {
+            return null;
+        }
     }
 
     render() {
         return (
             <div className={"Footer"}>
-                <DebugButton />
-                &copy; Copyright 2023, <a target="__blank" href={"http://etherfirma.com"}>Etherfirma, LLC</a>.
-                <br/>
-                All rights reserved.
-                <br/>
-                <br/>
-                Server Version {this.store.version}
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+                            &copy; Copyright 2024, <a target="__blank" href={"http://etherfirma.com"}>Etherfirma, LLC</a>.
+                            <br/>
+                            All rights reserved.
+                            <br/>
+                            <br/>
+                            Server Version {this.store.version} {this.renderEnv (this.store.env)}
+                        </td>
+                        <td>
+                            <DebugButton />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         );
     }

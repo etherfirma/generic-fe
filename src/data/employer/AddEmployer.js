@@ -26,6 +26,12 @@ const fields = [
         required: true,
         validator: Validator.stringValidator
     },
+    {
+        path: "domain",
+        domain: "Domain",
+        required: true,
+        validator: Validator.domainValidator
+    },
 ];
 
 class AddEmployer extends AddThing {
@@ -34,6 +40,7 @@ class AddEmployer extends AddThing {
             header: "Add Employer",
             slug: "employer",
             key: "",
+            domain: "", 
             name: "",
             isActive: false
         });
@@ -52,11 +59,12 @@ class AddEmployer extends AddThing {
     }
 
     get variables () {
-        const { name, key, isActive } = this.store;
+        const { name, domain, key, isActive } = this.store;
         return {
             employer: {
                 key,
                 name,
+                domain,
                 isActive
             }
         };
@@ -93,12 +101,17 @@ class AddEmployer extends AddThing {
                     <tbody>
                     <tr>
                         <td>
-                            {this.textField ("key", "Key")}
+                            {this.textField("key", "Key")}
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            {this.textField ("name", "Name")}
+                            {this.textField("name", "Name")}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.textField("domain", "Domain")}
                         </td>
                     </tr>
                     <tr>
@@ -106,7 +119,7 @@ class AddEmployer extends AddThing {
                             value={isActive}
                             onChange={(boolean) => {
                                 this.store.isActive = boolean;
-                                this.validate ();
+                                this.validate();
                             }}
                             required={false}
                             formProps={{
@@ -117,7 +130,7 @@ class AddEmployer extends AddThing {
                     </tr>
                     <tr>
                         <td colSpan={2}>
-                            <AddButton disabled={loading || ! this.isValid} onClick={() => this.doAdd ()} />
+                            <AddButton disabled={loading || !this.isValid} onClick={() => this.doAdd()}/>
                         </td>
                     </tr>
                     </tbody>
@@ -126,11 +139,11 @@ class AddEmployer extends AddThing {
         );
     }
 
-    onSuccess (obj) {
+    onSuccess(obj) {
         window.location.hash = `#/data/employer/${obj}`;
     }
 
-    renderHeader () {
+    renderHeader() {
         const { thing } = this.store;
         const crumbs = [
             { label: null, href: "#/" },

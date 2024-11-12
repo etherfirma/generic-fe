@@ -1,5 +1,5 @@
 import React from 'react';
-import {encodeUrl, formatDate, objGet, wrap} from "../../util/Utils";
+import {encodeUrl, formatDate, objGet, wrap, toBullets} from "../../util/Utils";
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
@@ -17,6 +17,7 @@ import _ from "lodash";
 import {TableFooter} from "@mui/material";
 import {employerLink, geoLink} from "../thing/ThingUtil";
 import Server from "../../util/Server";
+import {JobState} from "../../util/enum/EnumSlug";
 
 /**
  *
@@ -40,6 +41,11 @@ class ShowJob extends ThingDetail {
                 state
                 employer {id key name }
                 geo { id key name }
+                location { city additional } 
+                toApply { url instructions contact } 
+                requirements
+                compensation
+                eeoStatement
                 created
                 lastModified
             } 
@@ -81,7 +87,19 @@ class ShowJob extends ThingDetail {
             title: job.title,
             description: job.description,
             geo: geoLink (job.geo),
-            state: job.state,
+            "location.city": job.location.city,
+            "location.additional": job.location.additional || "-",
+            "toApply.url": (
+                <a className="ThingLink" target="__blank" href={job.toApply.url}>
+                    {job.toApply.url}
+                </a>
+            ),
+            "toApply.instructions" : job.toApply.instructions,
+            "toApply.contact": job.toApply.contact,
+            requirements: toBullets (job.requirements),
+            compensation: job.compensation || "-",
+            eeoStatement: job.eeoStatement,
+            state: <JobState value={job.state} />,
             created: job.created,
             lastModified: job.lastModified,
         };

@@ -4,6 +4,7 @@ const ZIPCODE = /^(\d{5}(\-\d{4})?)$/;
 const PHONE_NUMBER = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 const EMAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const URL = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+const DOMAIN = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/;
 const NUMBER = /^[0-9]+$/;
 const MONGO = /^[0-9a-f]{24}$/;
 const SLUG = /^[0-9a-zA-Z_-]+$/;
@@ -21,6 +22,10 @@ class ValidationUtil {
 
     isDate (val) {
         return DATE.test (val);
+    }
+
+    isDomain (val) {
+        return DOMAIN.test(val);
     }
 
     isTime (val) {

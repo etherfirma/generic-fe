@@ -11,6 +11,9 @@ import BooleanPicker from "../../util/BooleanPicker";
 import EmployerPicker from "../employer/EmployerPicker";
 import GeoPicker from "../geo/GeoPicker";
 import EnumPicker from "../../util/enum/EnumPicker";
+import StringListEditor from "./StringListEditor";
+import ToApplyEditor from "./ToApplyEditor";
+import LocationEditor from "./LocationEditor";
 
 /**
  * The validation rules for the form fields.
@@ -53,6 +56,18 @@ const jobValidationFields = [
         required: true,
         validator: Validator.stringValidator
     },
+    {
+        path: "compensation",
+        name: "Compensation",
+        required: true,
+        validator: Validator.stringValidator
+    },
+    {
+        path: "eeoStatement",
+        name: "EEO Statement",
+        required: true,
+        validator: null
+    }
 ];
 
 class AddJob extends AddThing {
@@ -65,6 +80,18 @@ class AddJob extends AddThing {
             jobKey: "",
             title: "",
             description: "",
+            compensation: "",
+            eeoStatement: "",
+            location: {
+                city: "",
+                additional: ""
+            },
+            toApply: {
+                url: "",
+                instructions: "",
+                contact: ""
+            },
+            requirements: [""],
             state: "PENDING",
             isActive: false
         });
@@ -134,13 +161,29 @@ class AddJob extends AddThing {
                                 required={true}
                                 onChange={employer => {
                                     this.store.employer = employer;
-                                    this.validate ();
+                                    this.validate();
                                 }}
                                 formProps={{
                                     fullWidth: true,
                                     size: "small"
                                 }}
                             />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            {this.textField("jobKey", "Job Key")}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.textField("title", "Title")}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.textField("description", "Description")}
                         </td>
                     </tr>
                     <tr>
@@ -158,17 +201,41 @@ class AddJob extends AddThing {
                     </tr>
                     <tr>
                         <td>
-                            {this.textField("jobKey", "Job Key")}
+                            <LocationEditor label={"Location"} value={this.store.location} setValue={(value) => {
+                                this.store.location = value;
+                                this.validate();
+                            }}>
+                                fsdfsadafsd
+                            </LocationEditor>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            {this.textField("title", "Title")}
+                            {this.textField("compensation", "Compensation")}
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            {this.textField("description", "Description")}
+                            {this.textField("eeoStatement", "EEO Statement")}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ToApplyEditor label={"To Apply"} value={this.store.toApply} setValue={(obj) => {
+                                this.store.toApply = obj;
+                                this.validate ();
+                            }} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <StringListEditor
+                                label={"Requirements"}
+                                values={this.store.requirements}
+                                setValues={(obj) => {
+                                    this.store.requirements = obj;
+                                }}
+                            />
                         </td>
                     </tr>
                     <tr>
@@ -198,14 +265,14 @@ class AddJob extends AddThing {
     renderHeader() {
         const {thing} = this.store;
         const crumbs = [
-            { label: null, href: "#/" },
-            { label: "Jobs", href: "#/data/jobs" },
-            { label: "Add Job" }
+            {label: null, href: "#/"},
+            {label: "Jobs", href: "#/data/jobs"},
+            {label: "Add Job"}
         ];
         return (
             <div>
-                <Breadcrumb crumbs={crumbs} />
-                {super.renderHeader ()}
+                <Breadcrumb crumbs={crumbs}/>
+                {super.renderHeader()}
             </div>
         );
     }

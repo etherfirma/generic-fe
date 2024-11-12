@@ -529,6 +529,20 @@ function Unimplemented (props) {
 
 const PreJson = ({ json }) => <pre>{JSON.stringify (json, null, 2)}</pre>;
 
+const toBullets = (els) => {
+    return (
+        <ul>
+            {_.map (els, (el, i) => {
+                return (
+                    <li key={i}>
+                        {el}
+                    </li>
+                );
+            })}
+        </ul>
+    );
+}
+
 const doGql = async (obj) => {
     try {
         obj.store.error = null;
@@ -634,7 +648,8 @@ export  {
     inAction,
     externalUrl,
     PreJson,
-    Repeat
+    Repeat,
+    toBullets
 };
 
 // EOF
