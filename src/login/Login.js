@@ -15,6 +15,7 @@ import Server from "../util/Server";
 import { GoogleLogin } from '@react-oauth/google';
 import AuthManager from "../util/AuthManager";
 import Validator from "./Validator";
+import AbideBanner from "./AbideBanner";
 
 /**
  * The validation rules for the form fields.
@@ -118,8 +119,7 @@ class Login extends Component {
                     maxWidth={"sm"}
                 >
                     <DialogContent>
-                        <DialogContentText>
-                        </DialogContentText>
+                        {/*<AbideBanner />*/}
                         <LoginBanner />
                         <div className={"LoginContent"}>
                             {this.renderErrors ()}

@@ -95,7 +95,7 @@ class Header extends Component {
         const user = AuthManager.user;
         return (
             <div className={"Header"}>
-                <div onClick={() => window.location.hash = "/"}>
+                <div onClick={() => window.location.href = "/#"}>
                     {/*<img height={50} src={logo} />*/}
                     <img height={45} src={"https://abide.com/wp-content/uploads/2023/03/Abide_Logo_Horizontal_FullColor_WEB.svg"} />
                 </div>

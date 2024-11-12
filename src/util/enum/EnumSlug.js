@@ -13,10 +13,6 @@ const EnumSlug = (type) => ({value}) => {
 };
 
 const JobState = EnumSlug ("JobState");
-// const ResourceStatus = EnumSlug ("ResourceStatus");
-// const ResourceLicense = EnumSlug ("ResourceLicense");
-// const MediaType = EnumSlug ("MediaType");
-// const OrganizationType = EnumSlug ("OrganizationType");
 
 export {
     EnumSlug,

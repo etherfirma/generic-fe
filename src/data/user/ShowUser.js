@@ -34,6 +34,7 @@ class DataUser extends ThingDetail {
                 name
                 email
                 locked
+                type
                 emailVerified
                 emailVerification {
                     expires
@@ -125,6 +126,7 @@ class DataUser extends ThingDetail {
             user: userLink (user),
             name: user.name,
             locked: <YesNo value={user.locked} labelled={true} />,
+            type: user.type,
             emailVerified: <YesNo value={user.emailVerified} labelled={true} />,
         };
 

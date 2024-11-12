@@ -7,6 +7,7 @@ import BooleanPicker from "../../util/BooleanPicker";
 import Validator from "../../login/Validator";
 import "./css/AddUser.css";
 import {AddButton} from "../../util/ButtonUtil";
+import EnumPicker from "../../util/enum/EnumPicker";
 
 /**
  * The validation rules for the form fields.
@@ -30,6 +31,12 @@ const fields = [
         name: "Name",
         required: false,
         validator: Validator.stringValidator
+    },
+    {
+        path: "type",
+        name: "Type",
+        required: false,
+        validator: Validator.stringValidator
     }
 ];
 
@@ -44,6 +51,7 @@ class AddUser extends AddThing {
             name: "",
             slug: "user",
             email: "",
+            type: "USER",
             locked: true
         });
         this.validate ();
@@ -61,19 +69,22 @@ class AddUser extends AddThing {
     }
 
     get variables () {
-        const { name, email, locked } = this.store;
+        const { name, email, locked, type } = this.store;
         return {
             user: {
                 name,
                 email,
-                locked
+                locked,
+                type
             }
         };
     }
 
     doRender () {
-        const { name, email, locked, isPublic, handle } = this.store;
+        const { name, email, locked, type } = this.store;
         const { loading, errors } = this.store;
+
+        const formProps = { fullWidth: true, size: "small" };
 
         return (
             <div>
@@ -121,7 +132,18 @@ class AddUser extends AddThing {
                                 value={locked}
                                 label={"Locked"}
                                 onChange={value => this.store.locked = value}
-                                formProps={{ fullWidth: true, size: "small" }}
+                                formProps={formProps}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <EnumPicker
+                                enumType={"UserType"}
+                                value={type}
+                                onChange={value => this.store.type = value}
+                                required={true}
+                                formProps={formProps}
                             />
                         </td>
                     </tr>

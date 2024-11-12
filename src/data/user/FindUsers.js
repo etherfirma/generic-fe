@@ -12,6 +12,7 @@ import YesNo from "../../util/YesNo";
 import Breadcrumb from "../../util/Breadcrumb";
 import {AddButton, ReloadButton} from "../../util/ButtonUtil";
 import {userLink} from "../thing/ThingUtil";
+import EnumPicker from "../../util/enum/EnumPicker";
 
 /**
  *
@@ -25,6 +26,7 @@ class FindUsers extends ThingDetails {
             email: "", // filter
             name: "", //filter
             handle: "", // filter
+            type: "", // filter
             id: "" // filter
         });
     }
@@ -39,9 +41,12 @@ class FindUsers extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { name, email, handle, id } = this.store;
+        const { name, email, type,id } = this.store;
         if (name) {
             filters.name = name;
+        }
+        if (type) {
+            filters.type = type;
         }
         if (email) {
             filters.email = email;
@@ -55,20 +60,20 @@ class FindUsers extends ThingDetails {
 
     get headers () {
         return [
-            this.sortHeader ("email", "Email"),
-            this.sortHeader ("name", "Name"),
-            <i className="fal fa-paper-plane" />,
-            <i className="fal fa-key" />,
-            this.sortHeader ("locked", <i className="fas fa-lock" />),
+            this.sortHeader("email", "Email"),
+            this.sortHeader("name", "Name"),
+            <i className="fal fa-user-crown"></i>,
+            <i className="fal fa-key"/>,
+            this.sortHeader("locked", <i className="fas fa-lock"/>),
             this.sortHeader("_id", "ID")
         ];
     }
 
-    xform (user) {
+    xform(user) {
         return [
             userLink (user),
             user.name,
-            <YesNo value={user.emailVerified} />,
+            <YesNo value={user.type === "ADMIN"} />,
             <YesNo value={user.hasUserLocal} />,
             <YesNo value={user.locked} onClick={async (e) => {
                 try {
@@ -114,13 +119,14 @@ class FindUsers extends ThingDetails {
 
     clearFilters = action (() => {
         this.store.name = "";
+        this.store.type = "";
         this.store.email = ""; 
         this.store.id = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { name, email, id, showDrawer } = this.store;
+        const { name, email, id, type, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -159,6 +165,15 @@ class FindUsers extends ThingDetails {
                             this.store.id = e.target.value;
                             this.doLoad();
                         }}
+                    />
+                    <EnumPicker
+                        enumType={"UserType"}
+                        value={type}
+                        onChange={value => {
+                            this.store.type = value;
+                            this.doLoad();
+                        }}
+                        formProps={formProps}
                     />
                     <br/>
                     <br/>

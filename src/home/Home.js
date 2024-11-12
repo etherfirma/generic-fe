@@ -5,7 +5,7 @@ import {DashboardBar, DashboardWidget} from "./Dashboard";
 import React, {Component} from "react";
 import {observable} from "mobx";
 import YesNo from "../util/YesNo";
-import {PreJson, wrap, fixedPoint} from "../util/Utils";
+import {PreJson, wrap, fixedPoint, encodeUrl} from "../util/Utils";
 import Loading from "../util/Loading";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -63,11 +63,11 @@ class Home extends Component {
                         </td>
                         <td>
                             <DashboardBar>
-                                <DashboardWidget label={"Users"} value={users} loading={users === null}/>
-                                <DashboardWidget label={"Employers"} value={employers} loading={employers === null}/>
+                                <DashboardWidget label={"Users"} value={users} loading={users === null} href={"#/data/users"}/>
+                                <DashboardWidget label={"Employers"} value={employers} loading={employers === null} href={"#/data/employers"}/>
                             </DashboardBar>
                             <DashboardBar>
-                                <DashboardWidget label={"Jobs"} value={jobs} loading={jobs === null}/>
+                                <DashboardWidget label={"Jobs"} value={jobs} loading={jobs === null} href={"#/data/jobs"}/>
                                 <DashboardWidget label={"Server Status"} value={<YesNo value={true} />} />
                             </DashboardBar>
                         </td>
@@ -124,7 +124,15 @@ class TopJobs extends Component {
                                 return (
                                     <TableRow key={i}>
                                         <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
-                                        <TableCell>{job.title}</TableCell>
+                                        <TableCell>
+                                            <span className={"ThingLink"} onClick={() => {
+                                                const params = { title: job.title };
+                                                const href = encodeUrl ("/data/jobs", params)
+                                                window.location.hash = href;
+                                            }}>
+                                                {job.title}
+                                            </span>
+                                        </TableCell>
                                         <TableCell align={"right"}>{job.count}</TableCell>
                                     </TableRow>
                             )})}
@@ -163,10 +171,19 @@ class TopEmployers extends Component {
                                 return (
                                     <TableRow key={i}>
                                         <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
-                                        <TableCell>{employerLink (el.employer)}</TableCell>
+                                        <TableCell>
+                                              <span className={"ThingLink"} onClick={() => {
+                                                  const params = { employerId: el.employer.id };
+                                                  const href = encodeUrl("/data/jobs", params)
+                                                  window.location.hash = href;
+                                              }}>
+                                                  {el.employer.name}
+                                              </span>
+                                        </TableCell>
                                         <TableCell align={"right"}>{el.count}</TableCell>
                                     </TableRow>
-                                )})}
+                                )
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -177,7 +194,7 @@ class TopEmployers extends Component {
 
 class TopGeos extends Component {
     render() {
-        const { topGeos } = this.props;
+        const {topGeos} = this.props;
         return (
             <ShadowBox>
                 <div className={"DashboardLabel"}>
@@ -203,13 +220,18 @@ class TopGeos extends Component {
                                     <TableRow key={i}>
                                         <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
                                         <TableCell>
-                                            <span className={"ThingLink"} onClick={() => window.location.hash = GeoUtil.linkUrl (el.geo.id)}>
-                                                {`${el.geo.name} (${el.geo.key})`}
-                                            </span>
+                                           <span className={"ThingLink"} onClick={() => {
+                                               const params = { geoId: el.geo.id};
+                                               const href = encodeUrl("/data/jobs", params)
+                                               window.location.hash = href;
+                                           }}>
+                                              {`${el.geo.name} (${el.geo.key})`}
+                                          </span>
                                         </TableCell>
                                         <TableCell align={"right"}>{el.count}</TableCell>
                                     </TableRow>
-                                )})}
+                                )
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -219,8 +241,8 @@ class TopGeos extends Component {
 }
 
 class JobsByState extends Component {
-    render () {
-        const { jobsByState } = this.props;
+    render() {
+        const {jobsByState} = this.props;
         return (
             <ShadowBox>
                 <div className={"DashboardLabel"}>
@@ -247,14 +269,22 @@ class JobsByState extends Component {
                                 return (
                                     <TableRow key={i}>
                                         <TableCell>
-                                            <JobState value={el.state} />
+                                            <span className={"ThingLink"} onClick={() => {
+                                                const params = {state: el.state};
+                                                const href = encodeUrl("/data/jobs", params)
+                                                window.location.hash = href;
+                                            }}>
+                                              <JobState value={el.state}/>
+                                          </span>
+
                                         </TableCell>
                                         <TableCell>{el.count}</TableCell>
                                         <TableCell>
-                                            {fixedPoint (el.count / total * 100.0)}%
+                                            {fixedPoint(el.count / total * 100.0)}%
                                         </TableCell>
                                     </TableRow>
-                                )})}
+                                )
+                            })}
                         </TableBody>
                     </Table>
                 </TableContainer>

@@ -56,6 +56,7 @@ class UserUtil {
                     email
                     name
                     locked  
+                    type
                     hasUserLocal
                 }
             }

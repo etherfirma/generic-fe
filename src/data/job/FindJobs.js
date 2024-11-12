@@ -1,5 +1,5 @@
 import React from 'react';
-import {wrap} from "../../util/Utils";
+import {wrap, getParams} from "../../util/Utils";
 import ID from "../../util/ID";
 import DataTable from "../DataTable";
 import Button from "@mui/material/Button";
@@ -15,6 +15,7 @@ import YesNo from "../../util/YesNo";
 import BooleanPicker from "../../util/BooleanPicker";
 import GeoPicker from "../geo/GeoPicker";
 import EmployerPicker from "../employer/EmployerPicker";
+import {JobState} from "../../util/enum/EnumSlug";
 
 /**
  *
@@ -29,6 +30,7 @@ class FindJobs extends ThingDetails {
             employer: null,
             geo: null,
             state: "",
+            title: "", // filter
             id: "" // filter
         });
     }
@@ -37,15 +39,38 @@ class FindJobs extends ThingDetails {
         return JobUtil.findJobsGql;
     }
 
+    parseParameters () {
+        const params = getParams ();
+        if (params.title) {
+            this.store.title = params.title;
+        }
+        if (params.employerId) {
+            this.store.employer = {
+                id: params.employerId
+            };
+        }
+        if (params.geoId) {
+            this.store.geo = {
+                id: params.geoId
+            };
+        }
+        if (params.state) {
+            this.store.state = params.state;
+        }
+    }
+
     extendVariables (variables) {
         const { sort } = this.store;
         if (sort) {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { jobKey, employer, geo, state, id } = this.store;
+        const { jobKey, employer, geo, state, title, id } = this.store;
         if (jobKey) {
             filters.jobKey = jobKey;
+        }
+        if (title) {
+            filters.title = title;
         }
         if (state) {
             filters.state = state;
@@ -78,7 +103,7 @@ class FindJobs extends ThingDetails {
             job.title,
             employerLink (job.employer),
             geoLink (job.geo),
-            job.state,
+            <JobState value={job.state} />,
             <ID value={job.id} />
         ];
     }
@@ -115,12 +140,13 @@ class FindJobs extends ThingDetails {
         this.store.state = "";
         this.store.employer = null;
         this.store.geo = null;
+        this.store.title = "";
         this.store.id = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { jobKey, state, employer, geo, id, showDrawer } = this.store;
+        const { jobKey, state, title, employer, geo, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -148,6 +174,15 @@ class FindJobs extends ThingDetails {
                         label={"Job Key"}
                         onChange={(e) => {
                             this.store.jobKey = e.target.value;
+                            this.doLoad();
+                        }}
+                    />
+                    <TextField
+                        {...formProps}
+                        value={title}
+                        label={"Title"}
+                        onChange={(e) => {
+                            this.store.title = e.target.value;
                             this.doLoad();
                         }}
                     />

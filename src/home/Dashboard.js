@@ -14,9 +14,13 @@ class DashboardBar extends Component {
 
 class DashboardWidget extends Component {
     render() {
-        const { label, value, loading } = this.props;
+        const { label, value, loading, href } = this.props;
         return (
-            <div className={"DashboardWidget"}>
+            <div className={"DashboardWidget"} onClick={() => {
+                if (href) {
+                    window.location.hash = href;
+                }
+            }}>
                 <div className={"DashboardLabel"}>
                     {label}
                 </div>
