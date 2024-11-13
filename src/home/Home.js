@@ -5,7 +5,7 @@ import {DashboardBar, DashboardWidget} from "./Dashboard";
 import React, {Component} from "react";
 import {observable} from "mobx";
 import YesNo from "../util/YesNo";
-import {PreJson, wrap, fixedPoint, encodeUrl} from "../util/Utils";
+import {PreJson, wrap, fixedPoint, encodeUrl, withCommas} from "../util/Utils";
 import Loading from "../util/Loading";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -63,11 +63,11 @@ class Home extends Component {
                         </td>
                         <td>
                             <DashboardBar>
-                                <DashboardWidget label={"Users"} value={users} loading={users === null} href={"#/data/users"}/>
-                                <DashboardWidget label={"Employers"} value={employers} loading={employers === null} href={"#/data/employers"}/>
+                                <DashboardWidget label={"Users"} value={withCommas (users)} loading={users === null} href={"#/data/users"}/>
+                                <DashboardWidget label={"Employers"} value={withCommas (employers)} loading={employers === null} href={"#/data/employers"}/>
                             </DashboardBar>
                             <DashboardBar>
-                                <DashboardWidget label={"Jobs"} value={jobs} loading={jobs === null} href={"#/data/jobs"}/>
+                                <DashboardWidget label={"Jobs"} value={withCommas (jobs)} loading={jobs === null} href={"#/data/jobs"}/>
                                 <DashboardWidget label={"Server Status"} value={<YesNo value={true} />} />
                             </DashboardBar>
                         </td>

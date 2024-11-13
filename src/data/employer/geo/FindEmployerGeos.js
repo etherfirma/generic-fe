@@ -14,6 +14,8 @@ import {employerLink, geoLink} from "../../thing/ThingUtil";
 import YesNo from "../../../util/YesNo";
 import BooleanPicker from "../../../util/BooleanPicker";
 import EmployerGeoUtil from "./EmployerGeoUtil";
+import {GeoType} from "../../../util/enum/EnumSlug";
+import TableCell from "@mui/material/TableCell";
 
 /**
  *
@@ -62,6 +64,7 @@ class FindEmployerGeos extends ThingDetails {
         return [
             this.sortHeader ("employer", "Employer"),
             this.sortHeader ("geo", "Geo"),
+            this.sortHeader ("geoType", "Geo Type"),
             this.sortHeader ("isActive", "Active?"),
             this.sortHeader("_id", "ID")
         ];
@@ -71,6 +74,7 @@ class FindEmployerGeos extends ThingDetails {
         return [
             employerLink (employerGeo.employer),
             geoLink (employerGeo.geo),
+            <GeoType value={employerGeo.geo.type} />,
             <YesNo value={employerGeo.isActive} />,
             <ID value={employerGeo.id} />
         ];

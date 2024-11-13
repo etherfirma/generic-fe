@@ -16,7 +16,7 @@ import Paper from '@mui/material/Paper';
 import _ from "lodash";
 import {TableFooter} from "@mui/material";
 import {geoLink} from "../thing/ThingUtil";
-import {JobState} from "../../util/enum/EnumSlug";
+import {GeoType, JobState} from "../../util/enum/EnumSlug";
 
 /**
  *
@@ -40,7 +40,7 @@ class ShowEmployer extends ThingDetail {
                 isActive
                 employerGeos {
                     id
-                    geo { id key name }
+                    geo { id key name type }
                     isActive
                 }
                 jobs {
@@ -130,6 +130,7 @@ class ShowEmployer extends ThingDetail {
                             <TableRow>
                                 <TableCell>Index</TableCell>
                                 <TableCell>Key</TableCell>
+                                <TableCell>Type</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Active?</TableCell>
                             </TableRow>
@@ -143,7 +144,11 @@ class ShowEmployer extends ThingDetail {
                                         {i + 1}.
                                     </TableCell>
                                     <TableCell>
-                                        {geoLink (employerGeo.geo)}</TableCell>
+                                        {geoLink (employerGeo.geo)}
+                                    </TableCell>
+                                    <TableCell>
+                                        <GeoType value={employerGeo.geo.type} />
+                                    </TableCell>
                                     <TableCell>{employerGeo.geo.name}</TableCell>
                                     <TableCell>
                                         <YesNo value={employerGeo.isActive} />

@@ -55,9 +55,12 @@ function ResetButton (props) {
 function ShowButton (props) {
     return iconButton("far fa-eye", "Show", props);
 }
+function UploadButton (props) {
+    return iconButton("far fa-cloud-upload", "Upload", props);
+}
 
 export {
-    IconButton, SendButton, ClearButton, ShowButton,
+    IconButton, SendButton, ClearButton, ShowButton, UploadButton,
     AddButton, EditButton, ReloadButton, DeleteButton, CancelButton, UpdateButton, CopyButton,
     ClearAllButton, PrettifyButton, ResetButton
 }

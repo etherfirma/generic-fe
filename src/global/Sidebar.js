@@ -51,6 +51,11 @@ const BUTTONS = [
         href: "#/system/gql",
     },
     {
+        label: "Sites",
+        icon: "fal fa-building",
+        href: "#/sites",
+    },
+    {
         label: "System",
         icon: "fal fa-cogs",
         href: "#/system",

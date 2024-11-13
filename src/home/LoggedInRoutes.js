@@ -57,6 +57,16 @@ import EnumPickerTest from "../util/enum/EnumPickerTest";
 import EnumSlugTest from "../util/enum/EnumSlugTest";
 import Graph1 from "../system/tests/graph/Graph1";
 import RenderJob from "../data/job/RenderJob";
+import Sites from "../sites/Sites";
+import FindAJCs from "../sites/ajc/FindAJCs";
+import FindPAs from "../sites/pa/FindPAs";
+import FindJCs from "../sites/jc/FindJCs";
+import FindWDBs from "../sites/wdb/FindWDBs";
+import UploadAJCs from "../sites/ajc/UploadAJCs";
+import UploadPAs from "../sites/pa/UploadPAs";
+import UploadJCs from "../sites/jc/UploadJCs";
+import UploadWDBs from "../sites/wdb/UploadWDBs";
+import ShowAJC from "../sites/ajc/ShowAJC";
 
 /**
  *
@@ -139,6 +149,27 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests/enumPickers", element: <EnumPickerTest /> },
     { path: "/tests/enumSlugTest", element: <EnumSlugTest /> },
     { path: "/tests/graph/1", element: <Graph1 /> },
+
+    { path: "/sites", element: <Sites /> },
+
+    { path: "/sites/ajc/find", element: <FindAJCs /> },
+    { path: "/sites/ajc/upload", element: <UploadAJCs /> },
+    { path: "/data/ajc/:id", element: <ShowAJC /> },
+
+    { path: "/sites/pa/find", element: <FindPAs /> },
+
+    { path: "/sites/jc/find", element: <FindJCs /> },
+
+    { path: "/sites/wdb/find", element: <FindWDBs /> },
+
+
+    { path: "/sites/pa/upload", element: <UploadPAs /> },
+
+    { path: "/sites/jc/upload", element: <UploadJCs /> },
+
+    { path: "/sites/wdb/upload", element: <UploadWDBs /> },
+
+
 ]);
 
 export default LOGGED_IN;

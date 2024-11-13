@@ -1,37 +1,33 @@
-import React from 'react';
-import {wrap} from "../../util/Utils";
-import ID from "../../util/ID";
-import DataTable from "../DataTable";
-import Button from "@mui/material/Button";
-import ThingDetails from "../thing/ThingDetails";
-import {action} from "mobx";
-import {Drawer} from "@mui/material";
+import React, { Component } from "react";
+import ThingDetails from "../../data/thing/ThingDetails";
+import DataTable from "../../data/DataTable";
+import {AddButton, ClearButton, ReloadButton} from "../../util/ButtonUtil";
 import TextField from "@mui/material/TextField";
-import GeoUtil from "./GeoUtil";
 import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, ReloadButton} from "../../util/ButtonUtil";
-import {geoLink} from "../thing/ThingUtil";
-import {GeoType} from "../../util/enum/EnumSlug";
-import TableCell from "@mui/material/TableCell";
+import AJCUtil from "./AJCUtil";
+import ID from "../../util/ID";
+import {Drawer} from "@mui/material";
+import {action} from "mobx";
+import {PreJson, wrap} from "../../util/Utils";
 
 /**
  *
  */
 
-class FindGeos extends ThingDetails {
+class FindAJCs extends ThingDetails {
     constructor () {
         super ({
-            heading: "Geos",
+            heading: "AmericanJobCenters",
             hasFilters: true,
-            key: "", // filter
+            centerId: "", // filter
             name: "", //filter
-            type: "", //filter
+            state: "", // filter
             id: "" // filter
         });
     }
 
     get query () {
-        return GeoUtil.findGeosGql;
+        return AJCUtil.findAJCsGql;
     }
 
     extendVariables (variables) {
@@ -40,15 +36,15 @@ class FindGeos extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { name, key, type, id } = this.store;
+        const { name, centerId, state, id } = this.store;
         if (name) {
             filters.name = name;
         }
-        if (key) {
-            filters.key = key;
+        if (centerId) {
+            filters.centerId = centerId;
         }
-        if (type) {
-            filters.type = type;
+        if (state) {
+            filters.state = state;
         }
         if (id) {
             filters.id = id;
@@ -59,19 +55,21 @@ class FindGeos extends ThingDetails {
 
     get headers () {
         return [
-            this.sortHeader ("key", "Key"),
             this.sortHeader ("name", "Name"),
-            this.sortHeader ("type", "Type"),
+            this.sortHeader ("centerId", "CenterId"),
+            this.sortHeader ("city", "City"),
+            this.sortHeader ("state", "State"),
             this.sortHeader("_id", "ID")
         ];
     }
 
-    xform (geo) {
+    xform (ajc) {
         return [
-            geoLink (geo),
-            geo.name,
-            <GeoType value={geo.type} />,
-            <ID value={geo.id} />
+            ajc.name,
+            ajc.centerId,
+            ajc.city,
+            ajc.state,
+            <ID value={ajc.id} />
         ];
     }
 
@@ -83,7 +81,7 @@ class FindGeos extends ThingDetails {
                     xform={this.xform.bind (this)}
                     rows={fres.results}
                     skip={fres.skip}
-                    onClick={geo => window.location.href = `#/data/geo/${geo.id}`}
+                    onClick={sender => window.location.href = `#/data/ajc/${sender.id}`}
                 />
 
                 <br/>
@@ -96,20 +94,20 @@ class FindGeos extends ThingDetails {
     }
 
     hasFilters () {
-        const { name, id, email, label } = this.store;
-        return Boolean (name || id || email || label);
+        const { name, centerId, state, id } = this.store;
+        return Boolean (name || id || state || centerId);
     }
 
     clearFilters = action (() => {
         this.store.name = "";
-        this.store.email = "";
+        this.store.centerId = "";
+        this.store.state = "";
         this.store.id = "";
-        this.store.label = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { key, name, type, id, showDrawer } = this.store;
+        const { name, centerId, state, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -124,10 +122,10 @@ class FindGeos extends ThingDetails {
 
                     <TextField
                         {...formProps}
-                        value={key}
-                        label={"Key"}
+                        value={centerId}
+                        label={"CenterId"}
                         onChange={(e) => {
-                            this.store.key = e.target.value;
+                            this.store.centerId = e.target.value;
                             this.doLoad();
                         }}
                     />
@@ -142,10 +140,10 @@ class FindGeos extends ThingDetails {
                     />
                     <TextField
                         {...formProps}
-                        value={type}
-                        label={"Type"}
+                        value={state}
+                        label={"State"}
                         onChange={(e) => {
-                            this.store.type = e.target.value;
+                            this.store.state = e.target.value;
                             this.doLoad();
                         }}
                     />
@@ -160,11 +158,7 @@ class FindGeos extends ThingDetails {
                     />
                     <br/>
                     <br/>
-                    <Button size="small" variant="outlined" onClick={() => this.clearFilters ()}>
-                        <i className="fas fa-trash" />
-                        &nbsp;
-                        Clear All
-                    </Button>
+                    <ClearButton onClick={() => this.clearFilters ()} />
                 </div>
             </Drawer>
         )
@@ -173,7 +167,7 @@ class FindGeos extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "Geos" }
+            { label: "AJCs" }
         ];
         return (
             <div>
@@ -184,6 +178,6 @@ class FindGeos extends ThingDetails {
     }
 }
 
-export default wrap (FindGeos);
+export default wrap (FindAJCs);
 
 // EOF

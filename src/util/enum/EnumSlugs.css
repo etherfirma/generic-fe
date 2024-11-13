@@ -52,3 +52,11 @@
 .JobState-REMOVED > span {
     color: darkgray;
 }
+
+
+.GeoType-STATE > span {
+    color: green;
+}
+.GeoType-TERRITORY > span {
+    color: darkgray;
+}

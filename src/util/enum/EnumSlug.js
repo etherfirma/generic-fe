@@ -13,10 +13,12 @@ const EnumSlug = (type) => ({value}) => {
 };
 
 const JobState = EnumSlug ("JobState");
+const GeoType = EnumSlug ("GeoType");
 
 export {
     EnumSlug,
-    JobState
+    JobState,
+    GeoType
 };
 
 // EOF

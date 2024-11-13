@@ -31,7 +31,7 @@ class ShowJob extends ThingDetail {
                 title
                 description
                 state
-                employer {id key name }
+                employer {id key name domain }
                 geo { id key name }
                 location { city additional } 
                 toApply { url instructions contact } 
@@ -74,7 +74,9 @@ class ShowJob extends ThingDetail {
 
         return (
             <div className={"RenderJob"}>
-                <h2>{job.title} @ {job.employer.name}</h2>
+                <h2>{job.title}</h2>
+                Posted by {job.employer.name} (<a href={""}>www.{job.employer.domain}</a>)
+
                 <p>
                     Located in {job.location.city}, {job.geo.name}. <br/>
                     {job.location.additional}
@@ -82,7 +84,9 @@ class ShowJob extends ThingDetail {
 
                 <h4>Job Description</h4>
 
-                {job.description}
+                <blockquote>
+                    {job.description}
+                </blockquote>
 
                 <If condition={job.compensation}>
                     <h4>Compensation</h4>
@@ -108,7 +112,7 @@ class ShowJob extends ThingDetail {
 
                 <ul>
                     <li>
-                        <b>URL</b> - {job.toApply.url}
+                        <b>URL</b> - <a href={`https://${job.toApply.url}`}>{job.toApply.url}</a>
                     </li>
                     <li>
                         <b>Contact</b> - {job.toApply.contact}

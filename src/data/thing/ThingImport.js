@@ -7,9 +7,10 @@ import "./css/ThingImport.css";
 import Server from "../../util/Server";
 import Loading from "../../util/Loading";
 import ErrorBanner from "../../util/ErrorBanner";
+import {UploadButton} from "../../util/ButtonUtil";
 
 /**
- *
+ * A base class for generating pages that import data via upload.
  */
 
 class ThingImport extends Component {
@@ -69,29 +70,9 @@ class ThingImport extends Component {
                 </div>
                 <br/>
 
-                <Button variant={"outlined"} size={"small"} disabled={! this.isValid || loading} onClick={() => {
+                <UploadButton disabled={! this.isValid || loading} onClick={() => {
                     this.doUpload();
-                }}>
-                    <i className="fal fa-upload"/>
-                    &nbsp;
-                    Upload
-                </Button>
-                &nbsp;
-                <Button variant={"outlined"} size={"small"} onClick={() => {
-                    window.open(this.csv, "__blank");
-                }}>
-                    <i className="fal fa-download"/>
-                    &nbsp;
-                    Template
-                </Button>
-                &nbsp;
-                <Button variant={"outlined"} size={"small"} onClick={() => {
-                    this.doExport ();
-                }}>
-                    <i className="fal fa-download"/>
-                    &nbsp;
-                    Export
-                </Button>
+                }} />
             </div>
         );
     }
@@ -110,10 +91,6 @@ class ThingImport extends Component {
         const res = await doGql (this);
         const { snackbarStore } = this.props;
         snackbarStore.show (`Added ${res} ${this.store.label.toLowerCase()}s.`);
-    }
-
-    async doExport () {
-        alert("UNIMPLEMENTED .doExport()");
     }
 }
 
