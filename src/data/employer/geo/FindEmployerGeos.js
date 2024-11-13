@@ -76,7 +76,7 @@ class FindEmployerGeos extends ThingDetails {
             geoLink (employerGeo.geo),
             <GeoType value={employerGeo.geo.type} />,
             <YesNo value={employerGeo.isActive} />,
-            <ID value={employerGeo.id} />
+            <ID short={true} value={employerGeo.id} />
         ];
     }
 

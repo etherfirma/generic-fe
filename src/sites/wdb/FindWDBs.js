@@ -67,7 +67,7 @@ class FindWDBs extends ThingDetails {
             wdb.wdbName,
             wdb.city,
             wdb.state,
-            <ID value={wdb.id} />
+            <ID short={true} value={wdb.id} />
         ];
     }
 

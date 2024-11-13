@@ -86,7 +86,7 @@ class FindUsers extends ThingDetails {
                     console.log(e);
                 }
             }}/>,
-            <ID value={user.id} />
+            <ID short={true} value={user.id} />
         ];
     }
 

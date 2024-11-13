@@ -69,7 +69,7 @@ class FindJCs extends ThingDetails {
             jc.city,
             jc.state,
             externalLink (jc.url),
-            <ID value={jc.id} />
+            <ID short={true} value={jc.id} />
         ];
     }
 

@@ -69,7 +69,7 @@ class FindAJCs extends ThingDetails {
             ajc.centerId,
             ajc.city,
             ajc.state,
-            <ID value={ajc.id} />
+            <ID short={true} value={ajc.id} />
         ];
     }
 

@@ -104,7 +104,7 @@ class FindJobs extends ThingDetails {
             employerLink (job.employer),
             geoLink (job.geo),
             <JobState value={job.state} />,
-            <ID value={job.id} />
+            <ID short={true} value={job.id} />
         ];
     }
 

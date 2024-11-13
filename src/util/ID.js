@@ -6,12 +6,13 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 
 class ID extends Component {
     render () {
-        const {value, icon, weight, snackbar, ...extra} = this.props;
+        const {value, short, icon, weight, snackbar, ...extra} = this.props;
+        const render = short ? `—${value.substring (20, 24)}` : value;
         const el = (
             <span className={"ID"} {...extra}>
                 <i className={classnames(weight, icon)}></i>
                 &nbsp;
-                <tt>{value}</tt>
+                <tt>{render}</tt>
             </span>
         );
         if (snackbar) {
@@ -34,7 +35,8 @@ class ID extends Component {
 
 ID.defaultProps = {
     icon: 'fa-key',
-    weight: 'fal'
+    weight: 'fal',
+    short: false
 };
 
 export default wrap(ID);

@@ -69,7 +69,7 @@ class FindSenders extends ThingDetails {
             sender.label, 
             senderLink (sender),
             sender.name || '-',
-            <ID value={sender.id} />
+            <ID short={true} value={sender.id} />
         ];
     }
 

@@ -71,7 +71,7 @@ class FindGeos extends ThingDetails {
             geoLink (geo),
             geo.name,
             <GeoType value={geo.type} />,
-            <ID value={geo.id} />
+            <ID short={true} value={geo.id} />
         ];
     }
 

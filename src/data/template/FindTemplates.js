@@ -78,7 +78,7 @@ class FindTemplates extends ThingDetails {
             userLink (template.user),
             template.path,
             shortenText (template.description, 8) || '-',
-            <ID value={template.id} />
+            <ID short={true} value={template.id} />
         ];
     }
 

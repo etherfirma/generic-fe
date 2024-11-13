@@ -60,7 +60,7 @@ class FindUserLocals extends ThingDetails {
         return [
             userLocal.hashedPassword,
             <YesNo value={userLocal.reset} />,
-            <ID value={userLocal.id} />
+            <ID short={true} value={userLocal.id} />
         ];
     }
 

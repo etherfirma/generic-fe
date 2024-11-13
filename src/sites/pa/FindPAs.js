@@ -67,7 +67,7 @@ class FindPAs extends ThingDetails {
             pa.name,
             externalLink (pa.url),
             <YesNo value={pa.certification} />,
-            <ID value={pa.id} />
+            <ID short={true} value={pa.id} />
         ];
     }
 
