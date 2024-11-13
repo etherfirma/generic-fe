@@ -1,15 +1,27 @@
 import React, { Component } from "react";
+import ThingImport from "../../data/thing/ThingImport";
+import _ from "lodash";
+import { wrap } from "../../util/Utils";
 
-class UploadWDBs extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Upload WDBs</h1>
-            </div>
-        );
+/**
+ *
+ */
+
+class UploadWDBs extends ThingImport {
+    constructor () {
+        super("WDB");
+    }
+
+    get query () {
+        return `
+           mutation ($file: String!) {
+                res: uploadWorkforceDevelopmentBoards (file: $file) 
+           }
+       `;
     }
 }
 
-export default UploadWDBs;
+export default wrap (UploadWDBs);
+
 
 // EOF

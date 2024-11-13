@@ -1,5 +1,5 @@
 import React from 'react';
-import {encodeUrl, formatDate, objGet, wrap} from "../../util/Utils";
+import {encodeUrl, externalLink, formatDate, objGet, wrap} from "../../util/Utils";
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../../data/thing/ThingDetail";
@@ -14,7 +14,7 @@ import _ from "lodash";
 class DataAjc extends ThingDetail {
     constructor () {
         super ({
-            type: "AJC"
+            type: "AmericanJobCenter"
         });
     }
 
@@ -24,6 +24,7 @@ class DataAjc extends ThingDetail {
             res: americanJobCenterById (id: $id) {
                 id
                 centerId
+                programType
                 name
                 address1
                 address2
@@ -67,6 +68,9 @@ class DataAjc extends ThingDetail {
         }
 
         const toContacts = (cs) => {
+            if (cs.length === 0) {
+                return <i>none</i>;
+            }
             return (
                 <ul>
                     {_.map (cs, (c, i) => <li key={i}>{toContact (c)}</li>)}
@@ -93,7 +97,7 @@ class DataAjc extends ThingDetail {
             zipcode: ajc.zipcode,
             phone: ajc.phone,
             email: ajc.email,
-            url: ajc.url,
+            url: externalLink (ajc.url),
             vetRep: <YesNo value={ajc.vetRep} />,
             vetRepContacts: toContacts (ajc.vetRepContacts),
             businessRep: toContact (ajc.businessRep),

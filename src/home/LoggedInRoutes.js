@@ -67,6 +67,10 @@ import UploadPAs from "../sites/pa/UploadPAs";
 import UploadJCs from "../sites/jc/UploadJCs";
 import UploadWDBs from "../sites/wdb/UploadWDBs";
 import ShowAJC from "../sites/ajc/ShowAJC";
+import RadiusSearch from "../sites/RadiusSearch";
+import ShowJC from "../sites/jc/ShowJC";
+import ShowPA from "../sites/pa/ShowPA";
+import ShowWDB from "../sites/wdb/ShowWDB";
 
 /**
  *
@@ -151,25 +155,23 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests/graph/1", element: <Graph1 /> },
 
     { path: "/sites", element: <Sites /> },
+    { path: "/sites/radius", element: <RadiusSearch /> },
 
     { path: "/sites/ajc/find", element: <FindAJCs /> },
     { path: "/sites/ajc/upload", element: <UploadAJCs /> },
     { path: "/data/ajc/:id", element: <ShowAJC /> },
 
     { path: "/sites/pa/find", element: <FindPAs /> },
+    { path: "/sites/pa/upload", element: <UploadPAs /> },
+    { path: "/data/pa/:id", element: <ShowPA /> },
 
     { path: "/sites/jc/find", element: <FindJCs /> },
-
-    { path: "/sites/wdb/find", element: <FindWDBs /> },
-
-
-    { path: "/sites/pa/upload", element: <UploadPAs /> },
-
     { path: "/sites/jc/upload", element: <UploadJCs /> },
+    { path: "/data/jc/:id", element: <ShowJC /> },
 
     { path: "/sites/wdb/upload", element: <UploadWDBs /> },
-
-
+    { path: "/sites/wdb/find", element: <FindWDBs /> },
+    { path: "/data/wdb/:id", element: <ShowWDB /> },
 ]);
 
 export default LOGGED_IN;

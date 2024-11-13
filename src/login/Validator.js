@@ -29,6 +29,14 @@ class Validator {
         }
     }
 
+    static floatValidator (val) {
+        if (! ValidationUtil.isFloat (val)) {
+            return "Not a float.";
+        } else {
+            return null;
+        }
+    }
+
     static oidValidator (val) {
         if (! ValidationUtil.isMongoId(val)) {
             return "Not a mongo oid.";

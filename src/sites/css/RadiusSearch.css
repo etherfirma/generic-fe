@@ -1,0 +1,6 @@
+.RadiusSearchTable {
+    width: 800px;
+}
+.RadiusSearchTable tr td {
+    width: 33%;
+}

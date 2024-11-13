@@ -20,7 +20,7 @@ function AddButton (props) {
     return iconButton ("far fa-plus", "Add", props);
 }
 function ClearButton (props) {
-    return iconButton ("far fa-trash", "ClearatBr", props);
+    return iconButton ("far fa-trash", "Clear", props);
 }
 function EditButton (props) {
     return iconButton ("far fa-edit", "Edit", props);

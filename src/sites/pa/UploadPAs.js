@@ -1,15 +1,27 @@
 import React, { Component } from "react";
+import ThingImport from "../../data/thing/ThingImport";
+import _ from "lodash";
+import { wrap } from "../../util/Utils";
 
-class UploadPAs extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Upload PAs</h1>
-            </div>
-        );
+/**
+ *
+ */
+
+class UploadPAs extends ThingImport {
+    constructor () {
+        super("PA");
+    }
+
+    get query () {
+        return `
+           mutation ($file: String!) {
+                res: uploadProfessionalAssociations (file: $file) 
+           }
+       `;
     }
 }
 
-export default UploadPAs;
+export default wrap (UploadPAs);
+
 
 // EOF

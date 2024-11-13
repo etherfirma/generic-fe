@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import _ from "lodash";
-import {ShowButton, UploadButton} from "../util/ButtonUtil";
+import {ShowButton, IconButton, UploadButton} from "../util/ButtonUtil";
 
 /**
  *
@@ -56,6 +56,8 @@ class Sites extends Component {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <br/>
+                <IconButton icon={"fal fa-globe"} label="Geo Search" onClick={() => window.location.hash = "/sites/radius"} />
             </div>
         );
     }

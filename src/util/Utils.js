@@ -601,6 +601,17 @@ const Repeat = ({ times, children}) => {
     return arr;
 };
 
+const externalLink = (url) => {
+    if (! url) {
+        return "-";
+    }
+    return (
+        <a href={url} target={"__blank"} className={"ThingLink"}>
+            {url}
+        </a>
+    );
+}
+
 export  {
     // MaybeError,
     doGql,
@@ -649,7 +660,8 @@ export  {
     externalUrl,
     PreJson,
     Repeat,
-    toBullets
+    toBullets,
+    externalLink
 };
 
 // EOF

@@ -6,6 +6,7 @@ const EMAIL = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\
 const URL = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
 const DOMAIN = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/;
 const NUMBER = /^[0-9]+$/;
+const FLOAT = /^[+-]?([0-9]*[.])?[0-9]+$/;
 const MONGO = /^[0-9a-f]{24}$/;
 const SLUG = /^[0-9a-zA-Z_-]+$/;
 const DATE = /^((1[012])|([0-9])|(0[0-0]))\/([123]?[0-9])\/(20[0-9][0-9])$/;
@@ -18,6 +19,10 @@ const TIME = /^([01][0-9]):([0-6][0-9])$/;
 class ValidationUtil {
     isSlug (val) {
         return SLUG.test (val);
+    }
+
+    isFloat (val) {
+        return FLOAT.test(val);
     }
 
     isDate (val) {
