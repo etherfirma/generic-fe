@@ -26,6 +26,7 @@ class DataBrowser extends Component {
         {name: "employers", hash: "#/data/employers", "desc": "Registered Employers" },
         {name: "employerGeos", hash: "#/data/employerGeos", "desc": "Employer to Geo mapping" },
         {name: "job", hash: "#/data/jobs", "desc": "A canonicalized Job" },
+        {name: "zipcode", hash: "#/data/zipcodes", "desc": "Zipcode lat/lon mappings" },
     ];
 
     render() {

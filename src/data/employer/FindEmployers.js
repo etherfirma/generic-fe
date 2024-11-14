@@ -70,7 +70,7 @@ class FindEmployers extends ThingDetails {
         return [
             employerLink (employer),
             employer.name,
-            <YesNo value={employer.isActive} />,
+            <YesNo value={employer.isActive} labelled={true} />,
             <ID short={true} value={employer.id} />
         ];
     }

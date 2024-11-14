@@ -66,7 +66,7 @@ class FindGeoTargets extends ThingDetails {
             <a href={geoTarget.url} target={"__blank"} >
                 {geoTarget.url}
             </a>,
-            <YesNo value={geoTarget.isActive} />,
+            <YesNo value={geoTarget.isActive} labelled={true} />,
             <ID value={geoTarget.id} />
         ];
     }

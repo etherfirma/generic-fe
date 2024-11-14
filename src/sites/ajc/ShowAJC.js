@@ -98,14 +98,14 @@ class DataAjc extends ThingDetail {
             phone: ajc.phone,
             email: ajc.email,
             url: externalLink (ajc.url),
-            vetRep: <YesNo value={ajc.vetRep} />,
+            vetRep: <YesNo value={ajc.vetRep} labelled={true} />,
             vetRepContacts: toContacts (ajc.vetRepContacts),
             businessRep: toContact (ajc.businessRep),
-            exOffenders: <YesNo value={ajc.exOffenders} />,
+            exOffenders: <YesNo value={ajc.exOffenders} labelled={true} />,
             youthReps: toContacts (ajc.youthReps),
             latitude: ajc.latitude,
             longitude: ajc.longitude,
-            closure: <YesNo value={ajc.closure} />,
+            closure: <YesNo value={ajc.closure} labelled={true} />,
             status: ajc.status || '-'
         };
 

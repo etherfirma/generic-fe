@@ -71,6 +71,8 @@ import RadiusSearch from "../sites/RadiusSearch";
 import ShowJC from "../sites/jc/ShowJC";
 import ShowPA from "../sites/pa/ShowPA";
 import ShowWDB from "../sites/wdb/ShowWDB";
+import FindZipcodes from "../data/zipcode/FindZipcodes";
+import ShowZipcode from "../data/zipcode/ShowZipcode";
 
 /**
  *
@@ -126,6 +128,10 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/employerGeos", element: <FindEmployerGeos /> },
     { path: "/data/employerGeo/add", element: <AddEmployerGeo /> },
     { path: "/data/employerGeo/:id", element: <ShowEmployerGeo /> },
+
+    { path: "/data/zipcodes", element: <FindZipcodes /> },
+    { path: "/data/zipcode/:id", element: <ShowZipcode /> },
+
 
     { path: "/data/geoTargets", element: <FindGeoTargets /> },
     { path: "/data/geoTarget/add", element: <AddGeoTarget /> },

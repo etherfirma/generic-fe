@@ -58,7 +58,7 @@ class DataPa extends ThingDetail {
             id: <ID snackbar={true} value={pa.id} />,
             name:  pa.name,
             url: externalLink (pa.url),
-            certification:  <YesNo value={pa.certification} />,
+            certification:  <YesNo value={pa.certification} labelled={true} />,
             careerCenterUrl: externalLink (pa.careerCenterUrl),
             naicsCode:  pa.naicsCode,
             onetCode:  pa.onetCode,
