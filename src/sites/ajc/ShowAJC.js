@@ -126,6 +126,7 @@ class DataAjc extends ThingDetail {
         const { result, id } = this.store;
         const crumbs = [
             { label: null, href: "#/" },
+            { label: "Sites", href: "#/sites" },
             { label: "AJCs", href: "#/sites/ajc/find" },
             { label: result?.centerId || id}
         ];

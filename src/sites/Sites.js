@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import _ from "lodash";
 import {ShowButton, IconButton, UploadButton} from "../util/ButtonUtil";
+import Breadcrumb from "../util/Breadcrumb";
 
 /**
  *
@@ -21,9 +22,15 @@ const SITES = [
 ];
 
 class Sites extends Component {
+    crumbs = [
+        { label: null, href: "#/" },
+        { label: "Sites" },
+    ];
+
     render() {
         return (
             <div>
+                <Breadcrumb crumbs={this.crumbs} />
                 <h1>Sites</h1>
 
                 <TableContainer component={Paper}>

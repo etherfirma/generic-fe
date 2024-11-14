@@ -21,15 +21,6 @@ const shadowObject = (obj) => {
     }
 };
 
-const externalUrl = (url) => {
-    return (
-        <span className={"ExternalUrl"} onClick={() => window.open (url, "__blank")}>
-            <i className="far fa-link"></i>
-            &nbsp;
-            {url}
-        </span>
-    )
-};
 class If extends Component {
     render () {
         if (this.props.condition) {
@@ -601,13 +592,13 @@ const Repeat = ({ times, children}) => {
     return arr;
 };
 
-const externalLink = (url) => {
+const externalLink = (url, text= url) => {
     if (! url) {
         return "-";
     }
     return (
         <a href={url} target={"__blank"} className={"ThingLink"}>
-            {url}
+            {text}
         </a>
     );
 }
@@ -657,7 +648,6 @@ export  {
     shadowObject,
     Unimplemented,
     inAction,
-    externalUrl,
     PreJson,
     Repeat,
     toBullets,

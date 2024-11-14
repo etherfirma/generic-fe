@@ -6,7 +6,7 @@ import ThingDetail from "../thing/ThingDetail";
 import YesNo from "../../util/YesNo";
 import Breadcrumb from "../../util/Breadcrumb";
 import Server from "../../util/Server";
-import {DeleteButton, EditButton, ReloadButton} from "../../util/ButtonUtil";
+import {IconButton, DeleteButton, EditButton, ReloadButton} from "../../util/ButtonUtil";
 
 /**
  *
@@ -41,6 +41,10 @@ class ShowZipcode extends ThingDetail {
         return (
             <div>
                 <ReloadButton onClick={() => this.doLoad ()} />
+                &nbsp;
+                <IconButton icon={"fab fa-google"} label={"Google Maps"} onClick={() => {
+                    window.open (`https://maps.google.com/maps/place/${zipcode.latitude}%20${zipcode.longitude}`);
+                }}/>
             </div>
         );
     }

@@ -165,7 +165,8 @@ class FindWDBs extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "WDBs" }
+            { label: "Sites", href: "#/sites" },
+            { label: "Workforce Development Boards" }
         ];
         return (
             <div>

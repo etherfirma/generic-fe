@@ -167,7 +167,8 @@ class FindJCs extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "JCs" }
+            { label: "Sites", href: "#/sites" },
+            { label: "Job Clubs" }
         ];
         return (
             <div>

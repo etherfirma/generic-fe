@@ -165,7 +165,8 @@ class FindPAs extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "PAs" }
+            { label: "Sites", href: "#/sites" },
+            { label: "Professional Associations" }
         ];
         return (
             <div>

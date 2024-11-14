@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {doGql, wrap, PreJson, fixedPoint, TabPanel, If} from "../util/Utils";
+import {doGql, wrap, PreJson, fixedPoint, TabPanel, If, externalLink} from "../util/Utils";
 import Validator from "../login/Validator";
 import {observable, action} from "mobx";
 import TextField from "@mui/material/TextField";
@@ -286,7 +286,7 @@ class RadiusSearch extends Component {
                                         {i + 1}.
                                     </TableCell>
                                     <TableCell>
-                                        {el.jc.name}
+                                        {externalLink (el.jc.url, el.jc.name)}
                                     </TableCell>
                                     <TableCell>
                                         {el.jc.city}
@@ -382,7 +382,7 @@ class RadiusSearch extends Component {
                                         {i + 1}.
                                     </TableCell>
                                     <TableCell>
-                                        {el.ajc.name}
+                                        {externalLink (el.ajc.url, el.ajc.name)},
                                     </TableCell>
                                     <TableCell>
                                         {el.ajc.city}
@@ -424,6 +424,7 @@ class RadiusSearch extends Component {
                     city
                     state
                     siteType
+                    url
                 }
                 distance 
             } 
@@ -434,6 +435,7 @@ class RadiusSearch extends Component {
                     city
                     state
                     siteType
+                    url
                 }
                 distance 
             } 

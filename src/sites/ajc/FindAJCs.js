@@ -167,7 +167,8 @@ class FindAJCs extends ThingDetails {
     renderHeader () {
         const crumbs = [
             { label: null, href: "#/" },
-            { label: "AJCs" }
+            { label: "Sites", href: "#/sites" },
+            { label: "American Job Centers" }
         ];
         return (
             <div>
