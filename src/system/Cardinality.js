@@ -123,7 +123,11 @@ class Cardinality extends Component {
         "user_local": "userLocal",
         "employer": "employer",
         "geo": "geo",
-        "employerGeo": "employerGeo"
+        "employerGeo": "employerGeo",
+        "geoTarget": "geoTargets",
+        "zipcode": "zipcodes",
+        "job": "jobs",
+        "batch": "batches"
     };
 
     collectionButton (which) {

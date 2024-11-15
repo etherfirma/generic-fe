@@ -11,6 +11,7 @@ import Server from "./Server";
 import Button from "@mui/material/Button";
 import PropertyTable from "./PropertyTable";
 import YesNo from "./YesNo";
+import Environment from "./Environment";
 
 const debugStore = observable ({
     open: false,
@@ -42,7 +43,7 @@ const DebugButton = observer (
 
 class DebugPane extends Component {
     render () {
-        const { debugStore, AuthManager } = this.props
+        const { debugStore, AuthManager, environment } = this.props
         const { open } = debugStore;
 
         const toggleClose = (e) => {
@@ -70,6 +71,11 @@ class DebugPane extends Component {
             serverUrl: Server.serverUrl
         };
 
+        const env = {
+            version: environment.version,
+            environment: environment.environment
+        };
+
         return (
             <Drawer
                 open={open}
@@ -86,6 +92,9 @@ class DebugPane extends Component {
 
                     <h2>Server</h2>
                     <PropertyTable value={server} />
+
+                    <h2>Environment</h2>
+                    <PropertyTable value={env} />
                 </div>
             </Drawer>
         );

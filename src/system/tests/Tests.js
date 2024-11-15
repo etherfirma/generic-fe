@@ -51,13 +51,18 @@ class Tests extends Component {
                                 BooleanPicker
                             </a>
                         </li>
+                        <li>
+                            <a href={"#/tests/ux/table"}>
+                                Table
+                            </a>
+                        </li>
                     </ul>
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <ul>
                         <li>
                             <a href={"#/tests/senderPicker"}>
-                                SenderPicker
+                            SenderPicker
                             </a>
                         </li>
                         <li>

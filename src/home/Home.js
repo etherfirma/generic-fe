@@ -133,7 +133,9 @@ class TopJobs extends Component {
                                                 {job.title}
                                             </span>
                                         </TableCell>
-                                        <TableCell align={"right"}>{job.count}</TableCell>
+                                        <TableCell align={"right"}>
+                                            {withCommas (job.count)}
+                                        </TableCell>
                                     </TableRow>
                             )})}
                         </TableBody>
@@ -180,7 +182,9 @@ class TopEmployers extends Component {
                                                   {el.employer.name}
                                               </span>
                                         </TableCell>
-                                        <TableCell align={"right"}>{el.count}</TableCell>
+                                        <TableCell align={"right"}>
+                                            {withCommas (el.count)}
+                                        </TableCell>
                                     </TableRow>
                                 )
                             })}
@@ -228,7 +232,9 @@ class TopGeos extends Component {
                                               {`${el.geo.name} (${el.geo.key})`}
                                           </span>
                                         </TableCell>
-                                        <TableCell align={"right"}>{el.count}</TableCell>
+                                        <TableCell align={"right"}>
+                                            {withCommas (el.count)}
+                                        </TableCell>
                                     </TableRow>
                                 )
                             })}
@@ -262,13 +268,13 @@ class JobsByState extends Component {
         _.each (jobsByState, (el) => total += el.count);
         return (
             <div>
-                <TableContainer component={Paper}>
-                    <Table size="small" aria-label="a dense table">
-                        <TableBody>
+                {/*<TableContainer component={Paper}>*/}
+                    <table size="small" aria-label="a dense table">
+                        <tbody>
                             {_.map (jobsByState, (el, i) => {
                                 return (
-                                    <TableRow key={i}>
-                                        <TableCell>
+                                    <tr key={i}>
+                                        <td>
                                             <span className={"ThingLink"} onClick={() => {
                                                 const params = {state: el.state};
                                                 const href = encodeUrl("/data/jobs", params)
@@ -277,17 +283,19 @@ class JobsByState extends Component {
                                               <JobState value={el.state}/>
                                           </span>
 
-                                        </TableCell>
-                                        <TableCell>{el.count}</TableCell>
-                                        <TableCell>
+                                        </td>
+                                        <td style={{ width: 80 }} align={"right"}>
+                                            {withCommas (el.count)}
+                                        </td>
+                                        <td align={"right"}>
                                             {fixedPoint(el.count / total * 100.0)}%
-                                        </TableCell>
-                                    </TableRow>
+                                        </td>
+                                    </tr>
                                 )
                             })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                        </tbody>
+                    </table>
+                {/*</TableContainer>*/}
                 <br/>
             </div>
         );

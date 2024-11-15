@@ -319,7 +319,7 @@ const renderMillis = (val) => {
 };
 
 
-const standardInjects = [ "infoDialogStore", "AuthManager", "debugStore", "snackbarStore", "EnumManager", "Server" ];
+const standardInjects = [ "infoDialogStore", "AuthManager", "debugStore", "snackbarStore", "EnumManager", "Server", "environment" ];
 
 const wrap = (thing, extra) => {
     if (extra) {
@@ -521,6 +521,9 @@ function Unimplemented (props) {
 const PreJson = ({ json }) => <pre>{JSON.stringify (json, null, 2)}</pre>;
 
 const toBullets = (els) => {
+    if (! els || els.size === 0) {
+        return "-";
+    }
     return (
         <ul>
             {_.map (els, (el, i) => {

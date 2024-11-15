@@ -15,7 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import _ from "lodash";
 import {TableFooter} from "@mui/material";
-import {employerLink, geoLink} from "../thing/ThingUtil";
+import {batchLink, employerLink, geoLink} from "../thing/ThingUtil";
 import Server from "../../util/Server";
 import {JobState} from "../../util/enum/EnumSlug";
 
@@ -35,6 +35,7 @@ class ShowJob extends ThingDetail {
         query ($id: String!) {
             res: jobById (id: $id) {
                 id
+                batch { id importType } 
                 jobKey
                 title
                 description
@@ -87,6 +88,7 @@ class ShowJob extends ThingDetail {
 
         const o = {
             id: <ID snackbar={true} value={job.id} />,
+            batch: batchLink (job.batch),
             employer: employerLink (job.employer),
             jobKey: job.jobKey,
             title: job.title,
@@ -100,10 +102,10 @@ class ShowJob extends ThingDetail {
                 </a>
             ),
             "toApply.instructions" : job.toApply.instructions,
-            "toApply.contact": job.toApply.contact,
+            "toApply.contact": job.toApply.contact || '-',
             requirements: toBullets (job.requirements),
             compensation: job.compensation || "-",
-            eeoStatement: job.eeoStatement,
+            eeoStatement: job.eeoStatement || "-",
             state: <JobState value={job.state} />,
             created: job.created,
             lastModified: job.lastModified,

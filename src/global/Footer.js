@@ -1,28 +1,9 @@
 import React, { Component } from "react";
 import "./css/Footer.css";
-import {observable} from "mobx";
-import Server from "../util/Server";
-import {observer} from "mobx-react";
 import {DebugButton} from "../util/debugStore";
+import { wrap } from "../util/Utils";
 
 class Footer extends Component {
-    store = observable ({
-        version: "...",
-        env: null
-    });
-
-    componentDidMount() {
-        this.getServerVersion ()
-    }
-
-    async getServerVersion () {
-        const query = "{ res: serverVersion { version env } }";
-        const res = await Server._gql (query);
-        this.store.version = res.version;
-        this.store.env = res.env;
-        return;
-    }
-
     renderEnv (env) {
         if (env) {
             return (
@@ -36,6 +17,8 @@ class Footer extends Component {
     }
 
     render() {
+        const { environment } = this.props;
+
         return (
             <div className={"Footer"}>
                 <table>
@@ -50,7 +33,7 @@ class Footer extends Component {
                             All rights reserved.
                             <br/>
                             <br/>
-                            Server Version {this.store.version} {this.renderEnv (this.store.env)}
+                            Server Version {environment.version} {this.renderEnv (environment.environment)}
                         </td>
                         <td>
                             <DebugButton />
@@ -63,6 +46,6 @@ class Footer extends Component {
     }
 }
 
-export default observer (Footer);
+export default wrap (Footer);
 
 // EOF

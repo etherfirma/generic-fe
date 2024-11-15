@@ -29,6 +29,11 @@ class System extends Component {
                             Cardinality
                         </a>
                     </li>
+                    <li>
+                        <a href={"#/system/importFeed"}>
+                            Import Feed
+                        </a>
+                    </li>
                 </ul>
             </div>
         );

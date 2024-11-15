@@ -9,6 +9,7 @@ const NUMBER = /^[0-9]+$/;
 const FLOAT = /^[+-]?([0-9]*[.])?[0-9]+$/;
 const MONGO = /^[0-9a-f]{24}$/;
 const SLUG = /^[0-9a-zA-Z_-]+$/;
+const PATH = /^\/.+$/;
 const DATE = /^((1[012])|([0-9])|(0[0-0]))\/([123]?[0-9])\/(20[0-9][0-9])$/;
 const TIME = /^([01][0-9]):([0-6][0-9])$/;
 
@@ -27,6 +28,10 @@ class ValidationUtil {
 
     isDate (val) {
         return DATE.test (val);
+    }
+
+    isPath (val) {
+        return PATH.test (val);
     }
 
     isDomain (val) {

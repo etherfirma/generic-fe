@@ -11,12 +11,14 @@ const thingLink = (type, field = "name", func = null) => (thing) => {
 }
 const senderLink = thingLink ("sender", "email");
 const userLink = thingLink ("user", "name", (thing) => `${thing.name} (${thing.email})`);
+const batchLink = thingLink ("batch", "importType")
 const templateLink = thingLink ("template", "path");
 const geoLink = thingLink ("geo", "key")
 const geoTargetLink = thingLink ("geoTarget", "key")
 const employerLink = thingLink ("employer", "name")
 
 export {
+    batchLink,
     senderLink,
     employerLink,
     geoLink,

@@ -16,6 +16,7 @@ import BooleanPicker from "../../util/BooleanPicker";
 import GeoPicker from "../geo/GeoPicker";
 import EmployerPicker from "../employer/EmployerPicker";
 import {JobState} from "../../util/enum/EnumSlug";
+import EnumPicker from "../../util/enum/EnumPicker";
 
 /**
  *
@@ -30,6 +31,7 @@ class FindJobs extends ThingDetails {
             employer: null,
             geo: null,
             state: "",
+            batchId: "", 
             title: "", // filter
             id: "" // filter
         });
@@ -54,6 +56,9 @@ class FindJobs extends ThingDetails {
                 id: params.geoId
             };
         }
+        if (params.batchId) {
+            this.store.batchId = params.batchId;
+        }
         if (params.state) {
             this.store.state = params.state;
         }
@@ -65,12 +70,15 @@ class FindJobs extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { jobKey, employer, geo, state, title, id } = this.store;
+        const { batchId, jobKey, employer, geo, state, title, id } = this.store;
         if (jobKey) {
             filters.jobKey = jobKey;
         }
         if (title) {
             filters.title = title;
+        }
+        if (batchId) {
+            filters.batchId = batchId;
         }
         if (state) {
             filters.state = state;
@@ -131,8 +139,8 @@ class FindJobs extends ThingDetails {
     }
 
     hasFilters () {
-        const { jobKey, employer, geo, state, id } = this.store;
-        return Boolean (jobKey || employer || geo || state || id);
+        const { batchId, jobKey, employer, geo, state, id } = this.store;
+        return Boolean (batchId || jobKey || employer || geo || state || id);
     }
 
     clearFilters = action (() => {
@@ -142,11 +150,12 @@ class FindJobs extends ThingDetails {
         this.store.geo = null;
         this.store.title = "";
         this.store.id = "";
+        this.store.batchId = ""; 
         this.doLoad ();
     });
 
     renderFilters () {
-        const { jobKey, state, title, employer, geo, id, showDrawer } = this.store;
+        const { batchId, jobKey, state, title, employer, geo, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -170,6 +179,15 @@ class FindJobs extends ThingDetails {
                     />
                     <TextField
                         {...formProps}
+                        value={batchId}
+                        label={"batchId"}
+                        onChange={(e) => {
+                            this.store.batchId = e.target.value;
+                            this.doLoad();
+                        }}
+                    />
+                    <TextField
+                        {...formProps}
                         value={jobKey}
                         label={"Job Key"}
                         onChange={(e) => {
@@ -185,6 +203,15 @@ class FindJobs extends ThingDetails {
                             this.store.title = e.target.value;
                             this.doLoad();
                         }}
+                    />
+                    <EnumPicker
+                        enumType={"JobState"}
+                        value={state}
+                        onChange={value => {
+                            this.store.state = value;
+                            this.doLoad();
+                        }}
+                        formProps={formProps}
                     />
                     <EmployerPicker
                         value={employer}

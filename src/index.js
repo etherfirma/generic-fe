@@ -12,6 +12,7 @@ import SnackbarPopop, {snackbarStore} from "./util/snackbarStore";
 import DebugPane, {DebugButton, debugStore} from "./util/debugStore";
 import {BugReport} from "@mui/icons-material";
 import {Avatar, Snackbar} from "@mui/material";
+import Environment from "./util/Environment";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +25,7 @@ root.render(
                 EnumManager={EnumManager}
                 Server={Server}
                 debugStore={debugStore}
+                environment={Environment}
                 // textFieldDialogStore={textFieldDialogStore}
             >
                 <App />
@@ -34,5 +36,7 @@ root.render(
         </React.StrictMode>
     </GoogleOAuthProvider>
 );
+
+Environment.load ();
 
 // EOF

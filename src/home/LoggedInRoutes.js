@@ -73,6 +73,10 @@ import ShowPA from "../sites/pa/ShowPA";
 import ShowWDB from "../sites/wdb/ShowWDB";
 import FindZipcodes from "../data/zipcode/FindZipcodes";
 import ShowZipcode from "../data/zipcode/ShowZipcode";
+import TableTest from "../system/tests/ux/TableTest";
+import FindBatches from "../data/job/batch/FindBatches";
+import ShowBatch from "../data/job/batch/ShowBatch";
+import ImportFeed from "../system/ImportFeed";
 
 /**
  *
@@ -132,6 +136,9 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/zipcodes", element: <FindZipcodes /> },
     { path: "/data/zipcode/:id", element: <ShowZipcode /> },
 
+    { path: "/data/batches", element: <FindBatches /> },
+    { path: "/data/batch/:id", element: <ShowBatch /> },
+
 
     { path: "/data/geoTargets", element: <FindGeoTargets /> },
     { path: "/data/geoTarget/add", element: <AddGeoTarget /> },
@@ -139,6 +146,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/geoTarget/:id/:edit", element: <EditGeoTarget /> },
 
     { path: "/system/cardinality", element: <Cardinality /> },
+    { path: "/system/importFeed", element: <ImportFeed /> },
 
     { path: "/tests/loading", element: <LoadingTest /> },
     { path: "/tests/propertyTable", element: <PropertyTableTest /> },
@@ -154,6 +162,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests/employerPicker", element: <EmployerPickerTest /> },
 
     { path: "/tests/ux/booleanPicker", element: <BooleanPickerTest /> },
+    { path: "/tests/ux/table", element: <TableTest /> },
 
     { path: "/tests/enums", element: <EnumTest /> },
     { path: "/tests/enumPickers", element: <EnumPickerTest /> },

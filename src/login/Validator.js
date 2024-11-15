@@ -13,6 +13,14 @@ class Validator {
         this.accessor = accessor || ((obj) => obj.store);
     }
 
+    static pathValidator (val) {
+        if (!ValidationUtil.isPath (val)) {
+            return "Not a path";
+        } else {
+            return null;
+        }
+    }
+
     static urlValidator (val) {
         if (!ValidationUtil.isUrl(val)) {
             return "Not a URL";
