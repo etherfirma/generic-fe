@@ -17,17 +17,18 @@ class DataBrowser extends Component {
     ];
 
     dataTypes = [
-        {name: "user", hash: "#/data/users", "desc": "The core User record" },
-        {name: "userLocal", hash: "#/data/userLocals", "desc": "For User's with a password" },
-        {name: "geo", hash: "#/data/geos", "desc": "Supported States and Territories" },
-        {name: "geoTarget", hash: "#/data/geoTargets", "desc": "Maps the publishing target for a Geo" },
-        {name: "sender", hash: "#/data/senders", "desc": "Email senders" },
-        {name: "template", hash: "#/data/templates", "desc": "Email and text templates" },
-        {name: "employers", hash: "#/data/employers", "desc": "Registered Employers" },
-        {name: "employerGeos", hash: "#/data/employerGeos", "desc": "Employer to Geo mapping" },
-        {name: "job", hash: "#/data/jobs", "desc": "A canonicalized Job" },
-        {name: "zipcode", hash: "#/data/zipcodes", "desc": "Zipcode lat/lon mappings" },
-        {name: "batch", hash: "#/data/batches", "desc": "Import batches" }
+        {name: "user", hash: "/data/users", "desc": "The core User record" },
+        {name: "userLocal", hash: "/data/userLocals", "desc": "For User's with a password" },
+        {name: "geo", hash: "/data/geos", "desc": "Supported States and Territories" },
+        {name: "geoTarget", hash: "/data/geoTargets", "desc": "Maps the publishing target for a Geo" },
+        {name: "sender", hash: "/data/senders", "desc": "Email senders" },
+        {name: "template", hash: "/data/templates", "desc": "Email and text templates" },
+        {name: "employers", hash: "/data/employers", "desc": "Registered Employers" },
+        {name: "employerGeos", hash: "/data/employerGeos", "desc": "Employer to Geo mapping" },
+        {name: "job", hash: "/data/jobs", "desc": "A canonicalized Job" },
+        {name: "zipcode", hash: "/data/zipcodes", "desc": "Zipcode lat/lon mappings" },
+        {name: "batch", hash: "/data/batches", "desc": "Import batches" },
+        {name: "jobTask", hash: "/data/jobTasks", "desc": "Publishing task status for ajob" }
     ];
 
     render() {

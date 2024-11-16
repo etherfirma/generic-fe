@@ -15,3 +15,8 @@
     color: cadetblue;
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+H1 {
+    color: #5e8fc2;
+    font-size: 1.6em;
+}

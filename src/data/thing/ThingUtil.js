@@ -16,9 +16,11 @@ const templateLink = thingLink ("template", "path");
 const geoLink = thingLink ("geo", "key")
 const geoTargetLink = thingLink ("geoTarget", "key")
 const employerLink = thingLink ("employer", "name")
+const jobLink = thingLink ("job", "title")
 
 export {
     batchLink,
+    jobLink,
     senderLink,
     employerLink,
     geoLink,

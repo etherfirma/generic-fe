@@ -77,6 +77,9 @@ import TableTest from "../system/tests/ux/TableTest";
 import FindBatches from "../data/job/batch/FindBatches";
 import ShowBatch from "../data/job/batch/ShowBatch";
 import ImportFeed from "../system/ImportFeed";
+import FindJobTasks from "../data/job/task/FindJobTasks";
+import ShowJobTask from "../data/job/task/ShowJobTask";
+import CreateJobTask from "../data/job/task/CreateJobTask";
 
 /**
  *
@@ -124,6 +127,11 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/job/:id", element: <ShowJob /> },
     { path: "/data/job/:id/edit", element: <EditJob /> },
     { path: "/data/posting/:id", element: <RenderJob /> },
+
+    { path: "/data/jobTasks", element: <FindJobTasks /> },
+    { path: "/data/jobTask/create", element: <CreateJobTask /> },
+    { path: "/data/jobTask/:id", element: <ShowJobTask /> },
+
 
     { path: "/data/employers", element: <FindEmployers /> },
     { path: "/data/employer/add", element: <AddEmployer /> },
