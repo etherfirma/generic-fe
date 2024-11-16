@@ -9,7 +9,7 @@ class JCUtil {
                     id           
                     name
                     city
-                    state
+                    geo { id key } 
                     url        
                 }
             }

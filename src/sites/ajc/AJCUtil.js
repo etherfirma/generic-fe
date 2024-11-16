@@ -8,8 +8,9 @@ class AJCUtil {
                 results { 
                     id           
                     centerId
-                    city, state, 
-                    name        
+                    city,  
+                    name    
+                    geo { id key }     
                 }
             }
         }`;

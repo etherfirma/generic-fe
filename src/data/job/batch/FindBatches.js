@@ -80,7 +80,7 @@ class FindBatches extends ThingDetails {
     xform (batch) {
         return [
             batch.importType, 
-            batch.jobCount,
+            withCommas (batch.jobCount),
             batch.jobsAdded ? withCommas (batch.jobsAdded) : "-",
             batch.jobsAlready ? withCommas (batch.jobsAlready) : "-",
             batch.jobsFailed ? withCommas (batch.jobsFailed) : "-",

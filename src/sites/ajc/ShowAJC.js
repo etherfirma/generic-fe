@@ -6,6 +6,7 @@ import ThingDetail from "../../data/thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
 import YesNo from "../../util/YesNo";
 import _ from "lodash";
+import {geoLink} from "../../data/thing/ThingUtil";
 
 /**
  *
@@ -29,7 +30,7 @@ class DataAjc extends ThingDetail {
                 address1
                 address2
                 city
-                state
+                geo { id key } 
                 zipcode
                 phone
                 email
@@ -93,7 +94,7 @@ class DataAjc extends ThingDetail {
             address1: ajc.address1,
             address2: ajc.address2 || '-',
             city: ajc.city,
-            state: ajc.state,
+            state: geoLink (ajc.geo),
             zipcode: ajc.zipcode,
             phone: ajc.phone,
             email: ajc.email,

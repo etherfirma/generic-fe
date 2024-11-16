@@ -9,6 +9,7 @@ import ID from "../../util/ID";
 import {Drawer} from "@mui/material";
 import {action} from "mobx";
 import {externalLink, PreJson, wrap} from "../../util/Utils";
+import GeoPicker from "../../data/geo/GeoPicker";
 
 /**
  *
@@ -21,7 +22,7 @@ class FindJCs extends ThingDetails {
             hasFilters: true,
             name: "", //filter
             city: "", // filter
-            state: "", // filter
+            geo: null, // filter
             id: "" // filter
         });
     }
@@ -36,15 +37,15 @@ class FindJCs extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { name, city, state, id } = this.store;
+        const { name, city, geo, id } = this.store;
         if (name) {
             filters.name = name;
         }
         if (city) {
             filters.city = city;
         }
-        if (state) {
-            filters.state = state;
+        if (geo) {
+            filters.geoId = geo.id;
         }
         if (id) {
             filters.id = id;
@@ -94,20 +95,20 @@ class FindJCs extends ThingDetails {
     }
 
     hasFilters () {
-        const { name, city, state, id } = this.store;
-        return Boolean (name || id || state || city);
+        const { name, city, geo, id } = this.store;
+        return Boolean (name || id || geo || city);
     }
 
     clearFilters = action (() => {
         this.store.name = "";
         this.store.city = "";
-        this.store.state = "";
+        this.store.geo = null;
         this.store.id = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { name, city, state, id, showDrawer } = this.store;
+        const { name, city, geo, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -138,15 +139,16 @@ class FindJCs extends ThingDetails {
                             this.doLoad();
                         }}
                     />
-                    <TextField
-                        {...formProps}
-                        value={state}
-                        label={"State"}
-                        onChange={(e) => {
-                            this.store.state = e.target.value;
-                            this.doLoad();
+                    <GeoPicker
+                        value={geo?.id}
+                        required={false}
+                        onChange={geo => {
+                            this.store.geo = geo;
+                            this.doLoad ();
                         }}
+                        formProps={formProps}
                     />
+
                     <TextField
                         {...formProps}
                         value={id}

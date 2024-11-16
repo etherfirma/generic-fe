@@ -6,6 +6,7 @@ import ThingDetail from "../../data/thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
 import YesNo from "../../util/YesNo";
 import _ from "lodash";
+import {geoLink} from "../../data/thing/ThingUtil";
 
 /**
  *
@@ -25,7 +26,7 @@ class DataJc extends ThingDetail {
                 id
                 name
                 city
-                state
+                geo { id key }
                 zipcode
                 contactName
                 contactPhone
@@ -62,7 +63,7 @@ class DataJc extends ThingDetail {
             id: <ID snackbar={true} value={jc.id} />,
             name: jc.name,
             city: jc.city,
-            state: jc.state,
+            state: geoLink (jc.geo),
             zipcode: jc.zipcode,
             contactName: jc.contactName,
             contactPhone: jc.contactPhone,

@@ -8,6 +8,7 @@ import EnumPicker from "../util/enum/EnumPicker";
 import ErrorBanner from "../util/ErrorBanner";
 import Loading from "../util/Loading";
 import Alert from "@mui/material/Alert";
+import {batchLink} from "../data/thing/ThingUtil";
 
 /**
  *
@@ -30,11 +31,11 @@ const fields = [
 
 const STATIC = {
     "localhost": {
-        "APPYHERE": "/Users/crawford/Workspace/kotlin-server/src/test/resources/cache/appyhere.xml",
-        "HIRECLIX": "/Users/crawford/Workspace/kotlin-server/src/test/resources/cache/hireclix.xml",
-        "PARADOX": "/Users/crawford/Workspace/kotlin-server/src/test/resources/cache/paradox.xml",
-        "SMART_RECRUITER": "/Users/crawford/Workspace/kotlin-server/src/test/resources/cache/smartrecruiters.xml",
-        "REDDOT": "/Users/crawford/Workspace/kotlin-server/src/test/resources/cache/reddot.xml"
+        "APPYHERE": "/Users/crawford/Workspace/kotlin-server/cache/appyhere.xml",
+        "HIRECLIX": "/Users/crawford/Workspace/kotlin-server/cache/hireclix.xml",
+        "PARADOX": "/Users/crawford/Workspace/kotlin-server/cache/paradox.xml",
+        "SMART_RECRUITER": "/Users/crawford/Workspace/kotlin-server/cache/smartrecruiters.xml",
+        "REDDOT": "/Users/crawford/Workspace/kotlin-server/cache/reddot.xml"
     },
     "dev": {
         "APPYHERE": "/home/ubuntu/kotlin-server/cache/appyhere.xml",
@@ -55,7 +56,9 @@ class ImportFeed extends Component {
         feedType: "",
         errors: {},
         error: null,
-        result: null
+        result: null,
+        results: null,
+        loading: false
     });
 
     validator = new Validator (this, fields);
@@ -100,8 +103,11 @@ class ImportFeed extends Component {
             return (
                 <div className={"ErrorBanner"}>
                     <Alert severity="info">
-                        Import (batchId={results.id}) of type {results.importType} succeded, with {withCommas (results.jobCount)} jobs processed.
+                        Import of type {results.importType} succeded, with {withCommas (results.jobCount)} jobs processed.
                         <ul>
+                            <li>
+                                <b>Batch</b> - {batchLink ({ importType: results.id })}
+                            </li>
                             <li>
                                 <b>Jobs Added</b> - {withCommas (results.jobsAdded)}
                             </li>
@@ -177,19 +183,7 @@ class ImportFeed extends Component {
     }
 
     async import () {
-        const { snackbarStore } = this.props;
-        try {
-            this.store.result = null;
-            this.store.error = null;
-            this.store.loading = true;
-            this.store.result = await doGql (this);
-        }
-        catch (e) {
-            this.store.error = e;
-        }
-        finally {
-            this.store.loading = false;
-        }
+        await doGql (this);
     }
 
     get query () {

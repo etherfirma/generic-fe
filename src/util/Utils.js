@@ -541,6 +541,7 @@ const doGql = async (obj) => {
     try {
         obj.store.error = null;
         obj.store.result = null;
+        obj.store.results = null;
         obj.store.loading = true;
         const results = await Server.gql (obj.query, obj.variables, obj.files, obj.headers);
         obj.store.results = results;

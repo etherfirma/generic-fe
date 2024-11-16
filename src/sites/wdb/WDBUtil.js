@@ -9,7 +9,7 @@ class WDBUtil {
                     id           
                      wdbName
                      city
-                     state        
+                     geo { id key }         
                 }
             }
         }`;

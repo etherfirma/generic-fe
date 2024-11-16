@@ -6,6 +6,7 @@ import ThingDetail from "../../data/thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
 import YesNo from "../../util/YesNo";
 import _ from "lodash";
+import {geoLink} from "../../data/thing/ThingUtil";
 
 /**
  *
@@ -30,7 +31,7 @@ class DataWdb extends ThingDetail {
                     addr1
                     addr2
                     city
-                    state
+                    geo { id key }
                     zipCode
                     phone
                     fax
@@ -79,7 +80,7 @@ class DataWdb extends ThingDetail {
             addr1: wdb.addr1,
             addr2: wdb.addr2 || '-',
             city: wdb.city,
-            state: wdb.state,
+            state: geoLink (wdb.geo),
             zipCode: wdb.zipCode,
             phone: wdb.phone,
             fax: wdb.fax || '-',

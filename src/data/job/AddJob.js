@@ -67,6 +67,12 @@ const jobValidationFields = [
         name: "EEO Statement",
         required: true,
         validator: null
+    },
+    {
+        path: "batchId",
+        name: "Batch ID",
+        required: true,
+        validator: Validator.oidValidator
     }
 ];
 
@@ -76,6 +82,7 @@ class AddJob extends AddThing {
             header: "Add Job",
             slug: "job",
             employer: null,
+            batchId: "",
             geo: null,
             jobKey: "",
             title: "",
@@ -110,11 +117,11 @@ class AddJob extends AddThing {
     }
 
     get variables () {
-        const { title, description, jobKey, state, employer, geo } = this.store;
+        const { title, description, jobKey, state, employer, geo, batchId, eeoStatement, compensation } = this.store;
         return {
             job: {
-                title, description, jobKey, state,
-                employerId: employer.id,
+                title, description, jobKey, state, eeoStatement, compensation,
+                employerId: employer.id, batchId,
                 geoId: geo.id
             }
         };
@@ -156,7 +163,12 @@ class AddJob extends AddThing {
                     <tbody>
                     <tr>
                         <td>
-                            <EmployerPicker
+                            {this.textField("batchId", "Batch ID")}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <EmployerPicker
                                 value={employer}
                                 required={true}
                                 onChange={employer => {
@@ -170,7 +182,6 @@ class AddJob extends AddThing {
                             />
                         </td>
                     </tr>
-
                     <tr>
                         <td>
                             {this.textField("jobKey", "Job Key")}
