@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {doGql, getParams, wrap} from "../../../util/Utils";
+import {doGql, getParams, TabPanel, wrap} from "../../../util/Utils";
 import {observable} from "mobx";
 import {IconButton} from "../../../util/ButtonUtil";
 import Validator from "../../../login/Validator";
@@ -7,6 +7,8 @@ import ErrorBanner from "../../../util/ErrorBanner";
 import TextField from "@mui/material/TextField";
 import "./css/TemplateMerge.css";
 import FancyBorder from "../../../util/FancyBorder";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 const fields = [
     {
@@ -35,7 +37,8 @@ class TemplateMerge extends Component {
         error: null,
         errors: {},
         template: "",
-        context: "{}"
+        context: "{}",
+        tab: 0
     });
 
     validator = new Validator (this, fields);
@@ -60,7 +63,7 @@ class TemplateMerge extends Component {
     }
 
     render() {
-        const { template, context, error, errors } = this.store;
+        const { template, context, error, errors, tab } = this.store;
 
         const formProps = {
             margin: "dense",
@@ -74,41 +77,46 @@ class TemplateMerge extends Component {
                 <h1>Template Merge</h1>
                 <ErrorBanner error={error} />
 
+
+                <Tabs
+                    value={tab}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    onChange={(e, f) => this.store.tab = f}
+                >
+                    <Tab label="Template"/>
+                    <Tab label="Context"/>
+                </Tabs>
+                <TabPanel value={tab} index={0}>
+                    <TextField
+                        label="Template"
+                        value={template}
+                        rows={24}
+                        onChange={(e) => {
+                            this.store.template = e.target.value;
+                            this.validate ();
+                        }}
+                        multiline={true}
+                        {...formProps}
+                    />
+                </TabPanel>
+                <TabPanel value={tab} index={1}>
+                    <TextField
+                        label="Context"
+                        value={context}
+                        rows={24}
+                        multiline={true}
+                        onChange={(e) => {
+                            this.store.context = e.target.value;
+                            this.validate();
+                        }}
+                        helperText={errors.context}
+                        error={Boolean(errors.context)}
+                        {...formProps}
+                    />
+                </TabPanel>
+
                 <table className={"TemplateMergeTable"}>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <TextField
-                                label="Template"
-                                value={template}
-                                rows={8}
-                                onChange={(e) => {
-                                    this.store.template = e.target.value;
-                                    this.validate ();
-                                }}
-                                multiline={true}
-                                {...formProps}
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <TextField
-                                label="Context"
-                                value={context}
-                                rows={8}
-                                multiline={true}
-                                onChange={(e) => {
-                                    this.store.context = e.target.value;
-                                    this.validate();
-                                }}
-                                helperText={errors.context}
-                                error={Boolean(errors.context)}
-                                {...formProps}
-                            />
-                        </td>
-                    </tr>
-                    </tbody>
                     <tfoot>
                     <tr>
                         <IconButton icon={"far fa-file-alt"} label={"Merge"} onClick={() => {

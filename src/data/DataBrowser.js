@@ -29,7 +29,8 @@ class DataBrowser extends Component {
         {name: "rawJob", hash: "/data/rawJobs", "desc": "Failed Job records" },
         {name: "zipcode", hash: "/data/zipcodes", "desc": "Zipcode lat/lon mappings" },
         {name: "batch", hash: "/data/batches", "desc": "Import batches" },
-        {name: "jobTask", hash: "/data/jobTasks", "desc": "Publishing task status for ajob" }
+        {name: "jobTask", hash: "/data/jobTasks", "desc": "Publishing task status for ajob" },
+        { name: "onetCode", hash: "/data/onetCodes", "desc": "O*net job taxonomy codes" }
     ];
 
     render() {

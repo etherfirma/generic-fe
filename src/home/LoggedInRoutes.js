@@ -83,6 +83,8 @@ import CreateJobTask from "../data/job/task/CreateJobTask";
 import TemplateMerge from "../system/tests/data/TemplateMerge";
 import FindRawJobs from "../data/job/raw/FindRawJobs";
 import ShowRawJob from "../data/job/raw/ShowRawJob";
+import FindOnetCodes from "../data/onet/FindOnetCodes";
+import ShowOnetCode from "../data/onet/ShowOnetCode";
 
 /**
  *
@@ -133,6 +135,8 @@ const LOGGED_IN = createHashRouter ([
 
     { path: "/data/rawJobs", element: <FindRawJobs /> },
     { path: "/data/rawJob/:id", element: <ShowRawJob /> },
+    { path: "/data/onetCodes", element: <FindOnetCodes /> },
+    { path: "/data/onetCode/:id", element: <ShowOnetCode /> },
 
     { path: "/data/jobTasks", element: <FindJobTasks /> },
     { path: "/data/jobTask/create", element: <CreateJobTask /> },
