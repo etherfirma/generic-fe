@@ -117,30 +117,28 @@ class TopJobs extends Component {
         }
         return (
             <div>
-                <TableContainer component={Paper}>
-                    <Table size="small" aria-label="a dense table">
-                        <TableBody>
-                            {_.map (topJobs, (job, i) => {
-                                return (
-                                    <TableRow key={i}>
-                                        <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
-                                        <TableCell>
-                                            <span className={"ThingLink"} onClick={() => {
-                                                const params = { title: job.title };
-                                                const href = encodeUrl ("/data/jobs", params)
-                                                window.location.hash = href;
-                                            }}>
-                                                {job.title}
-                                            </span>
-                                        </TableCell>
-                                        <TableCell align={"right"}>
-                                            {withCommas (job.count)}
-                                        </TableCell>
-                                    </TableRow>
-                            )})}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <table style={{ width: "100%" }} className={"FancyTable"}>
+                    <tbody>
+                        {_.map (topJobs, (job, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td style={{ width: "10%"}}>{i + 1}.</td>
+                                    <td>
+                                        <span className={"ThingLink"} onClick={() => {
+                                            const params = { title: job.title };
+                                            const href = encodeUrl ("/data/jobs", params)
+                                            window.location.hash = href;
+                                        }}>
+                                            {job.title}
+                                        </span>
+                                    </td>
+                                    <td style={{ width: "10%" }} align={"right"}>
+                                        {withCommas (job.count)}
+                                    </td>
+                                </tr>
+                        )})}
+                    </tbody>
+                </table>
             </div>
         );
     }
@@ -166,31 +164,29 @@ class TopEmployers extends Component {
         }
         return (
             <div>
-                <TableContainer component={Paper}>
-                    <Table size="small" aria-label="a dense table">
-                        <TableBody>
-                            {_.map (topEmployers, (el, i) => {
-                                return (
-                                    <TableRow key={i}>
-                                        <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
-                                        <TableCell>
-                                              <span className={"ThingLink"} onClick={() => {
-                                                  const params = { employerId: el.employer.id };
-                                                  const href = encodeUrl("/data/jobs", params)
-                                                  window.location.hash = href;
-                                              }}>
-                                                  {el.employer.name}
-                                              </span>
-                                        </TableCell>
-                                        <TableCell align={"right"}>
-                                            {withCommas (el.count)}
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <table style={{ width: "100%" }} className={"FancyTable"}>
+                    <tbody>
+                        {_.map (topEmployers, (el, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td style={{ width: "10%"}}>{i + 1}.</td>
+                                    <td>
+                                          <span className={"ThingLink"} onClick={() => {
+                                              const params = { employerId: el.employer.id };
+                                              const href = encodeUrl("/data/jobs", params)
+                                              window.location.hash = href;
+                                          }}>
+                                              {el.employer.name}
+                                          </span>
+                                    </td>
+                                    <td style={{ width: "10%" }} align={"right"}>
+                                        {withCommas (el.count)}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
         );
     }
@@ -216,31 +212,29 @@ class TopGeos extends Component {
         }
         return (
             <div>
-                <TableContainer component={Paper}>
-                    <Table size="small" aria-label="a dense table">
-                        <TableBody>
-                            {_.map (topGeos, (el, i) => {
-                                return (
-                                    <TableRow key={i}>
-                                        <TableCell style={{ width: "10%"}}>{i + 1}.</TableCell>
-                                        <TableCell>
-                                           <span className={"ThingLink"} onClick={() => {
-                                               const params = { geoId: el.geo.id};
-                                               const href = encodeUrl("/data/jobs", params)
-                                               window.location.hash = href;
-                                           }}>
-                                              {`${el.geo.name} (${el.geo.key})`}
-                                          </span>
-                                        </TableCell>
-                                        <TableCell align={"right"}>
-                                            {withCommas (el.count)}
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <table className={"FancyTable"} style={{ width: "100%" }}>
+                    <tbody>
+                        {_.map (topGeos, (el, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td style={{ width: "10%"}}>{i + 1}.</td>
+                                    <td>
+                                       <span className={"ThingLink"} onClick={() => {
+                                           const params = { geoId: el.geo.id};
+                                           const href = encodeUrl("/data/jobs", params)
+                                           window.location.hash = href;
+                                       }}>
+                                          {`${el.geo.name} (${el.geo.key})`}
+                                      </span>
+                                    </td>
+                                    <td style={{ width: "10%" }} align={"right"}>
+                                        {withCommas (el.count)}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
         );
     }
@@ -268,8 +262,7 @@ class JobsByState extends Component {
         _.each (jobsByState, (el) => total += el.count);
         return (
             <div>
-                {/*<TableContainer component={Paper}>*/}
-                    <table size="small" aria-label="a dense table">
+                    <table className={"FancyTable"} style={{ width: "100%" }}>
                         <tbody>
                             {_.map (jobsByState, (el, i) => {
                                 return (

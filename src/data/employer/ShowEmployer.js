@@ -48,6 +48,7 @@ class ShowEmployer extends ThingDetail {
                     title
                     geo { id key name }  
                     state
+                    jobTask { id } 
                 }
                 created
                 lastModified
@@ -182,6 +183,7 @@ class ShowEmployer extends ThingDetail {
                                 <TableCell>Index</TableCell>
                                 <TableCell>Title</TableCell>
                                 <TableCell>Geo</TableCell>
+                                <TableCell>Task?</TableCell>
                                 <TableCell>Status</TableCell>
                             </TableRow>
                         </TableHead>
@@ -198,6 +200,9 @@ class ShowEmployer extends ThingDetail {
                                     </TableCell>
                                     <TableCell>
                                         {geoLink (job.geo)}
+                                    </TableCell>
+                                    <TableCell>
+                                        <YesNo value={Boolean (job.jobTask)} />
                                     </TableCell>
                                     <TableCell>
                                         <JobState value={job.state} />

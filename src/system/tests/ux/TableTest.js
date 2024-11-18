@@ -19,15 +19,33 @@ class TableTest extends Component {
                     <tbody>
                     <tr>
                         <td>1.</td>
-                        <td>Namfdssfdsafdse</td>
+                        <td>sda</td>
+                        <td>Cofsdaafsdsfdfsdlor</td>
+                        <td>Actiffsdafsdons</td>
+                    </tr>
+                    <tr>
+                        <td>21.</td>
+                        <td>as</td>
+                        <td>Cofsdaafsdsfdfsdlor</td>
+                        <td>Actiffsdafsdons</td>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>asd</td>
+                        <td>Cofsdaafsdsfdfsdlor</td>
+                        <td>Actiffsdafsdons</td>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>asdas</td>
                         <td>Cofsdaafsdsfdfsdlor</td>
                         <td>Actiffsdafsdons</td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td>
-
+                        <td colSpan={4}>
+                            asasdasdas
                         </td>
                     </tr>
                     </tfoot>

@@ -5,16 +5,6 @@ import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
 import {AddButton, DeleteButton, EditButton, IconButton, ShowButton} from "../../util/ButtonUtil";
-import YesNo from "../../util/YesNo";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import _ from "lodash";
-import {TableFooter} from "@mui/material";
 import {batchLink, employerLink, geoLink} from "../thing/ThingUtil";
 import Server from "../../util/Server";
 import {JobState} from "../../util/enum/EnumSlug";
@@ -47,6 +37,10 @@ class ShowJob extends ThingDetail {
                 requirements
                 compensation
                 eeoStatement
+                subsidiary 
+                onetCode 
+                educationType 
+                employmentType
                 created
                 lastModified
                 jobTask { id }
@@ -113,6 +107,10 @@ class ShowJob extends ThingDetail {
             compensation: job.compensation || "-",
             eeoStatement: job.eeoStatement || "-",
             state: <JobState value={job.state} />,
+            subsidiary: job.subsidiary || '-',
+            onetCode: job.onetCode || '-',
+            educationType: job.educationType || '-',
+            employmentType: job.employmentType || '-',
             created: job.created,
             lastModified: job.lastModified,
         };

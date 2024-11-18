@@ -43,7 +43,7 @@ class FindJobTasks extends ThingDetail {
                 id
                 stateTask { attemptCount state attempts geo { id key } } 
                 siteTasks { 
-                    attemptCount state attempts siteId siteType
+                    attemptCount state attempts siteId siteType result
                     ajc { id name } 
                     jc { id name } 
                     wdb { id wdbName }  
@@ -62,7 +62,7 @@ class FindJobTasks extends ThingDetail {
                     this.delete (jobTask);
                 }} />
                 &nbsp;
-                <UploadButton onClick={() =>{
+                <UploadButton label="Process" onClick={() =>{
                     this.process (jobTask);
                 }} />
             </div>
@@ -198,6 +198,7 @@ class FindJobTasks extends ThingDetail {
                                 <TableCell>Site Type</TableCell>
                                 <TableCell>State</TableCell>
                                 <TableCell>Attempts</TableCell>
+                                <TableCell>Result</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -225,6 +226,17 @@ class FindJobTasks extends ThingDetail {
                                                 &nbsp;
                                                 <i className="fas fa-list"></i>
                                             </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            {el.result && (
+                                                <div onClick={() => {
+                                                    const { infoDialogStore } = this.props;
+                                                    infoDialogStore.showJson (el.result);
+                                                }}>
+                                                    &nbsp;
+                                                    <i className="fas fa-list"></i>
+                                                </div>
+                                            )}
                                         </TableCell>
                                     </TableRow>
                                 );

@@ -1,32 +1,31 @@
 .EnumSlug {
-    /*color: #666;*/
 }
 
-.Colors-BLACK > span {
+.Colors-BLACK > i {
     color: black;
 }
-.Colors-BLUE > span {
+.Colors-BLUE > i {
     color: cornflowerblue;
 }
-.Colors-BROWN > span {
+.Colors-BROWN > i {
     color: saddlebrown;
 }
-.Colors-GREEN > span {
+.Colors-GREEN > i {
     color: darkseagreen;
 }
-.Colors-ORANGE > span {
+.Colors-ORANGE > i {
     color:  orange;
 }
-.Colors-PURPLE > span {
+.Colors-PURPLE > i {
     color: mediumpurple;
 }
-.Colors-RED > span {
+.Colors-RED > i {
     color: red;
 }
-.Colors-WHITE > span {
+.Colors-WHITE > i {
     color: lightgray;
 }
-.Colors-YELLOW > span {
+.Colors-YELLOW > i {
     color: yellow;
 }
 
@@ -37,36 +36,39 @@
     /*padding: 1px 4px;*/
 }
 
-.JobState-ACTIVE > span {
+.JobState-INACTIVE > i {
+    color: darkgray;
+}
+.JobState-ACTIVE > i {
     color: cornflowerblue;
 }
-.JobState-FAILED > span {
+.JobState-FAILED > i {
     color: red;
 }
-.JobState-PENDING > span {
+.JobState-PENDING > i {
     color: darkorange;
 }
-.JobState-PUBLISHED > span {
+.JobState-PUBLISHED > i {
     color: green;
 }
-.JobState-REMOVED > span {
+.JobState-REMOVED > i {
+    color: #8f7a33;
+}
+
+
+.GeoType-STATE > i {
+    color: green;
+}
+.GeoType-TERRITORY > i {
     color: darkgray;
 }
 
-
-.GeoType-STATE > span {
-    color: green;
-}
-.GeoType-TERRITORY > span {
-    color: darkgray;
-}
-
-.TaskState-FAILED > span {
+.TaskState-FAILED > i {
     color: red;
 }
-.TaskState-COMPLETED > span {
+.TaskState-COMPLETED > i {
     color: darkseagreen;
 }
-.TaskState-PENDING > span {
+.TaskState-PENDING > i {
     color: lightslategray;
 }

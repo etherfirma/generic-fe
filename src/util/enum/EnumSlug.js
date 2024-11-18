@@ -3,9 +3,10 @@ import {Typography} from "@mui/material";
 
 const EnumSlug = (type) => ({value}) => {
     return (
-        <div className={classnames ("EnumSlug", type, `${type}-${value}`)}>
+        <div className={classnames("EnumSlug", type, `${type}-${value}`)}>
             {/*<span>⏺</span>*/}
-            <span>◼</span>
+            {/*<span>◼</span>*/}
+            <i className="fas fa-circle"></i>
             &nbsp;
             {value}
         </div>

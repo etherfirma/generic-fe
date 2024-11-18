@@ -1,23 +1,30 @@
 .FancyTable {
     margin: 8px;
     padding: 8px;
-    box-shadow: 1px 2px 3px rgb(0 0 0 / 0.2);
-    border: 1px solid blue;
-    border-radius: 12px;
     height: 100%;
     border-collapse: collapse;
-}
-.FancyTable thead tr {
-    border-bottom: 2px solid lightgray;
-    background-color: #f5f5f5;
-    font-weight: bold;
+
+    border-left: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
 }
 .FancyTable td, .FancyTable th {
-    padding: 4px;
+    padding: 6px 16px;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
 }
-.FancyTable tbody td {
-    /*border-right: 1px solid lightgray;*/
-    /*border-bottom: 1px solid lightgray;*/
+.FancyTable tbody td, tbody .FancyTable th {
+    color: rgba(0, 0, 0, 0.87)
+}
+
+.FancyTable thead tr th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #4379b1;
 }
 .FancyTable tbody tr:hover {
     background-color: #f9f9f9;

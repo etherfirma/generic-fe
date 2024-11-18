@@ -81,6 +81,8 @@ import FindJobTasks from "../data/job/task/FindJobTasks";
 import ShowJobTask from "../data/job/task/ShowJobTask";
 import CreateJobTask from "../data/job/task/CreateJobTask";
 import TemplateMerge from "../system/tests/data/TemplateMerge";
+import FindRawJobs from "../data/job/raw/FindRawJobs";
+import ShowRawJob from "../data/job/raw/ShowRawJob";
 
 /**
  *
@@ -128,6 +130,9 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/job/:id", element: <ShowJob /> },
     { path: "/data/job/:id/edit", element: <EditJob /> },
     { path: "/job/:id", element: <RenderJob /> },
+
+    { path: "/data/rawJobs", element: <FindRawJobs /> },
+    { path: "/data/rawJob/:id", element: <ShowRawJob /> },
 
     { path: "/data/jobTasks", element: <FindJobTasks /> },
     { path: "/data/jobTask/create", element: <CreateJobTask /> },
