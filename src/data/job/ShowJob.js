@@ -49,6 +49,7 @@ class ShowJob extends ThingDetail {
                 eeoStatement
                 created
                 lastModified
+                jobTask { id }
             } 
         }`;
     }
@@ -65,9 +66,14 @@ class ShowJob extends ThingDetail {
                 }} />
                 &nbsp;
                 <ShowButton label={"Show Posting"} onClick={() => {
-                    window.location.hash = `#/data/posting/${job.id}`;
+                    window.location.hash = `#/data/job/${job.id}`;
                 }}>
                 </ShowButton>
+                &nbsp;
+                {job.jobTask
+                    ? <ShowButton label={"Show JobTask"} onClick={() => window.location.hash=`/data/jobTask/${job.id}`} />
+                    : <AddButton label={"Add JobTask"} onClick={() => window.location.hash=`/data/jobTask/create?jobId=${job.id}`} />
+                }
             </div>
         );
     }

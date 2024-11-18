@@ -101,6 +101,7 @@ class FindJobs extends ThingDetails {
             this.sortHeader ("title", "Title"),
             this.sortHeader ("Employer", "Employer"),
             this.sortHeader ("geo", "Geo"),
+            "Task?",
             this.sortHeader ("state", "State"),
             this.sortHeader("_id", "ID")
         ];
@@ -111,6 +112,7 @@ class FindJobs extends ThingDetails {
             job.title,
             employerLink (job.employer),
             geoLink (job.geo),
+            <YesNo value={Boolean (job?.jobTask)} />,
             <JobState value={job.state} />,
             <ID short={true} value={job.id} />
         ];

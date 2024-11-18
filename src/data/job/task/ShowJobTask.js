@@ -5,8 +5,8 @@ import ID from "../../../util/ID";
 import ThingDetail from "../../thing/ThingDetail";
 import Breadcrumb from "../../../util/Breadcrumb";
 import Server from "../../../util/Server";
-import {DeleteButton, EditButton} from "../../../util/ButtonUtil";
-import {geoLink, jobLink} from "../../thing/ThingUtil";
+import {DeleteButton, EditButton, UploadButton} from "../../../util/ButtonUtil";
+import {ajcLink, employerLink, geoLink, jcLink, jobLink, wdbLink} from "../../thing/ThingUtil";
 // import {jobTaskLink} from "../../thing/ThingUtil";
 import _ from "lodash";
 import Table from '@mui/material/Table';
@@ -17,6 +17,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import * as PropTypes from "prop-types";
+import {TaskState} from "../../../util/enum/EnumSlug";
 
 function TableCall(props) {
     return null;
@@ -41,7 +42,12 @@ class FindJobTasks extends ThingDetail {
             res: jobTaskById (id: $id) {
                 id
                 stateTask { attemptCount state attempts geo { id key } } 
-                siteTasks { attemptCount state attempts siteId siteType }
+                siteTasks { 
+                    attemptCount state attempts siteId siteType
+                    ajc { id name } 
+                    jc { id name } 
+                    wdb { id wdbName }  
+                }
                 siteTaskCount
                 state
                 job { id title employer { id name } geo { id key } }                    
@@ -55,8 +61,28 @@ class FindJobTasks extends ThingDetail {
                 <DeleteButton onClick={()=> {
                     this.delete (jobTask);
                 }} />
+                &nbsp;
+                <UploadButton onClick={() =>{
+                    this.process (jobTask);
+                }} />
             </div>
         );
+    }
+
+    async process (jobTask) {
+        const query = "mutation ($jobId: String!) { processJobTask (jobId: $jobId) { state } }";
+        const variables = { jobId: jobTask.id };
+        try {
+            this.store.error = null;
+            const result = await Server.gql (query, variables);
+            if (result.errors.length > 0) {
+                this.store.error = result.errors;
+            }
+            this.doLoad ();
+        }
+        catch (e) {
+            this.store.error = e;
+        }
     }
 
     delete (jobTask) {
@@ -103,7 +129,8 @@ class FindJobTasks extends ThingDetail {
         const o = {
             id: <ID snackbar={true} value={jobTask.id} />,
             "job.title": jobLink (jobTask.job),
-            state: jobTask.state
+            "employer": employerLink (jobTask.job.employer),
+            state: <TaskState value={jobTask.state} />
         };
 
         return (
@@ -119,7 +146,7 @@ class FindJobTasks extends ThingDetail {
 
     renderList (list) {
         if (list.length === 0) {
-            return <i>none</i>;
+            return "-";
         }
         return (
             <ul>
@@ -131,7 +158,7 @@ class FindJobTasks extends ThingDetail {
     renderStateTask (stateTask) {
         const o = {
             geo: geoLink (stateTask.geo),
-            state: stateTask.state,
+            state: <TaskState value={stateTask.state} />,
             attemptCount: stateTask.attempts.length,
             attempts: this.renderList(stateTask.attempts),
             result: stateTask.result || '-',
@@ -144,6 +171,19 @@ class FindJobTasks extends ThingDetail {
         );
     }
 
+    siteName (siteTask) {
+        switch (siteTask.siteType) {
+            case "AJC":
+                return ajcLink (siteTask.ajc);
+            case "JC":
+                return jcLink (siteTask.jc);
+            case "WDB":
+                return wdbLink (siteTask.wdb);
+            default:
+                return "???";
+        }
+    }
+
     renderSiteTasks (siteTasks) {
         return (
             <div>
@@ -154,9 +194,9 @@ class FindJobTasks extends ThingDetail {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Index</TableCell>
-                                <TableCell>State</TableCell>
-                                <TableCell>Type</TableCell>
                                 <TableCell>Site Name</TableCell>
+                                <TableCell>Site Type</TableCell>
+                                <TableCell>State</TableCell>
                                 <TableCell>Attempts</TableCell>
                             </TableRow>
                         </TableHead>
@@ -168,7 +208,23 @@ class FindJobTasks extends ThingDetail {
                                             {i + 1}.
                                         </TableCell>
                                         <TableCell>
-
+                                            {this.siteName (el)}
+                                        </TableCell>
+                                        <TableCell>
+                                            {el.siteType}
+                                        </TableCell>
+                                        <TableCell>
+                                            <TaskState value={el.state} />
+                                        </TableCell>
+                                        <TableCell>
+                                            <div onClick={() => {
+                                                const { infoDialogStore } = this.props;
+                                                infoDialogStore.showJson (el.attempts);
+                                            }}>
+                                                {el.attemptCount}
+                                                &nbsp;
+                                                <i className="fas fa-list"></i>
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 );

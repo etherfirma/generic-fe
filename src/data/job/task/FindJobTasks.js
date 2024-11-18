@@ -10,7 +10,9 @@ import TextField from "@mui/material/TextField";
 import JobTasksUtil from "./JobTasksUtil";
 import Breadcrumb from "../../../util/Breadcrumb";
 import {AddButton, ClearButton, ReloadButton} from "../../../util/ButtonUtil";
-import {JobTasksLink} from "../../thing/ThingUtil";
+import {employerLink, geoLink, JobTasksLink} from "../../thing/ThingUtil";
+import {TaskState} from "../../../util/enum/EnumSlug";
+import EnumPicker from "../../../util/enum/EnumPicker";
 
 /**
  *
@@ -21,9 +23,7 @@ class FindJobTasks extends ThingDetails {
         super ({
             heading: "JobTasks",
             hasFilters: true,
-            // email: "", // filter
-            // name: "", //filter
-            // label: "", // filter
+            state: "", // filter
             id: "" // filter
         });
     }
@@ -38,16 +38,10 @@ class FindJobTasks extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { name, email, label, id } = this.store;
-        // if (name) {
-        //     filters.name = name;
-        // }
-        // if (label) {
-        //     filters.label = label;
-        // }
-        // if (email) {
-        //     filters.email = email;
-        // }
+        const { state, id } = this.store;
+        if (state) {
+            filters.state = state;
+        }
         if (id) {
             filters.id = id;
         }
@@ -57,17 +51,20 @@ class FindJobTasks extends ThingDetails {
 
     get headers () {
         return [
-            // this.sortHeader ("label", "Label"),
-            // this.sortHeader ("email", "Email"),
+            "Employer",
+            "Geo",
             // this.sortHeader ("name", "Name"),
+            this.sortHeader ("state", "State"),
             this.sortHeader("_id", "ID")
         ];
     }
 
-    xform (jobTasks) {
+    xform (jobTask) {
         return [
-
-            <ID short={true} value={jobTasks.id} />
+            employerLink (jobTask.job.employer),
+            geoLink (jobTask.job.geo),
+            <TaskState value={jobTask.state} />,
+            <ID short={true} value={jobTask.id} />
         ];
     }
 
@@ -79,7 +76,7 @@ class FindJobTasks extends ThingDetails {
                     xform={this.xform.bind (this)}
                     rows={fres.results}
                     skip={fres.skip}
-                    onClick={jobTasks => window.location.href = `#/data/jobTasks/${jobTasks.id}`}
+                    onClick={jobTask => window.location.href = `#/data/jobTask/${jobTask.id}`}
                 />
 
                 <br/>
@@ -94,20 +91,18 @@ class FindJobTasks extends ThingDetails {
     }
 
     hasFilters () {
-        const { name, id, email, label } = this.store;
-        return Boolean (name || id || email || label);
+        const { state, id} = this.store;
+        return Boolean (state || id);
     }
 
     clearFilters = action (() => {
-        // this.store.name = "";
-        // this.store.email = "";
-        // this.store.label = "";
+        this.store.state = "";
         this.store.id = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { name, email, label, id, showDrawer } = this.store;
+        const { state, id, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -120,33 +115,15 @@ class FindJobTasks extends ThingDetails {
                 <div className={"DataFilters"}>
                     <h2>Filters</h2>
 
-                    {/*<TextField*/}
-                    {/*    {...formProps}*/}
-                    {/*    value={email}*/}
-                    {/*    label={"Email"}*/}
-                    {/*    onChange={(e) => {*/}
-                    {/*        this.store.email = e.target.value;*/}
-                    {/*        this.doLoad();*/}
-                    {/*    }}*/}
-                    {/*/>*/}
-                    {/*<TextField*/}
-                    {/*    {...formProps}*/}
-                    {/*    value={name}*/}
-                    {/*    label={"Name"}*/}
-                    {/*    onChange={(e) => {*/}
-                    {/*        this.store.name = e.target.value;*/}
-                    {/*        this.doLoad();*/}
-                    {/*    }}*/}
-                    {/*/>*/}
-                    {/*<TextField*/}
-                    {/*    {...formProps}*/}
-                    {/*    value={label}*/}
-                    {/*    label={"Label"}*/}
-                    {/*    onChange={(e) => {*/}
-                    {/*        this.store.label = e.target.value;*/}
-                    {/*        this.doLoad();*/}
-                    {/*    }}*/}
-                    {/*/>*/}
+                    <EnumPicker
+                        enumType={"TaskState"}
+                        value={state}
+                        onChange={state => {
+                            this.store.state = state;
+                            this.doLoad ();
+                        }}
+                        formProps={formProps}
+                    />
                     <TextField
                         {...formProps}
                         value={id}

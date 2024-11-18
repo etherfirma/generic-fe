@@ -281,8 +281,8 @@ class RadiusSearch extends Component {
                         <TableRow>
                             <TableCell>Index</TableCell>
                             <TableCell>Center</TableCell>
-                            <TableCell>City</TableCell>
-                            <TableCell>State</TableCell>
+                            <TableCell>City, State</TableCell>
+                            <TableCell>Zipcode</TableCell>
                             <TableCell>Distance</TableCell>
                         </TableRow>
                     </TableHead>
@@ -297,10 +297,10 @@ class RadiusSearch extends Component {
                                         {externalLink (el.jc.url, el.jc.name)}
                                     </TableCell>
                                     <TableCell>
-                                        {el.jc.city}
+                                        {el.jc.city}, {el.jc.state}
                                     </TableCell>
                                     <TableCell>
-                                        {el.jc.state}
+                                        {el.jc.zipcode}
                                     </TableCell>
                                     <TableCell>
                                         {fixedPoint (el.distance, 2)} miles
@@ -332,8 +332,8 @@ class RadiusSearch extends Component {
                         <TableRow>
                             <TableCell>Index</TableCell>
                             <TableCell>Center</TableCell>
-                            <TableCell>City</TableCell>
-                            <TableCell>State</TableCell>
+                            <TableCell>City, State</TableCell>
+                            <TableCell>Zipcode</TableCell>
                             <TableCell>Distance</TableCell>
                         </TableRow>
                     </TableHead>
@@ -348,10 +348,10 @@ class RadiusSearch extends Component {
                                         {el.wdb.wdbName}
                                     </TableCell>
                                     <TableCell>
-                                        {el.wdb.city}
+                                        {el.wdb.city}, {el.wdb.state}
                                     </TableCell>
                                     <TableCell>
-                                        {el.wdb.state}
+                                        {el.wdb.zipCode}
                                     </TableCell>
                                     <TableCell>
                                         {fixedPoint (el.distance, 2)} miles
@@ -383,8 +383,8 @@ class RadiusSearch extends Component {
                         <TableRow>
                             <TableCell>Index</TableCell>
                             <TableCell>Center</TableCell>
-                            <TableCell>City</TableCell>
-                            <TableCell>State</TableCell>
+                            <TableCell>City, State</TableCell>
+                            <TableCell>Zipcode</TableCell>
                             <TableCell>Distance</TableCell>
                         </TableRow>
                     </TableHead>
@@ -399,10 +399,10 @@ class RadiusSearch extends Component {
                                         {externalLink (el.ajc.url, el.ajc.name)},
                                     </TableCell>
                                     <TableCell>
-                                        {el.ajc.city}
+                                        {el.ajc.city}, {el.ajc.state}
                                     </TableCell>
                                     <TableCell>
-                                        {el.ajc.state}
+                                        {el.ajc.zipcode}
                                     </TableCell>
                                     <TableCell>
                                         {fixedPoint (el.distance, 2)} miles
@@ -439,6 +439,7 @@ class RadiusSearch extends Component {
                     state
                     siteType
                     url
+                    zipcode
                 }
                 distance 
             } 
@@ -450,6 +451,7 @@ class RadiusSearch extends Component {
                     state
                     siteType
                     url
+                    zipcode
                 }
                 distance 
             } 
@@ -460,6 +462,7 @@ class RadiusSearch extends Component {
                     city
                     state
                     siteType
+                    zipCode
                 }
                 distance 
             } 

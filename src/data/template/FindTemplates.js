@@ -66,18 +66,18 @@ class FindTemplates extends ThingDetails {
 
     get headers () {
         return [
-            this.sortHeader ("user", "User"),
             this.sortHeader ("path", "Path"),
             this.sortHeader ("description", "Description"),
+            this.sortHeader ("user", "User"),
             this.sortHeader("_id", "ID")
         ];
     }
 
     xform (template) {
         return [
-            userLink (template.user),
             template.path,
-            shortenText (template.description, 8) || '-',
+            shortenText (template.description, 32) || '-',
+            userLink (template.user),
             <ID short={true} value={template.id} />
         ];
     }

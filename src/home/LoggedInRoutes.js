@@ -80,6 +80,7 @@ import ImportFeed from "../system/ImportFeed";
 import FindJobTasks from "../data/job/task/FindJobTasks";
 import ShowJobTask from "../data/job/task/ShowJobTask";
 import CreateJobTask from "../data/job/task/CreateJobTask";
+import TemplateMerge from "../system/tests/data/TemplateMerge";
 
 /**
  *
@@ -126,7 +127,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/job/add", element: <AddJob /> },
     { path: "/data/job/:id", element: <ShowJob /> },
     { path: "/data/job/:id/edit", element: <EditJob /> },
-    { path: "/data/posting/:id", element: <RenderJob /> },
+    { path: "/job/:id", element: <RenderJob /> },
 
     { path: "/data/jobTasks", element: <FindJobTasks /> },
     { path: "/data/jobTask/create", element: <CreateJobTask /> },
@@ -166,6 +167,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/tests/templateLink", element: <TemplateLinkTest /> },
     { path: "/tests/svc/sendEmail", element: <SendEmailTest /> },
     { path: "/tests/template", element: <TemplateTest /> },
+    { path: "/tests/merge", element: <TemplateMerge /> },
     { path: "/tests/geoPicker", element: <GeoPickerTest /> },
     { path: "/tests/employerPicker", element: <EmployerPickerTest /> },
 

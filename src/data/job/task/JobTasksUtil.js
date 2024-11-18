@@ -11,7 +11,7 @@ class JobTaskUtil {
                     siteTasks { attemptCount }
                     siteTaskCount
                     state
-                    job { id title employer { id name } geo { id key } }                    
+                    job { id title employer { id name } geo { id key } } 
                 }
             }
         }`;

@@ -69,11 +69,19 @@ class ThingImport extends Component {
                     )}
                 </div>
                 <br/>
-
-                <UploadButton disabled={! this.isValid || loading} onClick={() => {
-                    this.doUpload();
-                }} />
+                {this.actions ()}
             </div>
+        );
+    }
+
+    actions () {
+        const { loading } = this.store;
+        return (
+            <>
+                <UploadButton disabled={!this.isValid || loading} onClick={() => {
+                    this.doUpload();
+                }}/>
+            </>
         );
     }
 

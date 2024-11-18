@@ -3,7 +3,7 @@ import {AddButton} from "../../../util/ButtonUtil";
 import Loading from "../../../util/Loading";
 import {observable} from "mobx";
 import ErrorBanner from "../../../util/ErrorBanner";
-import {doGql, If, PreJson, wrap} from "../../../util/Utils";
+import {doGql, getParams, If, PreJson, wrap} from "../../../util/Utils";
 import "./css/CreateJobTask.css";
 import TextField from "@mui/material/TextField";
 import Validator from "../../../login/Validator";
@@ -31,6 +31,10 @@ class CreateJobTask extends Component {
     });
 
     componentDidMount() {
+        const params = getParams ();
+        if (params.jobId) {
+            this.store.jobId = params.jobId;
+        }
         this.validator.validate ();
     }
 

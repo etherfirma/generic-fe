@@ -5,7 +5,7 @@ import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
 import Server from "../../util/Server";
-import {DeleteButton, EditButton, IconButton} from "../../util/ButtonUtil";
+import {DeleteButton, EditButton, IconButton, ShowButton} from "../../util/ButtonUtil";
 import {userLink} from "../thing/ThingUtil";
 
 const INIT = {
@@ -56,7 +56,16 @@ class DataTemplate extends ThingDetail {
                 &nbsp;
                 <IconButton icon={"far fa-file-alt"} label={"Merge"} onClick={() => {
                     window.location.hash = `#/tests/template?templateId=${template.id}`;
-                }}/>
+                }} />
+                &nbsp;
+                <ShowButton label="Merge" onClick={() => {
+                    const params = {
+                        template: template.template,
+                        context: template.sampleContext
+                    };
+                    const url = encodeUrl("/tests/merge", params);
+                    window.location.hash = url;
+                }} />
             </div>
         );
     }

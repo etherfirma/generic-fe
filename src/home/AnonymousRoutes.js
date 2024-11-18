@@ -6,6 +6,7 @@ import React from "react";
 import LoginLink from "../login/LoginLink";
 import ResetPassword from "../login/ResetPassword";
 import VerifyEmail from "../login/VerifyEmail";
+import RenderJob from "../data/job/RenderJob";
 
 /**
  *
@@ -41,6 +42,10 @@ const ANONYMOUS = createHashRouter ([
     {
         path: "/forgot",
         element: <ForgotPassword/>
+    },
+    {
+        path: "/data/job/:id",
+        elements: <RenderJob />
     }
 ]);
 

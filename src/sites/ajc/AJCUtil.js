@@ -1,3 +1,4 @@
+import React from "react";
 
 class AJCUtil {
     findAJCsGql =  `query ($req: AmericanJobCenterFindRequest!) { 

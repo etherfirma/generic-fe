@@ -60,3 +60,13 @@
 .GeoType-TERRITORY > span {
     color: darkgray;
 }
+
+.TaskState-FAILED > span {
+    color: red;
+}
+.TaskState-COMPLETED > span {
+    color: darkseagreen;
+}
+.TaskState-PENDING > span {
+    color: lightslategray;
+}

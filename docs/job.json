@@ -1,0 +1,72 @@
+{
+  "job": {
+    "id": "673a76ab561cfa10b1112161",
+    "jobKey": "P1-1005520-0",
+    "title": "Cashier",
+    "description": "<p><span class=\"highlight-token\" data-value=\"ja-base_pay_minimum\" data-denotation-char=\"#\" contenteditable=\"false\"><span contenteditable=\"false\">$20 per hour</span></span> - <span class=\"highlight-token\" data-value=\"ja-base_pay_maximum\" data-denotation-char=\"#\" contenteditable=\"false\"><span contenteditable=\"false\">$20 per hour</span></span></p><p><br/></p><p>Restaurant Crewmembers at Raising Cane’s will wear many hats (including a Raising Cane’s hat) while working hard and having fun as a critical part of the Restaurant team. We are hiring immediately for Restaurant Crew to work all shifts: opening shifts, closing shifts and everything in between. Whether you have experience as a customer service associate, retail team member, cashier, restaurant server, kitchen lead, cook, prep cook, drive thru cashier or any other restaurant or service-oriented role - we have a position for you.  </p><p><br/></p><p>We offer competitive pay and benefits for all positions. Even if you don’t have previous Restaurant experience, this position is entry-level (yes, that's no experience required) and we provide paid training for every new Restaurant Crewmember on the team. We will make sure you are prepared to grow your Restaurant career with us. </p><p><br/></p><p>Within your first year of working in the Restaurant, you can earn up to an extra dollar fifty per hour in pay increases through additional training, certifications, and performance evaluations! If you want to be at Restaurant that is a FUN place to work, that values your growth and provides opportunities to impact your community, we want you on our team!  </p><p><br/></p><p>Qualities of awesome Canes Restaurant Crewmembers: </p><ul><li>Team player </li><li>Excellent communicator </li><li>Happy, Courteous and Enthusiastic</li><li>Hard working and attentive </li><li>Responsible and dependable</li><li>Authentic and genuine</li><li>Takes pride in doing a good job</li></ul><p><br/></p><p><strong>Benefits available for hourly Crew:</strong></p><ul><li>Medical & Pharmacy, Dental, Vision Life Insurance, Short Term Disability, Hospital Indemnity, Legal Insurance, Pet Insurance, Auto and Renter’s Insurance, and ID Theft Protection</li><li>401(k) With Safe Harbor Employer Match (age 21 & older)</li><li>Crewmember Assistance Program</li><li>Education assistance</li><li>Pet Insurance</li></ul><p><br/></p><p><u>Perks & Rewards for hourly Crew:</u></p><ul><li>Paid Time Off*</li><li>Closed for all major holidays**</li><li>Early closure for company events</li><li>Casual Work Attire</li><li>Flexible Scheduling</li><li>Perkspot Employee Discount Program</li></ul><p><em>*Must satisfy hours requirement per year</em></p><p>**Locations may vary</p><p><br/></p><p><strong>ESSENTIAL FUNCTIONS OF THE POSITION</strong>: </p><p>The intellectual and physical demands described below are representative of what must be met by Crewmembers to successfully perform the essential functions of this job. Reasonable accommodations may be made to enable individuals with disabilities to perform the essential functions. </p><p><br/></p><ul><li>Lift and carry, push or pull heavy objects up to 50 pounds </li><li>Kneel, bend, twist or stoop</li><li>Ascend or descend stairs</li><li>Reach and grasp objects (including above head and below waistline)</li><li>Excellent verbal and written communication</li><li>Ability to show up to scheduled shifts on time</li><li>Cleaning tables, floors and other areas of the Restaurant</li><li>Taking orders from Customers and processing payments efficiently</li><li>Follow proper safety procedures when handling and/or preparing food</li><li>Ability to multitask </li></ul><p><br/></p><p><strong>ADDITIONAL REQUIREMENTS</strong>:</p><ul><li>Must be <span class=\"highlight-token\" data-value=\"ja-minimum_age\" data-denotation-char=\"#\" contenteditable=\"false\"><span contenteditable=\"false\">16</span></span> years of age or older</li><li>Provide all Customers with quick and friendly service</li><li>Work together as a team, assisting other Crewmembers in completion of tasks and assignments to ensure continuity of service</li><li>Work under pressure and at a fast pace</li><li>Align with Raising Cane’s culture by balancing Working Hard and Having Fun</li><li>Take initiative</li><li>Comply with Company policies</li></ul><p>Raising Cane’s appreciates & values individuality. EOE</p><p><br/></p><p><br/></p><p><span class=\"highlight-token\" data-value=\"ja-indeed_visibility\" data-denotation-char=\"#\" contenteditable=\"false\"><span contenteditable=\"false\"></span></span></p><p><br/></p><p><br/></p>",
+    "geo": {
+      "id": "673a76aa561cfa10b111209b",
+      "key": "CL",
+      "name": "Candyland"
+    },
+    "location": {
+      "city": "Licorice Castle",
+      "additional": null
+    },
+    "toApply": {
+      "url": "https://olivia.paradox.ai/co/RaisingCanes9/Job?job_id=P1-1005520-1&source=OfferUp",
+      "instructions": "apply via url",
+      "contact": null
+    },
+    "requirements": [
+      "Legal right to work in the United States.",
+      "Has opposable thumbs."
+    ],
+    "compensation": null,
+    "eeoStatement": "We're equal opportunity employers."
+  },
+  "geo": {
+    "id": "673a76aa561cfa10b111209b",
+    "key": "CL",
+    "name": "Candyland",
+    "type": "TERRITORY"
+  },
+  "employer": {
+    "id": "673a76ab561cfa10b11120d3",
+    "key": "chicken",
+    "name": "Raising Cane's",
+    "domain": "raisingcanes.com",
+    "isActive": true
+  },
+  "site":  {
+    "id": "673a76ab561cfa10b1112167",
+    "centerId": "44089",
+    "programType": "Affiliate American Job Center",
+    "name": "Center For Kids Who Can't Read Good",
+    "address1": "1 Main St.",
+    "address2": "",
+    "city": "Licorice Castle",
+    "geo": {
+      "id": "673a76aa561cfa10b111209b",
+      "key": "CL"
+    },
+    "zipcode": "00000",
+    "phone": "000-000-000",
+    "email": "lee.crawford+ajc@gmail.com",
+    "url": "https://giphy.com/",
+    "vetRep": false,
+    "latitude": 0.02,
+    "longitude": 0.01,
+    "closure": false,
+    "status": "",
+    "businessRep": {
+      "name": "Freddy Mercury",
+      "phone": "(111) 222-333",
+      "email": "fmercury@aol.com"
+    },
+    "vetRepContacts": [],
+    "youthReps": []
+  },
+  "siteType": "AJC",
+  "siteId": "673a76aa561cfa10b1112099"
+}

@@ -17,6 +17,9 @@ const geoLink = thingLink ("geo", "key")
 const geoTargetLink = thingLink ("geoTarget", "key")
 const employerLink = thingLink ("employer", "name")
 const jobLink = thingLink ("job", "title")
+const ajcLink = thingLink ("ajc", "name")
+const jcLink = thingLink ("jc", "name")
+const wdbLink = thingLink ("wdb", "wdbName")
 
 export {
     batchLink,
@@ -26,7 +29,8 @@ export {
     geoLink,
     userLink,
     templateLink,
-    geoTargetLink
+    geoTargetLink,
+    ajcLink, jcLink, wdbLink
 };
 
 // EOF

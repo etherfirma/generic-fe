@@ -58,6 +58,9 @@ function ShowButton (props) {
 function UploadButton (props) {
     return iconButton("far fa-cloud-upload", "Upload", props);
 }
+// function ProcessButton (props) {
+//     return iconButton("far fa-cloud-upload", "Upload", props);
+// }
 
 export {
     IconButton, SendButton, ClearButton, ShowButton, UploadButton,

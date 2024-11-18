@@ -15,6 +15,7 @@ class JobUtil {
                     state
                     created
                     lastModified
+                    jobTask { id } 
                 }
             }
         }`;
