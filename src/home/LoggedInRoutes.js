@@ -81,10 +81,12 @@ import FindJobTasks from "../data/job/task/FindJobTasks";
 import ShowJobTask from "../data/job/task/ShowJobTask";
 import CreateJobTask from "../data/job/task/CreateJobTask";
 import TemplateMerge from "../system/tests/data/TemplateMerge";
-import FindRawJobs from "../data/job/raw/FindRawJobs";
-import ShowRawJob from "../data/job/raw/ShowRawJob";
 import FindOnetCodes from "../data/onet/FindOnetCodes";
 import ShowOnetCode from "../data/onet/ShowOnetCode";
+import AuditJob from "../data/job/AuditJob";
+import AuditEmployer from "../data/employer/AuditEmployer";
+import FindRawJobs from "../data/job/raw/FindRawJobs";
+import ShowRawJob from "../data/job/raw/ShowRawJob";
 
 /**
  *
@@ -131,6 +133,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/job/add", element: <AddJob /> },
     { path: "/data/job/:id", element: <ShowJob /> },
     { path: "/data/job/:id/edit", element: <EditJob /> },
+    { path: "/data/job/:id/audit", element: <AuditJob /> },
     { path: "/job/:id", element: <RenderJob /> },
 
     { path: "/data/rawJobs", element: <FindRawJobs /> },
@@ -147,6 +150,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/employer/add", element: <AddEmployer /> },
     { path: "/data/employer/:id", element: <ShowEmployer /> },
     { path: "/data/employer/:id/edit", element: <EditEmployer /> },
+    { path: "/data/employer/:id/audit", element: <AuditEmployer /> },
     { path: "/data/employerGeos", element: <FindEmployerGeos /> },
     { path: "/data/employerGeo/add", element: <AddEmployerGeo /> },
     { path: "/data/employerGeo/:id", element: <ShowEmployerGeo /> },

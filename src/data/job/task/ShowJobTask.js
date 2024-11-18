@@ -218,25 +218,33 @@ class FindJobTasks extends ThingDetail {
                                             <TaskState value={el.state} />
                                         </TableCell>
                                         <TableCell>
-                                            <div onClick={() => {
-                                                const { infoDialogStore } = this.props;
-                                                infoDialogStore.showJson (el.attempts);
-                                            }}>
-                                                {el.attemptCount}
-                                                &nbsp;
-                                                <i className="fas fa-list"></i>
-                                            </div>
+                                            {el.attemptCount
+                                                ? (
+                                                    <div onClick={() => {
+                                                        const { infoDialogStore } = this.props;
+                                                        infoDialogStore.showJson (el.attempts);
+                                                    }}>
+                                                        {el.attemptCount}
+                                                        &nbsp;
+                                                        <i className="fas fa-list"></i>
+                                                    </div>
+                                                )
+                                                : "-"
+                                            }
                                         </TableCell>
                                         <TableCell>
-                                            {el.result && (
-                                                <div onClick={() => {
-                                                    const { infoDialogStore } = this.props;
-                                                    infoDialogStore.showJson (el.result);
-                                                }}>
-                                                    &nbsp;
-                                                    <i className="fas fa-list"></i>
-                                                </div>
-                                            )}
+                                            {el.result
+                                                ? (
+                                                    <div onClick={() => {
+                                                        const { infoDialogStore } = this.props;
+                                                        infoDialogStore.showJson (el.result);
+                                                    }}>
+                                                        &nbsp;
+                                                        <i className="fas fa-list"></i>
+                                                    </div>
+                                                )
+                                                : '-'
+                                            }
                                         </TableCell>
                                     </TableRow>
                                 );

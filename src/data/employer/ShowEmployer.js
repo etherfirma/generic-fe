@@ -4,7 +4,7 @@ import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, DeleteButton, EditButton, IconButton} from "../../util/ButtonUtil";
+import {AddButton, AuditButton, DeleteButton, EditButton, IconButton} from "../../util/ButtonUtil";
 import YesNo from "../../util/YesNo";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -62,10 +62,10 @@ class ShowEmployer extends ThingDetail {
                 <EditButton onClick={() => {
                     window.location.hash = `#/data/employer/${employer.id}/edit`;
                 }} />
-                {/*&nbsp;*/}
-                {/*<DeleteButton onClick={()=> {*/}
-                {/*    this.delete (employer);*/}
-                {/*}} />*/}
+                &nbsp;
+                <AuditButton onClick={()=> {
+                    window.location.hash = `/data/employer/${employer.id}/audit`;
+                }} />
             </div>
         );
     }

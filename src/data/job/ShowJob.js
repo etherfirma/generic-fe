@@ -4,7 +4,7 @@ import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, DeleteButton, EditButton, IconButton, ShowButton} from "../../util/ButtonUtil";
+import {AddButton, AuditButton, DeleteButton, EditButton, IconButton, ShowButton} from "../../util/ButtonUtil";
 import {batchLink, employerLink, geoLink} from "../thing/ThingUtil";
 import Server from "../../util/Server";
 import {JobState} from "../../util/enum/EnumSlug";
@@ -61,8 +61,11 @@ class ShowJob extends ThingDetail {
                 &nbsp;
                 <ShowButton label={"Show Posting"} onClick={() => {
                     window.location.hash = `#/data/job/${job.id}`;
-                }}>
-                </ShowButton>
+                }} />
+                &nbsp;
+                <AuditButton onClick={()=> {
+                    window.location.hash = `/data/job/${job.id}/audit`;
+                }} />
                 &nbsp;
                 {job.jobTask
                     ? <ShowButton label={"Show JobTask"} onClick={() => window.location.hash=`/data/jobTask/${job.id}`} />
