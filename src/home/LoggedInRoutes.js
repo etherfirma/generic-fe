@@ -195,20 +195,20 @@ const LOGGED_IN = createHashRouter ([
     { path: "/sites", element: <Sites /> },
     { path: "/sites/radius", element: <RadiusSearch /> },
 
-    { path: "/sites/ajc/find", element: <FindAJCs /> },
+    { path: "/sites/ajcs", element: <FindAJCs /> },
     { path: "/sites/ajc/upload", element: <UploadAJCs /> },
     { path: "/data/ajc/:id", element: <ShowAJC /> },
 
-    { path: "/sites/pa/find", element: <FindPAs /> },
+    { path: "/sites/pas", element: <FindPAs /> },
     { path: "/sites/pa/upload", element: <UploadPAs /> },
     { path: "/data/pa/:id", element: <ShowPA /> },
 
-    { path: "/sites/jc/find", element: <FindJCs /> },
+    { path: "/sites/jcs", element: <FindJCs /> },
     { path: "/sites/jc/upload", element: <UploadJCs /> },
     { path: "/data/jc/:id", element: <ShowJC /> },
 
     { path: "/sites/wdb/upload", element: <UploadWDBs /> },
-    { path: "/sites/wdb/find", element: <FindWDBs /> },
+    { path: "/sites/wdbs", element: <FindWDBs /> },
     { path: "/data/wdb/:id", element: <ShowWDB /> },
 ]);
 
