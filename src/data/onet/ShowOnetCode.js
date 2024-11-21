@@ -4,7 +4,7 @@ import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
-import {batchLink, employerLink, geoLink} from "../thing/ThingUtil";
+import _ from "lodash";
 
 /**
  *
@@ -25,6 +25,7 @@ class ShowOnetCode extends ThingDetail {
                 code
                 title
                 description
+                alternateTitles
             } 
         }`;
     }
@@ -53,7 +54,8 @@ class ShowOnetCode extends ThingDetail {
             id: <ID snackbar={true} value={onetCode.id} />,
             code: onetCode.code,
             title: onetCode.title,
-            description: onetCode.description
+            description: onetCode.description,
+            alternateTitles: this.renderAlternateTitles (onetCode)
         };
 
         return (
@@ -63,6 +65,22 @@ class ShowOnetCode extends ThingDetail {
                 {this.actions (onetCode)}
             </div>
         )
+    }
+
+    renderAlternateTitles (onetCode) {
+        if (onetCode.alternateTitles) {
+            return (
+                <ul>
+                    {_.map(onetCode.alternateTitles, (el, i) => {
+                        return (
+                            <li>{el}</li>
+                        );
+                    })}
+                </ul>
+            );
+        } else {
+            return null;
+        }
     }
 
     renderHeader () {

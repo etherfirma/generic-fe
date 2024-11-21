@@ -10,8 +10,6 @@ import AuthManager from "./util/AuthManager";
 import EnumManager from "./util/enum/EnumManager";
 import SnackbarPopop, {snackbarStore} from "./util/snackbarStore";
 import DebugPane, {DebugButton, debugStore} from "./util/debugStore";
-import {BugReport} from "@mui/icons-material";
-import {Avatar, Snackbar} from "@mui/material";
 import Environment from "./util/Environment";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
