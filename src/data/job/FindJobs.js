@@ -112,7 +112,7 @@ class FindJobs extends ThingDetails {
             job.title,
             employerLink (job.employer),
             geoLink (job.geo),
-            <YesNo value={Boolean (job?.jobTask)} />,
+            <YesNo value={Boolean (job?.jobTask)} labelled={true} />,
             <JobState value={job.state} />,
             <ID short={true} value={job.id} />
         ];

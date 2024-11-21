@@ -20,7 +20,7 @@ class YesNo extends Component {
                     <i className="fas fa-times" ></i>
                     {labelled && (
                         <>
-                            &nbsp;{"" + value}
+                            &nbsp;{value ? "yes" : "no"}
                         </>
                     )}
                 </span>

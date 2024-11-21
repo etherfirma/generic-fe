@@ -9,6 +9,7 @@ import "./css/TemplateMerge.css";
 import FancyBorder from "../../../util/FancyBorder";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import BooleanPicker from "../../../util/BooleanPicker";
 
 const fields = [
     {
@@ -38,7 +39,8 @@ class TemplateMerge extends Component {
         errors: {},
         template: "",
         context: "{}",
-        tab: 0
+        tab: 0,
+        boolean: true
     });
 
     validator = new Validator (this, fields);
@@ -63,7 +65,7 @@ class TemplateMerge extends Component {
     }
 
     render() {
-        const { template, context, error, errors, tab } = this.store;
+        const { template, context, boolean, error, errors, tab } = this.store;
 
         const formProps = {
             margin: "dense",
@@ -99,12 +101,22 @@ class TemplateMerge extends Component {
                         multiline={true}
                         {...formProps}
                     />
+                    <BooleanPicker
+                        value={boolean}
+                        onChange={(boolean) => {
+                            this.store.boolean = boolean;
+                        }}
+                        label={"HTML"}
+                        required={false}
+                        formProps={formProps}
+                        hideEmpty={true}
+                    />
                 </TabPanel>
                 <TabPanel value={tab} index={1}>
                     <TextField
                         label="Context"
                         value={context}
-                        rows={24}
+                        rows={16}
                         multiline={true}
                         onChange={(e) => {
                             this.store.context = e.target.value;

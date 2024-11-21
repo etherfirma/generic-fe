@@ -106,7 +106,7 @@ class TemplateTest extends Component {
                                 rows={8}
                                 multiline={true}
                                 fullWidth
-                                readOnly={true}
+                                disabled={true}
                                 variant="outlined"
                             />
                         </td>

@@ -99,10 +99,10 @@ class FindJobTasks extends ThingDetail {
     }
 
     async doDelete (follow) {
-        const mutation = `mutation ($id: String!) {
-            res: deletejobTask (id: $id) 
+        const mutation = `mutation ($jobId: String!) {
+            res: deleteJobTask (jobId: $jobId) 
         }`;
-        const variables = { id: follow.id };
+        const variables = { jobId: follow.id };
         try {
             const res = await Server._gql (mutation, variables);
             this.doLoad();

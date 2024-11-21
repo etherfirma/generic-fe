@@ -109,6 +109,11 @@ class Tests extends Component {
                                 SendEmail
                             </a>
                         </li>
+                        <li>
+                            <a href={"#/tests/merge"}>
+                                Template Merge
+                            </a>
+                        </li>
                     </ul>
                 </TabPanel>
                 <TabPanel value={tab} index={3}>
