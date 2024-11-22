@@ -75,12 +75,15 @@ function UploadButton(props) {
 function AuditButton (props) {
     return iconButton("far fa-file-chart-line", "Audit", props);
 }
+function SearchButton (props) {
+    return iconButton("far fa-search", "Search", props);
+}
 
 
 export {
     IconButton, SendButton, ClearButton, ShowButton, UploadButton, AuditButton,
     AddButton, EditButton, ReloadButton, DeleteButton, CancelButton, UpdateButton, CopyButton,
-    ClearAllButton, PrettifyButton, ResetButton
+    ClearAllButton, PrettifyButton, ResetButton, SearchButton
 }
 
 // EOF

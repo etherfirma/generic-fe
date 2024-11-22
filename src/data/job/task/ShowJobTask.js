@@ -5,9 +5,8 @@ import ID from "../../../util/ID";
 import ThingDetail from "../../thing/ThingDetail";
 import Breadcrumb from "../../../util/Breadcrumb";
 import Server from "../../../util/Server";
-import {DeleteButton, EditButton, UploadButton} from "../../../util/ButtonUtil";
+import {DeleteButton, EditButton, ResetButton, UploadButton} from "../../../util/ButtonUtil";
 import {ajcLink, employerLink, geoLink, jcLink, jobLink, wdbLink} from "../../thing/ThingUtil";
-// import {jobTaskLink} from "../../thing/ThingUtil";
 import _ from "lodash";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -18,6 +17,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import * as PropTypes from "prop-types";
 import {TaskState} from "../../../util/enum/EnumSlug";
+import "./css/ShowJobTask.css";
 
 function TableCall(props) {
     return null;
@@ -57,20 +57,44 @@ class FindJobTasks extends ThingDetail {
 
     actions (jobTask) {
         return (
-            <div>
-                <DeleteButton onClick={()=> {
-                    this.delete (jobTask);
-                }} />
-                &nbsp;
-                <UploadButton label="Process" onClick={() =>{
-                    this.process (jobTask);
-                }} />
+            <div className={"ActionButtons"}>
+                <div>
+                    <UploadButton label="Process" onClick={() =>{
+                        this.process (jobTask);
+                    }} />
+                </div>
+                <div>
+                    <DeleteButton onClick={()=> {
+                        this.delete (jobTask);
+                    }} />
+                    &nbsp;
+                    <ResetButton onClick={() =>{
+                        this.reset (jobTask);
+                        this.doLoad ();
+                    }} />
+                </div>
             </div>
         );
     }
 
     async process (jobTask) {
         const query = "mutation ($jobId: String!) { processJobTask (jobId: $jobId) { state } }";
+        const variables = { jobId: jobTask.id };
+        try {
+            this.store.error = null;
+            const result = await Server.gql (query, variables);
+            if (result.errors.length > 0) {
+                this.store.error = result.errors;
+            }
+            this.doLoad ();
+        }
+        catch (e) {
+            this.store.error = e;
+        }
+    }
+
+    async reset (jobTask) {
+        const query = "mutation ($jobId: String!) { resetJobTask (jobId: $jobId) { state } }";
         const variables = { jobId: jobTask.id };
         try {
             this.store.error = null;

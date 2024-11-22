@@ -7,9 +7,10 @@ import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import OnetCodeUtil from "./OnetCodeUtil";
 import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, ReloadButton} from "../../util/ButtonUtil";
+import {AddButton, ReloadButton, SearchButton} from "../../util/ButtonUtil";
 import ThingDetails from "../thing/ThingDetails";
 import DataTable from "../DataTable";
+import Validator from "../../login/Validator";
 
 /**
  *
@@ -94,6 +95,8 @@ class FindOnetCodes extends ThingDetails {
                 <br/>
 
                 <ReloadButton disabled={this.store.loading} onClick={() => this.doLoad ()} />
+                &nbsp;
+                <SearchButton onClick={() => window.location.hash = "/data/onetCode/map"} />
             </div>
         );
     }

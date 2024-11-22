@@ -87,6 +87,7 @@ import AuditJob from "../data/job/AuditJob";
 import AuditEmployer from "../data/employer/AuditEmployer";
 import FindRawJobs from "../data/job/raw/FindRawJobs";
 import ShowRawJob from "../data/job/raw/ShowRawJob";
+import MapOnetCode from "../data/onet/MapOnetCode";
 
 /**
  *
@@ -139,6 +140,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/rawJobs", element: <FindRawJobs /> },
     { path: "/data/rawJob/:id", element: <ShowRawJob /> },
     { path: "/data/onetCodes", element: <FindOnetCodes /> },
+    { path: "/data/onetCode/map", element: <MapOnetCode /> },
     { path: "/data/onetCode/:id", element: <ShowOnetCode /> },
 
     { path: "/data/jobTasks", element: <FindJobTasks /> },
