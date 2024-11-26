@@ -40,7 +40,7 @@ class ShowEmployer extends ThingDetail {
                 isActive
                 employerGeos {
                     id
-                    geo { id key name type }
+                    geo { id key name type connectorType }
                     isActive
                 }
                 jobs {
@@ -65,6 +65,10 @@ class ShowEmployer extends ThingDetail {
                 &nbsp;
                 <AuditButton onClick={()=> {
                     window.location.hash = `/data/employer/${employer.id}/audit`;
+                }} />
+                &nbsp;
+                <AddButton label="Candyland" onClick={() => {
+                    window.location.hash = `/system/candyland?employerId=${employer.id}`;
                 }} />
             </div>
         );
@@ -133,6 +137,7 @@ class ShowEmployer extends ThingDetail {
                                 <TableCell>Key</TableCell>
                                 <TableCell>Type</TableCell>
                                 <TableCell>Name</TableCell>
+                                <TableCell>Connector</TableCell>
                                 <TableCell>Active?</TableCell>
                             </TableRow>
                         </TableHead>
@@ -151,6 +156,7 @@ class ShowEmployer extends ThingDetail {
                                         <GeoType value={employerGeo.geo.type} />
                                     </TableCell>
                                     <TableCell>{employerGeo.geo.name}</TableCell>
+                                    <TableCell>{employerGeo.geo.connectorType}</TableCell>
                                     <TableCell>
                                         <YesNo value={employerGeo.isActive} />
                                     </TableCell>

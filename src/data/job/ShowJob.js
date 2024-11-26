@@ -113,7 +113,7 @@ class ShowJob extends ThingDetail {
             subsidiary: job.subsidiary || '-',
             onetCode: job.onetCode || '-',
             educationType: job.educationType || '-',
-            employmentType: job.employmentType || '-',
+            employmentType: this.encodeStrings (job.employmentType) || '-',
             created: job.created,
             lastModified: job.lastModified,
         };
@@ -127,6 +127,19 @@ class ShowJob extends ThingDetail {
                 {this.actions (job)}
             </div>
         )
+    }
+
+    encodeStrings (els) {
+        let str = "";
+        if (els) {
+            for (const el of els) {
+                if (str) {
+                    str += ", ";
+                }
+                str += el;
+            }
+        }
+        return str;
     }
 
     renderHeader () {

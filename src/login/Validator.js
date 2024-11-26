@@ -15,15 +15,8 @@ class Validator {
 
     static addValidator (obj, fields, accessor) {
         obj.validator = new Validator (obj, fields, accessor);
-        obj.validate = () => {
-            obj.validator.validate ();
-            console.log ("validate");
-        }
-        obj.isValid = () => {
-            const isValid = obj.validator.isValid;
-            console.log ("isValid", isValid)
-            return isValid;
-        }
+        obj.validate = () => obj.validator.validate ();
+        obj.isValid = () =>  obj.validator.isValid;
     }
 
     componentDidMount () {

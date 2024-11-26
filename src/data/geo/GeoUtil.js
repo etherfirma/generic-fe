@@ -10,6 +10,8 @@ class GeoUtil {
                     key
                     name
                     type
+                    isActive
+                    connectorType
                 }
             }
         }`;

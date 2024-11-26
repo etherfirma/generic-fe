@@ -44,10 +44,6 @@ import AddEmployerGeo from "../data/employer/geo/AddEmployerGeo";
 import ShowEmployerGeo from "../data/employer/geo/ShowEmployerGeo";
 import GeoPickerTest from "../system/tests/data/GeoPickerTest";
 import EmployerPickerTest from "../system/tests/data/EmployerPickerTest";
-import FindGeoTargets from "../data/geo/target/FindGeoTargets";
-import EditGeoTarget from "../data/geo/target/EditGeoTarget";
-import ShowGeoTarget from "../data/geo/target/ShowGeoTarget";
-import AddGeoTarget from "../data/geo/target/AddGeoTarget";
 import FindJobs from "../data/job/FindJobs";
 import AddJob from "../data/job/AddJob";
 import ShowJob from "../data/job/ShowJob";
@@ -88,6 +84,7 @@ import AuditEmployer from "../data/employer/AuditEmployer";
 import FindRawJobs from "../data/job/raw/FindRawJobs";
 import ShowRawJob from "../data/job/raw/ShowRawJob";
 import MapOnetCode from "../data/onet/MapOnetCode";
+import Candyland from "../system/Candyland";
 
 /**
  *
@@ -163,13 +160,8 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/batches", element: <FindBatches /> },
     { path: "/data/batch/:id", element: <ShowBatch /> },
 
-
-    { path: "/data/geoTargets", element: <FindGeoTargets /> },
-    { path: "/data/geoTarget/add", element: <AddGeoTarget /> },
-    { path: "/data/geoTarget/:id", element: <ShowGeoTarget /> },
-    { path: "/data/geoTarget/:id/:edit", element: <EditGeoTarget /> },
-
     { path: "/system/cardinality", element: <Cardinality /> },
+    { path: "/system/candyland", element: <Candyland /> },
     { path: "/system/importFeed", element: <ImportFeed /> },
 
     { path: "/tests/loading", element: <LoadingTest /> },

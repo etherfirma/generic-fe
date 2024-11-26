@@ -34,6 +34,11 @@ class System extends Component {
                             Import Feed
                         </a>
                     </li>
+                    <li>
+                        <a href={"#/system/candyland"}>
+                            Employer Utils
+                        </a>
+                    </li>
                 </ul>
             </div>
         );

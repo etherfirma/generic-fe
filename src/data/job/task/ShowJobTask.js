@@ -41,7 +41,7 @@ class FindJobTasks extends ThingDetail {
         query ($id: String!) {
             res: jobTaskById (id: $id) {
                 id
-                stateTask { attemptCount state attempts geo { id key } } 
+                stateTask { attemptCount state attempts geo { id key } result } 
                 siteTasks { 
                     attemptCount state attempts siteId siteType result
                     ajc { id name } 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {encodeUrl, formatDate, objGet, wrap} from "../../../util/Utils";
+import {encodeUrl, formatDate, objGet, PreJson, wrap} from "../../../util/Utils";
 import PropertyTable from "../../../util/PropertyTable";
 import ID from "../../../util/ID";
 import ThingDetail from "../../thing/ThingDetail";
@@ -29,6 +29,7 @@ class ShowEmployerGeo extends ThingDetail {
                 employer { id name key isActive } 
                 geo { id name key } 
                 isActive
+                config
             } 
         }`;
     }
@@ -97,6 +98,7 @@ class ShowEmployerGeo extends ThingDetail {
                     </Button>
                 </div>
             ),
+            config: <PreJson json={employerGeo.config} />
         };
 
         return (

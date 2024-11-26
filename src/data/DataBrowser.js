@@ -20,7 +20,6 @@ class DataBrowser extends Component {
         {name: "user", hash: "/data/users", "desc": "The core User record" },
         {name: "userLocal", hash: "/data/userLocals", "desc": "For User's with a password" },
         {name: "geo", hash: "/data/geos", "desc": "Supported States and Territories" },
-        {name: "geoTarget", hash: "/data/geoTargets", "desc": "Maps the publishing target for a Geo" },
         {name: "sender", hash: "/data/senders", "desc": "Email senders" },
         {name: "template", hash: "/data/templates", "desc": "Email and text templates" },
         {name: "employers", hash: "/data/employers", "desc": "Registered Employers" },

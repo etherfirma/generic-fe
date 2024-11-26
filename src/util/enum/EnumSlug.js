@@ -16,9 +16,11 @@ const EnumSlug = (type) => ({value}) => {
 const JobState = EnumSlug ("JobState");
 const TaskState = EnumSlug ("TaskState");
 const GeoType = EnumSlug ("GeoType");
+const ConnectorType = EnumSlug ("ConnectorType");
 
 export {
     EnumSlug,
+    ConnectorType,
     JobState,
     GeoType,
     TaskState

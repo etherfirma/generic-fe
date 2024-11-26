@@ -1,10 +1,11 @@
 import React from 'react';
-import {encodeUrl, formatDate, objGet, wrap} from "../../util/Utils";
+import {encodeUrl, formatDate, objGet, PreJson, wrap} from "../../util/Utils";
 import PropertyTable from "../../util/PropertyTable";
 import ID from "../../util/ID";
 import ThingDetail from "../thing/ThingDetail";
 import Breadcrumb from "../../util/Breadcrumb";
 import {DeleteButton, EditButton} from "../../util/ButtonUtil";
+import YesNo from "../../util/YesNo";
 
 /**
  *
@@ -25,6 +26,9 @@ class DataGeo extends ThingDetail {
                 key
                 name
                 type 
+                isActive
+                connectorType
+                connectorConfig
             } 
         }`;
     }
@@ -51,7 +55,10 @@ class DataGeo extends ThingDetail {
             id: <ID snackbar={true} value={geo.id} />,
             key: geo.key,
             name: geo.name,
-            type: geo.type
+            type: geo.type,
+            isActive: <YesNo value={geo.isActive} />,
+            connectorType: geo.connectorType,
+            connectorConfig: <PreJson json={geo.connectorConfig} />
         };
 
         return (

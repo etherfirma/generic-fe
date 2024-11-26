@@ -13,6 +13,9 @@ import {AddButton, ReloadButton} from "../../util/ButtonUtil";
 import {geoLink} from "../thing/ThingUtil";
 import {GeoType} from "../../util/enum/EnumSlug";
 import TableCell from "@mui/material/TableCell";
+import EnumPicker from "../../util/enum/EnumPicker";
+import YesNo from "../../util/YesNo";
+import BooleanPicker from "../../util/BooleanPicker";
 
 /**
  *
@@ -26,6 +29,8 @@ class FindGeos extends ThingDetails {
             key: "", // filter
             name: "", //filter
             type: "", //filter
+            connectorType: "", //filter
+            isActive: null, //filter
             id: "" // filter
         });
     }
@@ -40,7 +45,10 @@ class FindGeos extends ThingDetails {
             variables.sort = JSON.stringify (sort);
         }
         const filters = { };
-        const { name, key, type, id } = this.store;
+        const { name, key, type, isActive, connectorType, id } = this.store;
+        if (isActive !== null) {
+            filters.isActive = isActive;
+        }
         if (name) {
             filters.name = name;
         }
@@ -49,6 +57,9 @@ class FindGeos extends ThingDetails {
         }
         if (type) {
             filters.type = type;
+        }
+        if (connectorType) {
+            filters.connectorType = connectorType;
         }
         if (id) {
             filters.id = id;
@@ -61,7 +72,9 @@ class FindGeos extends ThingDetails {
         return [
             this.sortHeader ("key", "Key"),
             this.sortHeader ("name", "Name"),
+            this.sortHeader ("isActive", "Active?"),
             this.sortHeader ("type", "Type"),
+            this.sortHeader ("connectorType", "Connector"),
             this.sortHeader("_id", "ID")
         ];
     }
@@ -70,7 +83,9 @@ class FindGeos extends ThingDetails {
         return [
             geoLink (geo),
             geo.name,
+            <YesNo value={geo.isActive} labelled={true} />,
             <GeoType value={geo.type} />,
+            geo.connectorType || '-',
             <ID short={true} value={geo.id} />
         ];
     }
@@ -96,20 +111,22 @@ class FindGeos extends ThingDetails {
     }
 
     hasFilters () {
-        const { name, id, email, label } = this.store;
-        return Boolean (name || id || email || label);
+        const { name, id, email, isActive, connectorType, label } = this.store;
+        return Boolean (name || id || email || connectorType || isActive || label);
     }
 
     clearFilters = action (() => {
         this.store.name = "";
         this.store.email = "";
         this.store.id = "";
+        this.store.isActive = null;
+        this.store.connectorType = "";
         this.store.label = "";
         this.doLoad ();
     });
 
     renderFilters () {
-        const { key, name, type, id, showDrawer } = this.store;
+        const { key, name, type, id, isActive, connectorType, showDrawer } = this.store;
         const formProps = {margin: "dense", size: "small", fullWidth: true};
 
         return (
@@ -148,6 +165,20 @@ class FindGeos extends ThingDetails {
                             this.store.type = e.target.value;
                             this.doLoad();
                         }}
+                    />
+                    <EnumPicker
+                        enumType={"ConnectorType"}
+                        value={connectorType}
+                        onChange={value => this.store.connectorType = value}
+                        formProps={formProps}
+                    />
+                    <BooleanPicker
+                        value={isActive}
+                        onChange={(boolean) => {
+                            this.store.isActive = boolean;
+                            this.doLoad ();
+                        }}
+                        formProps={formProps}
                     />
                     <TextField
                         {...formProps}
