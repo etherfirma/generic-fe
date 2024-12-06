@@ -4,7 +4,10 @@ import "./css/ThingUtil.css";
 const thingLink = (type, field = "name", func = null) => (thing) => {
     const text = func ? func (thing) : thing[field];
     return (
-        <span className="ThingLink" onClick={() => window.location.href = `#/data/${type}/${thing.id}`}>
+        <span className="ThingLink" onClick={(e) => {
+            window.location.href = `#/data/${type}/${thing.id}`;
+            e.stopPropagation ();
+        }}>
             {text}
         </span>
     );

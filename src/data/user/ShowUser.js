@@ -123,7 +123,7 @@ class DataUser extends ThingDetail {
         const publicUrl = UserUtil.getPublicUrl (user);
         const o = {
             id: <ID value={user.id} snackbar={true} />,
-            user: userLink (user),
+            email: user.email,
             name: user.name,
             locked: <YesNo value={user.locked} labelled={true} />,
             type: user.type,

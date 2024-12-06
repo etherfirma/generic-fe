@@ -1,12 +1,12 @@
 import React from 'react';
-import {encodeUrl, formatDate, objGet, TabPanel, wrap, PreJson} from "../../util/Utils";
-import PropertyTable from "../../util/PropertyTable";
-import ID from "../../util/ID";
-import ThingDetail from "../thing/ThingDetail";
-import YesNo from "../../util/YesNo";
-import Breadcrumb from "../../util/Breadcrumb";
-import Server from "../../util/Server";
-import {DeleteButton, EditButton, ReloadButton} from "../../util/ButtonUtil";
+import {encodeUrl, formatDate, objGet, TabPanel, wrap, PreJson} from "../../../util/Utils";
+import PropertyTable from "../../../util/PropertyTable";
+import ID from "../../../util/ID";
+import ThingDetail from "../../thing/ThingDetail";
+import YesNo from "../../../util/YesNo";
+import Breadcrumb from "../../../util/Breadcrumb";
+import Server from "../../../util/Server";
+import {DeleteButton, EditButton, ReloadButton} from "../../../util/ButtonUtil";
 
 /**
  *
@@ -24,7 +24,8 @@ class ShowUserLocal extends ThingDetail {
         return `query ($id: String!) {
                     res: userLocalById (id: $id) {
                         id
-                        hashedPassword 
+                        hashedPassword
+                        user { name email }  
                         reset {
                             expires
                             isExpired

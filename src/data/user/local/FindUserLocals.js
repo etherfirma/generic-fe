@@ -1,15 +1,16 @@
 import React from 'react';
-import {wrap} from "../../util/Utils";
-import ID from "../../util/ID";
-import DataTable from "../DataTable";
-import ThingDetails from "../thing/ThingDetails";
+import {wrap} from "../../../util/Utils";
+import ID from "../../../util/ID";
+import DataTable from "../../DataTable";
+import ThingDetails from "../../thing/ThingDetails";
 import {action} from "mobx";
 import {Drawer} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import UserLocalUtil from "./UserLocalUtil";
-import Breadcrumb from "../../util/Breadcrumb";
-import {AddButton, ClearAllButton, ReloadButton} from "../../util/ButtonUtil";
-import YesNo from "../../util/YesNo";
+import Breadcrumb from "../../../util/Breadcrumb";
+import {AddButton, ClearAllButton, ReloadButton} from "../../../util/ButtonUtil";
+import YesNo from "../../../util/YesNo";
+import {userLink} from "../../thing/ThingUtil";
 
 /**
  *
@@ -48,8 +49,8 @@ class FindUserLocals extends ThingDetails {
 
     get headers () {
         return [
+            "User",
             this.sortHeader ("hashedPassword", "HashedPassword"),
-            // this.sortHeader ("name", "Name"),
             <i className="fal fa-key" />,
             // this.sortHeader ("locked", <i className="fas fa-lock" />),
             this.sortHeader("_id", "ID")
@@ -58,6 +59,7 @@ class FindUserLocals extends ThingDetails {
 
     xform (userLocal) {
         return [
+            userLink (userLocal.user),
             userLocal.hashedPassword,
             <YesNo value={userLocal.reset} />,
             <ID short={true} value={userLocal.id} />

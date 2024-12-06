@@ -23,8 +23,8 @@ import ShowUser from "../data/user/ShowUser";
 import EditUser from "../data/user/EditUser";
 import UserPickerTest from "../system/tests/data/UserPickerTest";
 import UserLinkTest from "../system/tests/data/UserLinkTest";
-import FindUserLocals from "../data/userLocal/FindUserLocals";
-import ShowUserLocal from "../data/userLocal/ShowUserLocal";
+import FindUserLocals from "../data/user/local/FindUserLocals";
+import ShowUserLocal from "../data/user/local/ShowUserLocal";
 import TemplatePickerTest from "../system/tests/data/TemplatePickerTest";
 import TemplateTest from "../system/tests/data/TemplateTest";
 import SendEmailTest from "../system/tests/svc/SendEmailTest";
@@ -88,6 +88,7 @@ import Candyland from "../system/Candyland";
 import AddUserEmployer from "../data/employer/user/AddUserEmployer";
 import ShowUserEmployer from "../data/employer/user/ShowUserEmployer";
 import FindUserEmployers from "../data/employer/user/FindUserEmployer";
+import AddUserLocal from "../data/user/local/AddUserLocal";
 
 /**
  *
@@ -126,6 +127,7 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/user/:id", element: <ShowUser /> },
     { path: "/data/user/:id/edit", element: <EditUser /> },
     { path: "/data/userLocals", element: <FindUserLocals /> },
+    { path: "/data/userLocal/add", element: <AddUserLocal /> },
     { path: "/data/userLocal/:id", element: <ShowUserLocal /> },
     { path: "/data/geos", element: <FindGeos /> },
     { path: "/data/geo/:id", element: <ShowGeo /> },

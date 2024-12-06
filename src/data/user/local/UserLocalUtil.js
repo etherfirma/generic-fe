@@ -9,6 +9,7 @@ class UserLocalUtil {
                 results { 
                     id
                     hashedPassword
+                    user { id email name } 
                     reset {
                         expires
                         token
