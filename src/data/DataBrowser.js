@@ -23,6 +23,7 @@ class DataBrowser extends Component {
         {name: "sender", hash: "/data/senders", "desc": "Email senders" },
         {name: "template", hash: "/data/templates", "desc": "Email and text templates" },
         {name: "employers", hash: "/data/employers", "desc": "Registered Employers" },
+        {name: "userEmployers", hash: "/data/userEmployers", "desc": "Mapping of Users to Employers" },
         {name: "employerGeos", hash: "/data/employerGeos", "desc": "Employer to Geo mapping" },
         {name: "job", hash: "/data/jobs", "desc": "A canonicalized Job" },
         {name: "rawJob", hash: "/data/rawJobs", "desc": "Failed Job records" },

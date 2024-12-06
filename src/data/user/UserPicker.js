@@ -95,10 +95,10 @@ class UserPicker extends Component {
             <FormControl error={error} variant="outlined" {...formProps}>
                 <InputLabel>{label}</InputLabel>
                 <Select
-                    value={encodeSelectValue (value)}
+                    value={encodeSelectValue (value?.id)}
                     onChange={(e) => {
                         const id = e.target.value;
-                        const decoded = _.find (users, user => user.id === id) || null;
+                        const decoded = _.find (users, user => user.id == id) || null;
                         onChange (decoded);
                     }}
                     label={label}
@@ -112,8 +112,8 @@ class UserPicker extends Component {
                     )}
                     {_.map (users, (user, i) => {
                         return (
-                            <MenuItem key={i} value={user.id}>
-                                {user.name} &lt;{user.email}&gt;
+                            <MenuItem key={i} value={user?.id}>
+                                {user.name} &lt;{user.email}&gt; {user.id}
                             </MenuItem>
                         );
                     })}

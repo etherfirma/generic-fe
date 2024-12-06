@@ -85,6 +85,9 @@ import FindRawJobs from "../data/job/raw/FindRawJobs";
 import ShowRawJob from "../data/job/raw/ShowRawJob";
 import MapOnetCode from "../data/onet/MapOnetCode";
 import Candyland from "../system/Candyland";
+import AddUserEmployer from "../data/employer/user/AddUserEmployer";
+import ShowUserEmployer from "../data/employer/user/ShowUserEmployer";
+import FindUserEmployers from "../data/employer/user/FindUserEmployer";
 
 /**
  *
@@ -153,6 +156,10 @@ const LOGGED_IN = createHashRouter ([
     { path: "/data/employerGeos", element: <FindEmployerGeos /> },
     { path: "/data/employerGeo/add", element: <AddEmployerGeo /> },
     { path: "/data/employerGeo/:id", element: <ShowEmployerGeo /> },
+
+    { path: "/data/userEmployers", element: <FindUserEmployers /> },
+    { path: "/data/userEmployer/add", element: <AddUserEmployer /> },
+    { path: "/data/userEmployer/:id", element: <ShowUserEmployer /> },
 
     { path: "/data/zipcodes", element: <FindZipcodes /> },
     { path: "/data/zipcode/:id", element: <ShowZipcode /> },
