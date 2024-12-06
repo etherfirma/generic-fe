@@ -16,6 +16,8 @@ import BooleanPicker from "../../../util/BooleanPicker";
 import userEmployerUtil from "./UserEmployerUtil";
 import {GeoType} from "../../../util/enum/EnumSlug";
 import UserEmployerUtil from "./UserEmployerUtil";
+import EmployerPicker from "../EmployerPicker";
+import UserPicker from "../../user/UserPicker";
 
 /**
  *
@@ -127,24 +129,24 @@ class FindUserEmployers extends ThingDetails {
                 <div className={"DataFilters"}>
                     <h2>Filters</h2>
 
-                    {/*<TextField*/}
-                    {/*    {...formProps}*/}
-                    {/*    value={key}*/}
-                    {/*    label={"Key"}*/}
-                    {/*    onChange={(e) => {*/}
-                    {/*        this.store.key = e.target.value;*/}
-                    {/*        this.doLoad();*/}
-                    {/*    }}*/}
-                    {/*/>*/}
-                    {/*<TextField*/}
-                    {/*    {...formProps}*/}
-                    {/*    value={name}*/}
-                    {/*    label={"Name"}*/}
-                    {/*    onChange={(e) => {*/}
-                    {/*        this.store.name = e.target.value;*/}
-                    {/*        this.doLoad();*/}
-                    {/*    }}*/}
-                    {/*/>*/}
+                    <EmployerPicker
+                        value={employer}
+                        onChange={employer => {
+                            this.store.employer = employer;
+                            this.doLoad();
+                        }}
+                        required={true}
+                        formProps={formProps}
+                    />
+                    <UserPicker
+                        value={user}
+                        onChange={user => {
+                            this.store.user = user;
+                            this.doLoad ();
+                        }}
+                        required={true}
+                        formProps={formProps}
+                    />
                     <BooleanPicker
                         value={isActive}
                         onChange={(boolean) => {

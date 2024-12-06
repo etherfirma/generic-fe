@@ -113,7 +113,7 @@ class UserPicker extends Component {
                     {_.map (users, (user, i) => {
                         return (
                             <MenuItem key={i} value={user?.id}>
-                                {user.name} &lt;{user.email}&gt; {user.id}
+                                {user.name} &lt;{user.email}&gt;
                             </MenuItem>
                         );
                     })}

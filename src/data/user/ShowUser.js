@@ -9,7 +9,7 @@ import Breadcrumb from "../../util/Breadcrumb";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Server from "../../util/Server";
-import {DeleteButton, EditButton, ReloadButton, ResetButton, SendButton} from "../../util/ButtonUtil";
+import {AddButton, DeleteButton, EditButton, ReloadButton, ResetButton, SendButton} from "../../util/ButtonUtil";
 import {userLink} from "../thing/ThingUtil";
 
 /**
@@ -73,6 +73,11 @@ class DataUser extends ThingDetail {
                 <ReloadButton onClick={() => this.doLoad ()} />
                 &nbsp;
                 <SendButton label="Verify Email" onClick={() => this.sendVerifyEmail (user)} />
+                &nbsp;
+                <AddButton label="Connect Employer" onClick={() => {
+                    const params = { userId: user.id };
+                    window.location.hash = encodeUrl ("#/data/userEmployer/add", params);
+                }}/>
             </div>
         );
     }

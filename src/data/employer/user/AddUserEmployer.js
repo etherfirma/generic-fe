@@ -127,11 +127,9 @@ class AddUserEmployer extends AddThing {
                                 this.store.isActive = boolean;
                                 this.validate ();
                             }}
+                            label={"IsActive?"}
                             required={true}
-                            formProps={{
-                                fullWidth: true,
-                                size: "small"
-                            }}
+                            formProps={formProps}
                         />
                     </tr>
                     <tr>

@@ -70,6 +70,11 @@ class ShowEmployer extends ThingDetail {
                 <AddButton label="Candyland" onClick={() => {
                     window.location.hash = `/system/candyland?employerId=${employer.id}`;
                 }} />
+                &nbsp;
+                <AddButton label="Connect User" onClick={() => {
+                    const params = { employerId: employer.id };
+                    window.location.hash = encodeUrl ("#/data/userEmployer/add", params);
+                }}/>
             </div>
         );
     }
