@@ -11,6 +11,7 @@ import Tab from "@mui/material/Tab";
 import Server from "../../util/Server";
 import {AddButton, DeleteButton, EditButton, ReloadButton, ResetButton, SendButton} from "../../util/ButtonUtil";
 import {userLink} from "../thing/ThingUtil";
+import Button from "@mui/material/Button";
 
 /**
  *
@@ -130,7 +131,15 @@ class DataUser extends ThingDetail {
             id: <ID value={user.id} snackbar={true} />,
             email: user.email,
             name: user.name,
-            locked: <YesNo value={user.locked} labelled={true} />,
+            locked: (
+                <div>
+                    <YesNo value={user.locked} labelled={true} />
+                    &nbsp;
+                    <Button variant={"outlined"} size={"small"} onClick={() => this.toggleActive (user)}>
+                        Toggle
+                    </Button>
+                </div>
+            ),
             type: user.type,
             emailVerified: <YesNo value={user.emailVerified} labelled={true} />,
         };
@@ -157,6 +166,24 @@ class DataUser extends ThingDetail {
                 {this.showAuthentication (user)}
             </div>
         )
+    }
+
+
+    async toggleActive (user) {
+        const query = `mutation ($id: String!, $update: UserUpdate!) {
+            res: updateUser (id: $id, update: $update) {
+                id 
+            }  
+        }`;
+        const variables = {
+            id: user.id,
+            update: {
+                locked: ! user.locked
+            }
+        };
+        const req = await Server._gql (query, variables);
+        this.doLoad ();
+        return;
     }
 
     showAuthentication (user) {

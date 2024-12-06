@@ -16,6 +16,7 @@ class ID extends Component {
             </span>
         );
         if (snackbar) {
+            console.log (value)
             return (
                 <CopyToClipboard
                     text={value}
