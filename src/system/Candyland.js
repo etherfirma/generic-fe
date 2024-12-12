@@ -7,13 +7,14 @@ import Loading from "../util/Loading";
 import TextField from "@mui/material/TextField";
 import {AddButton, ReloadButton, ResetButton, ShowButton} from "../util/ButtonUtil";
 import Server from "../util/Server";
+import EmployerPicker from "../data/employer/EmployerPicker";
 
 const fields = [
     {
-        path: "employerId",
+        path: "employer",
         name: "Employer ID",
         required: true,
-        validator: Validator.oidValidator
+        validator: Validator.nonNullValidator
     }
 ];
 
@@ -26,13 +27,15 @@ class Candyland extends Component {
     componentDidMount() {
         const params = getParams ();
         if (params.employerId) {
-            this.store.employerId = params.employerId;
+            this.store.employer = {
+                id: params.employerId
+            };
         }
         this.validate ();
     }
 
     store = observable ({
-        employerId: "",
+        employer: null,
         results: null,
         result: null,
         error: null,
@@ -41,7 +44,8 @@ class Candyland extends Component {
     });
 
     render() {
-        const { employerId, loading, error, errors } = this.store;
+        const { employer, loading, error, errors } = this.store;
+        const employerId = employer?.id;
 
         return (
             <div>
@@ -54,20 +58,21 @@ class Candyland extends Component {
                     <tbody>
                     <tr>
                         <td colSpan={2}>
-                            <TextField
-                                label={"Employer ID"}
-                                value={employerId}
-                                margin={"dense"}
-                                size={"small"}
-                                fullWidth
-                                required={true}
-                                onChange={(e) => {
-                                    this.store.employerId = e.target.value;
-                                    this.validate();
+                            <EmployerPicker
+                                value={employer}
+                                required={false}
+                                onChange={employer => {
+                                    this.store.employer = employer;
+                                    this.validator.validate();
                                 }}
-                                helperText={errors.employerId}
-                                error={Boolean(errors.employerId)}
-                                variant="outlined"
+                                helperText={errors.employer}
+                                error={Boolean(errors.employer)}
+                                formProps={{
+                                    fullWidth: true,
+                                    size: "small",
+                                    variant: "outlined",
+                                    margin: "dense"
+                                }}
                             />
                         </td>
                     </tr>
@@ -118,6 +123,18 @@ class Candyland extends Component {
                             Start JobTask processing run
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <AddButton
+                                label={"Activate Geos"}
+                                disabled={! this.validator.isValid}
+                                onClick={() => this.activateGeos ()}
+                            />
+                        </td>
+                        <td>
+                            Enable all inactive geos
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -125,12 +142,14 @@ class Candyland extends Component {
     }
 
     async createMissing() {
-        const {employerId} = this.store;
+        const {employer} = this.store;
         const query = `
             mutation ($employerId: String!) { 
                 res: createJobTasksForEmployer (employerId: $employerId)
             }`;
-        const variables = {employerId};
+        const variables = {
+            employerId: employer.id
+        };
         const res = await Server.gql (query, variables);
         if (res.errors.length > 0) {
             this.store.errors = res.errors;
@@ -140,13 +159,32 @@ class Candyland extends Component {
         }
     }
 
+    async activateGeos () {
+        const {employer} = this.store;
+        const query = `mutation ($id: String!) { 
+            res: enableAllGeosForEmployer (id: $id)       
+        }`;
+        const variables = {
+            id: employer.id
+        };
+        const res = await Server.gql(query, variables);
+        if (res.errors.length > 0) {
+            this.store.errors = res.errors;
+        } else {
+            const {snackbarStore} = this.props;
+            snackbarStore.show(`Activated ${res.data.res} geos for employer.`);
+        }
+    }
+
     async process () {
-        const {employerId} = this.store;
+        const { employer } = this.store;
         const query = `
             mutation ($employerId: String!) { 
                 res: processJobTasks (employerId: $employerId)
             }`;
-        const variables = {employerId};
+        const variables = {
+            employerId: employer.id
+        };
         const res = await Server.gql (query, variables);
         if (res.errors.length > 0) {
             this.store.errors = res.errors;
@@ -171,8 +209,10 @@ class Candyland extends Component {
     }
 
     get variables () {
-        const {employerId} = this.store;
-        return {employerId};
+        const { employer } = this.store;
+        return {
+            employerId: employer.id
+        };
     }
 }
 

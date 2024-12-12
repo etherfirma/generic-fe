@@ -169,7 +169,10 @@ class FindGeos extends ThingDetails {
                     <EnumPicker
                         enumType={"ConnectorType"}
                         value={connectorType}
-                        onChange={value => this.store.connectorType = value}
+                        onChange={value => {
+                            this.store.connectorType = value
+                            this.doLoad ();
+                        }}
                         formProps={formProps}
                     />
                     <BooleanPicker

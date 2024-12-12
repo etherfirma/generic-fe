@@ -67,7 +67,7 @@ class ShowEmployer extends ThingDetail {
                     window.location.hash = `/data/employer/${employer.id}/audit`;
                 }} />
                 &nbsp;
-                <AddButton label="Candyland" onClick={() => {
+                <IconButton icon={"fas fa-tools"} label="Utilities" onClick={() => {
                     window.location.hash = `/system/candyland?employerId=${employer.id}`;
                 }} />
                 &nbsp;
@@ -163,7 +163,7 @@ class ShowEmployer extends ThingDetail {
                                     <TableCell>{employerGeo.geo.name}</TableCell>
                                     <TableCell>{employerGeo.geo.connectorType}</TableCell>
                                     <TableCell>
-                                        <YesNo value={employerGeo.isActive} />
+                                        <YesNo value={employerGeo.isActive} labelled={true} />
                                     </TableCell>
                                 </TableRow>
                             )}
@@ -213,7 +213,7 @@ class ShowEmployer extends ThingDetail {
                                         {geoLink (job.geo)}
                                     </TableCell>
                                     <TableCell>
-                                        <YesNo value={Boolean (job.jobTask)} />
+                                        <YesNo value={Boolean (job.jobTask)} labelled={true} />
                                     </TableCell>
                                     <TableCell>
                                         <JobState value={job.state} />
